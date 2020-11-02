@@ -8,6 +8,7 @@ export const SET_REVIEW_ITEM = 'SET_REVIEW_ITEM';
 export const setReviewsLoading = () => ({ type: SET_REVIEWS_LOADING });
 export const pushReviews = (reviews, page) => ({ type: PUSH_REVIEWS, payload: { reviews, page } });
 export const setReviewItem = review => ({ type: SET_REVIEW_ITEM, payload: review });
+export const editReview = () => {};
 
 export const loadReviews = page => {
   return dispatch => {

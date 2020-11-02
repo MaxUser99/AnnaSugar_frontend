@@ -7,7 +7,7 @@ import OptionsList from './optionsList';
 import Button from '../../components/button/button';
 import infoIcon from '../../assets/icons/info.svg';
 import Price from '../../components/price/price';
-import { BREAKPOINTS, $maxWidth } from '../../theme';
+import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 
 const ConsultItem = ({ item }) => {
   const {
@@ -34,7 +34,7 @@ const ConsultItem = ({ item }) => {
           alignItems='center'
           fullWidth>
             <img src={`/${image}`} alt='' />
-            { imageInfo && <Info>{imageInfo}</Info>}
+            { imageInfo && <Info $showFrom={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
         </ImageContainer>
         <ContentBlock direction='column'>
           <Title>{ quoted ? `«${title}»` : title }</Title>
@@ -43,6 +43,7 @@ const ConsultItem = ({ item }) => {
           { optionsList && <OptionsList data={optionsList} />}
           { faqList && <FaqList data={faqList} />}
           { info && <Info>{info}</Info>}
+          { imageInfo && <Info $showBefore={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
           {
             price && <>
               <Label>Цена</Label>
@@ -88,7 +89,7 @@ const Info = styled.p`
   font-size: 14px;
   line-height: 28px;
   color: ${({ theme }) => theme.color.black};
-  &::before {
+  ::before {
     content: "";
     position: absolute;
     left: 0;
@@ -98,6 +99,8 @@ const Info = styled.p`
     height: 21px;
     background: url(${infoIcon});
   }
+  ${({ $showFrom }) => $showFrom && $maxWidth($showFrom, `display: none;`)}
+  ${({ $showBefore }) => $showBefore && $minWidth($showBefore, `display: none;`)}
 `;
 
 const Title = styled.h2`
