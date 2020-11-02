@@ -1,0 +1,33 @@
+[
+  {
+    "id": 6,
+    "title": "Марго, 28",
+    "short": "И. обратилась ко мне за помощью по поводу серьёзной проблемы: уже много месяцев ей не удавалось найти подходящую работу.",
+    "text": "Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum."
+  }, {
+    "id": 5,
+    "title": "Катерина, 32",
+    "short": "Е. я знаю давно. Благодаря свой внешности она всегда казалась мне хрупкой и поэтому, составив натальную карту, я даже…",
+    "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum."
+  }, {
+    "id": 4,
+    "title": "Ксюша, 18",
+    "short": "Последние несколько лет А. был безответно влюблён. Не мог устроить личную жизнь, пытаясь вернуть прошлое. Проводил много…",
+    "text": "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem."
+  }, {
+    "id": 3,
+    "title": "Марго, 28",
+    "short": "И. обратилась ко мне за помощью по поводу серьёзной проблемы: уже много месяцев ей не удавалось найти подходящую работу.",
+    "text": "Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum."
+  }, {
+    "id": 2,
+    "title": "Катерина, 32",
+    "short": "Е. я знаю давно. Благодаря свой внешности она всегда казалась мне хрупкой и поэтому, составив натальную карту, я даже…",
+    "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum."
+  }, {
+    "id": 1,
+    "title": "Ксюша, 18",
+    "short": "Последние несколько лет А. был безответно влюблён. Не мог устроить личную жизнь, пытаясь вернуть прошлое. Проводил много…",
+    "text": "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem."
+  }
+]
