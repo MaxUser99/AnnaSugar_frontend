@@ -31,7 +31,7 @@ const SubHeader = styled.h4`
   color: ${({ theme }) => theme.text.lighter2};
 `;
 
-const Text = styled.pre`
+const Text = styled.p`
   font-family: "Montserrat Alternates";
   white-space: pre-line;
   font-size: 16px;

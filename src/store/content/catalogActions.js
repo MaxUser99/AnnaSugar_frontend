@@ -143,9 +143,9 @@ function itemLoader(id, contentType) {
       setReviewItem = setReviewOther;
       break; 
   }
-
+  console.log(id, typeof id, contentType);
   return async function (dispatch) {
-    const item = mockBracelets.find(x => x.id === id) || null;
+    const item = mockBracelets.find(x => x.id === +id) || null;
 
     await delay(400).then(() => dispatch(setReviewItem(item)));
     return item;

@@ -73,8 +73,23 @@ const ImageWrapper = styled(Container)`
     `)
   }
   & > img {
-    max-width: 100%;
-    max-height: 100%;
+    /* max-width: 100%;
+    max-height: 100%; */
+    /* width: 100%; */
+    width: 340px;
+    height: 340px;
+    ${
+      $maxWidth(BREAKPOINTS.DESCTOP, `
+        width: 240px;
+        height: 240px;
+      `)
+    }
+    ${
+      $maxWidth(BREAKPOINTS.TABLET, `
+        width: 285px;
+        height: 240px;
+      `)
+    }
   }
   ${({ imageLoaded }) => !imageLoaded && 'min-height: 300px;'}
 `;
@@ -88,6 +103,7 @@ const Content = styled(Container)`
 
 const Purchase = styled(Container)`
   margin-top: auto;
+  flex-wrap: wrap;
 `;
 
 const Name = styled(Link)`
@@ -112,7 +128,7 @@ const Brief = styled.p`
   line-height: 28px;
   max-height: 134px;
   overflow: hidden;
-  margin: 0;
+  margin: 0 0 50px;
   color: ${({ theme }) => theme.text.default};
 `;
 
