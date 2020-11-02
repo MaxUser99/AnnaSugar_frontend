@@ -104,6 +104,7 @@ const Caption = styled.p`
 const StyledWrapper = styled(ContentWrapper)`
   max-width: 513px;
   padding: 10px 10px 64px;
+  ${ $maxWidth(BREAKPOINTS.TABLET, `padding: 10px 45px 64px;`)}
   text-align: center;
 `;
 
