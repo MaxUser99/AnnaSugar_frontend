@@ -47,8 +47,14 @@ const CatalogItemPage = ({ itemId, reviewItem, clearHandler, loadItem }) => {
       </StyledContainer>
       <Container fullWidth>
         <SubPageWrapper>
-          { subPage === SUB_PAGES.DESCRIPTION && <Description /> }
-          { subPage === SUB_PAGES.FEATURES && <Features /> }
+        {
+          subPage === SUB_PAGES.DESCRIPTION &&
+          <Description>{reviewItem ? reviewItem.description : '-'}</Description>
+        }
+        {
+          subPage === SUB_PAGES.FEATURES &&
+          <Features>{reviewItem ? reviewItem.features : '-'}</Features>
+        }
         </SubPageWrapper>
       </Container>
     </StyledLayout>
