@@ -8,6 +8,7 @@ const Dropdown = ({
   value,
   label,
   changeHandler,
+  className
 }) => {
   const [ minWidth, setMinWidth ] = useState(0);
   const rootRef = useRef();
@@ -25,7 +26,7 @@ const Dropdown = ({
   }
 
   return (
-    <Container direction='column'>
+    <Container className={className} direction='column'>
       <Label>{label}</Label>
       <Root onClick={rootClickHandler} ref={rootRef} fullWidth>
         <p>{value.text}</p>

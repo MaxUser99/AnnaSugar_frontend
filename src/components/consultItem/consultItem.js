@@ -106,7 +106,7 @@ const ConsultItem = ({ item }) => {
           {
             type === ConsultDataType.DROPDOWNS &&
             data.map(x =>  (
-                <Dropdown
+                <StyledDropdown
                   key={x.name}
                   options={x.options}
                   value={state[ConsultDataType.DROPDOWNS][x.name] || x.options[0]}
@@ -127,10 +127,22 @@ const ConsultItem = ({ item }) => {
           <Button>заказать</Button>
         </ContentBlock>
       </MainBlock>
-      { description && <Descritption>{ description }</Descritption> }
+      {
+        description &&
+        <Descritption direction='column'>
+          <strong>Описание:</strong>
+          <p>{ description }</p>
+        </Descritption>
+      }
     </Container>
   );
 };
+
+const StyledDropdown = styled(Dropdown)`
+  + button {
+    margin-top: 64px;
+  }
+`;
 
 const StyledPanel = styled(ExpansionPanel)`
   box-sizing: border-box;
@@ -155,7 +167,20 @@ const MainBlock = styled(Container)`
     align-items: center;
   `)}
 `;
-const Descritption = styled(Container)``;
+const Descritption = styled(Container)`
+  white-space: pre-line;
+  margin-bottom: 64px;
+  p {
+    font-size: 16px;
+    line-height: 36px;
+  }
+  strong {
+    font-size: 10px;
+    line-height: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+`;
 const ImageContainer = styled(Container)`
   max-width: 350px;
   min-width: 220px;
