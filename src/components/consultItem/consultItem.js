@@ -1,29 +1,83 @@
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import Container from '../container/container';
-import FaqList from './faqList';
-import OptionsSelect from './optionsSelect';
-import OptionsList from './optionsList';
+// import FaqList from './faqList';
+// import OptionsSelect from './optionsSelect';
+// import OptionsList from './optionsList';
 import Button from '../../components/button/button';
 import infoIcon from '../../assets/icons/info.svg';
 import Price from '../../components/price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
+import Dropdown from '../../components/dropdown';
+import { ConsultDataType } from '../../constants/consultDataType';
+
+const ACTIONS = {
+  SET_DROPDOWN: 'SET_DROPDOWN',
+  SET_SELECT_LIST: 'SET_SELECT_LIST',
+  RESET: 'RESET'
+}
+
+const setDropdown = (name, value) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value }});
+const setSelect = (name, value) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value }});
+const reset = () => ({ type: ACTIONS.RESET });
+
+const initialState = {
+  [ConsultDataType.DROPDOWNS]: {},
+  [ConsultDataType.SELECT_LIST]: {},
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.SET_DROPDOWN: return {
+      ...state,
+      [ConsultDataType.DROPDOWNS]: {
+        ...state[ConsultDataType.DROPDOWNS],
+        [action.payload.name]: action.payload.value
+      }
+    };;
+    case ACTIONS.SET_SELECT_LIST: return {
+      ...state,
+      [ConsultDataType.SELECT_LIST]: {
+        ...state[ConsultDataType.SELECT_LIST],
+        [action.payload.name]: action.payload.value
+      }
+    };
+    default: return state;
+  }
+}
 
 const ConsultItem = ({ item }) => {
   const {
     title,
-    quoted,
     image,
     short,
     description,
     imageInfo,
     price,
     priceRemark,
-    optionsList,
-    optionsSelect,
-    faqList,
     info,
+    type,
+    data
   } = item;
+
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (type === ConsultDataType.DROPDOWNS) {
+      data.forEach(({ name, options }) => {
+        dispatch(setDropdown(name, options[0]));
+      });
+    }
+    if (type === ConsultDataType.SELECT_LIST) {
+      const value = data.options[0];
+      const name = data.name;
+
+      dispatch(setSelect(name. value));
+    }
+    return () => dispatch(reset());
+  }, []);
+
+  const dropDownChangeHandler = (name) => value => dispatch(setDropdown(name, value[0]));
 
   return (
     <Container direction='column' fullWidth>
@@ -37,11 +91,24 @@ const ConsultItem = ({ item }) => {
             { imageInfo && <Info $showFrom={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
         </ImageContainer>
         <ContentBlock direction='column'>
-          <Title>{ quoted ? `«${title}»` : title }</Title>
+          <Title>{ title }</Title>
           <Short>{short}</Short>
-          { optionsSelect && <OptionsSelect data={optionsSelect} />}
-          { optionsList && <OptionsList data={optionsList} />}
-          { faqList && <FaqList data={faqList} />}
+          {/* { optionsSelect && <OptionsSelect data={optionsSelect} />} */}
+          {/* { optionsList && <OptionsList data={optionsList} />} */}
+          {/* { faqList && <FaqList data={faqList} />} */}
+          {
+            type === ConsultDataType.DROPDOWNS &&
+            data.map(x =>  (
+                <Dropdown
+                  key={x.name}
+                  options={x.options}
+                  value={state[ConsultDataType.DROPDOWNS][x.name] || x.options[0]}
+                  label={x.name}
+                  changeHandler={dropDownChangeHandler(x.name)}
+                />
+              )
+            )
+          }
           { info && <Info>{info}</Info>}
           { imageInfo && <Info $showBefore={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
           {
@@ -60,6 +127,7 @@ const ConsultItem = ({ item }) => {
 
 const MainBlock = styled(Container)`
   margin-top: 48px;
+  margin-bottom: 64px;
   ${ $maxWidth(BREAKPOINTS.TABLET, `
     flex-direction: column;
     align-items: center;
