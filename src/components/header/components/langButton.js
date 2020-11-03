@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ruIcon from '../../../assets/lang/ru-active.svg';
-import ruIconMutted from '../../../assets/lang/ru-mutted.svg';
+import ruIconMutted from '../../../assets/lang/ru-muted.svg';
 import enIcon from '../../../assets/lang/en-active.svg';
-import enIconMutted from '../../../assets/lang/en-mutted.svg';
+import enIconMutted from '../../../assets/lang/en-muted.svg';
 import LANGS from '../../../constants/langs';
 
 const icons = {
@@ -14,6 +14,7 @@ const icons = {
 
 const LangButton = ({ lang, active, onClick }) => {
   const icon = icons[lang][active ? 'active' : 'mutted'];
+  console.log({ lang, active });
   return (
     <StyledButton onClick={onClick}>
       <Img src={icon} alt='' />

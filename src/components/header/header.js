@@ -13,7 +13,7 @@ import { useLocalization } from '../../hooks/useLocalization';
 
 const Header = () => {
   const { pathname } = useLocation();
-  const { setLang } = useLocalization();
+  const { setLang, lang } = useLocalization();
 
   return (
     <RootContainer id='header' alignItems='center' fullWidth>
@@ -34,8 +34,8 @@ const Header = () => {
           }
         </LinksContainer>
         <FixedWidthContainer $hidden justifyContent='flex-end'>
-          <LangButton onClick={() => setLang(LANGS.EN)} active lang={LANGS.RU} />
-          <LangButton onClick={() => setLang(LANGS.RU)} lang={LANGS.EN} />
+          <LangButton onClick={() => setLang(LANGS.RU)} active={lang === LANGS.RU} lang={LANGS.RU} />
+          <LangButton onClick={() => setLang(LANGS.EN)} active={lang === LANGS.EN} lang={LANGS.EN} />
         </FixedWidthContainer>
         <MenuButton />
       </StyledContentWrapper>
