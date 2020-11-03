@@ -2,14 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Container from '../container/container';
 
-const ExpansionPanel = ({ className, title, text }) => {
+const ExpansionPanel = ({ className, title, text, HeaderComponent, activeIndicator }) => {
   const [ open, setOpen ] = useState(false);
   const [ contentHeight, setContentHeight ] = useState(0);
   const [ headerHeight, setHeaderHeight ] = useState(0);
   const headerRef = useRef();
   const contentRef = useRef();
-
-  const toggleOpen = () => setOpen(prev => !prev);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -25,18 +23,38 @@ const ExpansionPanel = ({ className, title, text }) => {
     }
   }, [headerRef]);
 
+  const toggleOpen = () => setOpen(prev => !prev);
+
+  const containerClick = activeIndicator
+    ? undefined
+    : toggleOpen;
+  
+  const indicatorClick = activeIndicator
+    ? toggleOpen
+    : undefined;
+
   return (
     <Wrapper
       direction='column'
-      onClick={toggleOpen}
+      onClick={containerClick}
       className={className}
       $maxHeight={open ? headerHeight + contentHeight : headerHeight}
       $withTransition={!!contentHeight}
       $open={open}
       fullWidth>
       <Header className='header' ref={headerRef} alignItems='center' fullWidth>
-        <p className='title'>{title}</p>
-        <Indicator className='indicator' $open={open}>{open ? '-' : '+'}</Indicator>
+        {/* <p className='title'>{title}</p> */}
+        {
+          HeaderComponent
+          ? <HeaderComponent />
+          : <p className='title'>{title}</p>
+        }
+        <Indicator
+          onClick={indicatorClick}
+          className='indicator'
+          $open={open}>
+            {open ? '-' : '+'}
+          </Indicator>
       </Header>
       {
         !!headerHeight && 
@@ -57,7 +75,11 @@ const Wrapper = styled(Container)`
   margin-top: 10px;
   border-radius: 4px;
   /* padding: 0 30px; */
-  padding: 15px 30px;
+
+  box-sizing: border-box;
+  padding: 0;
+
+  /* padding: 15px 30px; */
   border: 1px solid ${({ theme }) => theme.color.darkBeige};
   background-color: ${({ $open, theme }) => ($open ? theme.color.darkBeige : 'transparent')};
   max-height: ${({ $maxHeight }) => ($maxHeight === 0 ? 'auto' : `${$maxHeight}px`)};
@@ -71,7 +93,7 @@ const Wrapper = styled(Container)`
 
   ${({ $withTransition }) => $withTransition && 'transition: 0.3s'};
 
-  :hover > div:first-of-type p {
+  :hover > div:first-of-type p.title {
     transition: 0.3s;
     color: ${({ theme }) => theme.text.mutted};
   }
@@ -81,10 +103,18 @@ const Content = styled(Container)`
   transition: 0.3s;
   opacity: ${({ $open }) => ($open ? '1' : '0')};
   line-height: 28px;
+  padding: 0px 32px 32px;
+  box-sizing: border-box;
+  .text {
+    margin: 0;
+  }
 `;
 
 const Header = styled(Container)`
   // background-color: #aaa;
+  padding: 4px 32px;
+  box-sizing: border-box;
+
   cursor: pointer;
   font-size: 24px;
   line-height: 24px;

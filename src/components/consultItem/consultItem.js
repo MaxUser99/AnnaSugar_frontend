@@ -1,9 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import Container from '../container/container';
-// import FaqList from './faqList';
-// import OptionsSelect from './optionsSelect';
-// import OptionsList from './optionsList';
+import SelectList from './selectList';
 import Button from '../../components/button/button';
 import infoIcon from '../../assets/icons/info.svg';
 import Price from '../../components/price/price';
@@ -19,7 +17,7 @@ const ACTIONS = {
 }
 
 const setDropdown = (name, value) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value }});
-const setSelect = (name, value) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value }});
+const setSelect = (value) => ({ type: ACTIONS.SET_SELECT_LIST, payload: value});
 const reset = () => ({ type: ACTIONS.RESET });
 
 const initialState = {
@@ -28,6 +26,7 @@ const initialState = {
 }
 
 function reducer(state, action) {
+  console.log('action: ', action);
   switch (action.type) {
     case ACTIONS.SET_DROPDOWN: return {
       ...state,
@@ -40,7 +39,7 @@ function reducer(state, action) {
       ...state,
       [ConsultDataType.SELECT_LIST]: {
         ...state[ConsultDataType.SELECT_LIST],
-        [action.payload.name]: action.payload.value
+        selected: action.payload
       }
     };
     default: return state;
@@ -61,25 +60,27 @@ const ConsultItem = ({ item }) => {
     data
   } = item;
 
-  const [ state, dispatch ] = useReducer(reducer, initialState);
-
-  useEffect(() => {
+  const [ state, dispatch ] = useReducer(reducer, initialState, (s) => {
     if (type === ConsultDataType.DROPDOWNS) {
-      data.forEach(({ name, options }) => {
-        dispatch(setDropdown(name, options[0]));
-      });
+      return data.reduce((currState, { name, options }) => {
+        return reducer(currState, setDropdown(name, options[0]));
+      }, s);
     }
     if (type === ConsultDataType.SELECT_LIST) {
-      const value = data.options[0];
-      const name = data.name;
+      console.log('case')
 
-      dispatch(setSelect(name. value));
+      const value = data[0];
+      return reducer(s, setSelect(value));
     }
-    return () => dispatch(reset());
-  }, []);
+
+    return s;
+  });
 
   const dropDownChangeHandler = (name) => value => dispatch(setDropdown(name, value[0]));
 
+  const setSelected = (selectItem) => dispatch(setSelect(selectItem));
+
+  console.log('state: ', state);
   return (
     <Container direction='column' fullWidth>
       <MainBlock alignItems='flex-start' justifyContent='space-between' fullWidth>
@@ -94,13 +95,18 @@ const ConsultItem = ({ item }) => {
         <ContentBlock direction='column' fullWidth>
           <Title>{ title }</Title>
           <Short>{short}</Short>
-          {/* { optionsSelect && <OptionsSelect data={optionsSelect} />} */}
-          {/* { optionsList && <OptionsList data={optionsList} />} */}
-          {/* { faqList && <FaqList data={faqList} />} */}
+          {
+            type === ConsultDataType.SELECT_LIST &&
+            <SelectList
+              selected={state[ConsultDataType.SELECT_LIST].selected}
+              items={data}
+              setSelected={setSelected}
+            />
+          }
           {
             type === ConsultDataType.FAQ_LIST &&
             data.map(x => (
-              <StyledPanel key={x.name} title={x.title} text={x.text} />
+              <StyledPanel key={x.title} title={x.title} text={x.text} />
             ))
           }
           {
@@ -122,6 +128,17 @@ const ConsultItem = ({ item }) => {
             price && <>
               <Label>Цена</Label>
               <StyledPrice remark={`(${priceRemark})`}>{price}</StyledPrice>
+            </>
+          }
+          {
+            state[ConsultDataType.SELECT_LIST].selected && state[ConsultDataType.SELECT_LIST].selected.price && <>
+              <Label>Цена</Label>
+              <StyledPrice
+                remark={
+                  state[ConsultDataType.SELECT_LIST].selected.time
+                  ? ` (${state[ConsultDataType.SELECT_LIST].selected.time} минут)`
+                  : ''
+                }>{state[ConsultDataType.SELECT_LIST].selected.price}</StyledPrice>
             </>
           }
           <Button>заказать</Button>

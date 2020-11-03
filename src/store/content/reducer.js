@@ -66,7 +66,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log('actioN: ', action)
+  // console.log('actioN: ', action)
   switch (action.type) {
     // article action cases
     case SET_ARTICLES_LOADING: return {

@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const amountPlaceholder = '-';
 const centsPlaceholder = '';
 
-function amountTransformer(amount) {
+export function amountTransformer(amount) {
+  if (!amount) return amount;
   return [...amount].reduceRight(
     (acc, curr, i, arr) => {
       const reversI = arr.length - i;
