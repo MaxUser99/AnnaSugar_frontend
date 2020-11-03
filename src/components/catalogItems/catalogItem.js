@@ -8,11 +8,19 @@ import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import Button from '../button/button';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 
-const CatalogItem = ({ item, onClick }) => {
+const CatalogItem = ({
+  item,
+  onClick,
+  setImageWidth,
+  targetImageWidth
+}) => {
   const { id, images, name, brief, price } = item;
   const [ imageLoaded, setImageLoaded ] = useState(false);
 
-  const imageLoadHandler = () => setImageLoaded(true);
+  const imageLoadHandler = (e) => {
+    setImageLoaded(true);
+    setImageWidth(e.target.width);
+  }
   const nameClickHandler = () => onClick(item);
   const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
 
@@ -20,8 +28,12 @@ const CatalogItem = ({ item, onClick }) => {
     <Wrapper
       alignItems='stretch'
       fullWidth>
-      <ImageWrapper imageLoaded={imageLoaded}>
-        <img onLoad={imageLoadHandler} src={`/${images[0]}`} alt='' />
+      <ImageWrapper $targetWidth={targetImageWidth} imageLoaded={imageLoaded}>
+        <img
+          onLoad={imageLoadHandler}
+          src={`/${images[0]}`}
+          alt=''
+        />
       </ImageWrapper>
       <Content alignItems='stretch' direction='column' fullWidth>
         <Name onClick={nameClickHandler} to={`${id}`}>{name}</Name>
@@ -71,21 +83,22 @@ const ImageWrapper = styled(Container)`
   ${
     $maxWidth(BREAKPOINTS.DESCTOP, `
       max-width: 240px;
-      max-height: 240px;
+      // max-height: 240px;
     `)
   }
   ${
     $maxWidth(BREAKPOINTS.TABLET, `
       justify-content: center;
-      max-width: none;
+      // max-width: none;
       max-height: none;
     `)
   }
   & > img {
-    /* max-width: 100%;
-    max-height: 100%; */
+    /* max-width: 100%; */
+    max-width: ${({ $targetWidth }) => ($targetWidth ? `${$targetWidth}px;` : '100%;')};
+    max-height: 100%;
     /* width: 100%; */
-    width: 340px;
+    /* width: 340px;
     height: 340px;
     ${
       $maxWidth(BREAKPOINTS.DESCTOP, `
@@ -98,7 +111,7 @@ const ImageWrapper = styled(Container)`
         width: 285px;
         height: 240px;
       `)
-    }
+    } */
   }
   ${({ imageLoaded }) => !imageLoaded && 'min-height: 300px;'}
 `;
