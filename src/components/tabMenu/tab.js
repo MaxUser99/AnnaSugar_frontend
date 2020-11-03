@@ -9,6 +9,7 @@ const Tab = ({ children, href }) => (
 );
 
 const TabItem = styled(Link)`
+  box-sizing: border-box;
   white-space: nowrap;
   border-radius: 0;
   padding: 20px 36px;
@@ -20,7 +21,7 @@ const TabItem = styled(Link)`
   line-height: 24px;
   text-align: center;
   background-color: transparent;
-  width: 100%;
+  width: 50%;
   text-decoration: none;
   transition: 0.3s;
   color: ${({ theme }) => theme.text.mutted};
