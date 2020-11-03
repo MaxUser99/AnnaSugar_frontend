@@ -34,17 +34,18 @@ const ExpansionPanel = ({ className, title, text }) => {
       $withTransition={!!contentHeight}
       $open={open}
       fullWidth>
-      <Header ref={headerRef} alignItems='center' fullWidth>
-        <p>{title}</p>
-        <Indicator $open={open}>{open ? '-' : '+'}</Indicator>
+      <Header className='header' ref={headerRef} alignItems='center' fullWidth>
+        <p className='title'>{title}</p>
+        <Indicator className='indicator' $open={open}>{open ? '-' : '+'}</Indicator>
       </Header>
       {
         !!headerHeight && 
         <Content
+          className='content'
           $open={open}
           ref={contentRef}
           fullWidth>
-          <p>{text}</p>
+          <p className='text'>{text}</p>
         </Content>
       }
     </Wrapper>

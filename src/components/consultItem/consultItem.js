@@ -10,6 +10,7 @@ import Price from '../../components/price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import Dropdown from '../../components/dropdown';
 import { ConsultDataType } from '../../constants/consultDataType';
+import ExpansionPanel from '../expansionPanel/expansionPanel';
 
 const ACTIONS = {
   SET_DROPDOWN: 'SET_DROPDOWN',
@@ -90,12 +91,18 @@ const ConsultItem = ({ item }) => {
             <img src={`/${image}`} alt='' />
             { imageInfo && <Info $showFrom={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
         </ImageContainer>
-        <ContentBlock direction='column'>
+        <ContentBlock direction='column' fullWidth>
           <Title>{ title }</Title>
           <Short>{short}</Short>
           {/* { optionsSelect && <OptionsSelect data={optionsSelect} />} */}
           {/* { optionsList && <OptionsList data={optionsList} />} */}
           {/* { faqList && <FaqList data={faqList} />} */}
+          {
+            type === ConsultDataType.FAQ_LIST &&
+            data.map(x => (
+              <StyledPanel key={x.name} title={x.title} text={x.text} />
+            ))
+          }
           {
             type === ConsultDataType.DROPDOWNS &&
             data.map(x =>  (
@@ -124,6 +131,21 @@ const ConsultItem = ({ item }) => {
     </Container>
   );
 };
+
+const StyledPanel = styled(ExpansionPanel)`
+  box-sizing: border-box;
+  padding: 0;
+  .header {
+    padding: 4px 32px;
+    box-sizing: border-box;
+  }
+  :first-of-type {
+    margin-top: 17px;
+  }
+  :last-of-type {
+    margin-bottom: 32px;
+  }
+`;
 
 const MainBlock = styled(Container)`
   margin-top: 48px;
@@ -157,6 +179,7 @@ const Info = styled.p`
   font-size: 14px;
   line-height: 28px;
   color: ${({ theme }) => theme.color.black};
+  white-space: pre-wrap;
   ::before {
     content: "";
     position: absolute;
