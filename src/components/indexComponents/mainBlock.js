@@ -8,8 +8,12 @@ import FabIcon from '../../assets/images/whatsup-fab.svg';
 // import Img from 'gatsby-image';
 // import { useStaticQuery, graphql } from 'gatsby';
 import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
+import SOCIAL_LINKS from '../../constants/socialLinks';
 
 const MainBlock = () => {
+  const fabClickHandler = () => {
+    window.open(SOCIAL_LINKS.WHATS_UP);
+  }
   // const data = useStaticQuery(graphql`
   //   query MyQuery {
   //     file(relativePath: {eq: "image.png"}) {
@@ -39,7 +43,7 @@ const MainBlock = () => {
             </Container>
             <FabWrapper alignItems='center' direction='column'>
               <p>Написать Мне</p>
-              <Fab><FabImg src={FabIcon} alt='' /></Fab>
+              <Fab onClick={fabClickHandler}><FabImg src={FabIcon} alt='' /></Fab>
             </FabWrapper>
           </Container>
         </TextContainer>
@@ -68,7 +72,7 @@ const MainBlock = () => {
           <Image src={MainImage} alt='' />
           {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
         </div>
-        <Fab $absolute><FabImg src={FabIcon} alt='' /></Fab>
+        <Fab onClick={fabClickHandler} $absolute><FabImg src={FabIcon} alt='' /></Fab>
       </StyledWrapper>
     </Container>
   );

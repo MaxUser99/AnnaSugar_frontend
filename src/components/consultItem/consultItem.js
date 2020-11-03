@@ -9,6 +9,7 @@ import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import Dropdown from '../../components/dropdown';
 import { ConsultDataType } from '../../constants/consultDataType';
 import ExpansionPanel from '../expansionPanel/expansionPanel';
+import SOCIAL_LINKS from '../../constants/socialLinks';
 
 const ACTIONS = {
   SET_DROPDOWN: 'SET_DROPDOWN',
@@ -82,6 +83,8 @@ const ConsultItem = ({ item }) => {
 
   const setSelected = (selectItem) => dispatch(setSelect(selectItem));
 
+  const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
+
   return (
     <Container direction='column' fullWidth>
       <MainBlock alignItems='flex-start' justifyContent='space-between' fullWidth>
@@ -143,7 +146,7 @@ const ConsultItem = ({ item }) => {
                 }>{state[ConsultDataType.SELECT_LIST].selected.price}</StyledPrice>
             </>
           }
-          <Button>записаться</Button>
+          <Button onClick={offerClickHandler}>записаться</Button>
         </ContentBlock>
       </MainBlock>
       {

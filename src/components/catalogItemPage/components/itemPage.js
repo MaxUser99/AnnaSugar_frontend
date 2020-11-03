@@ -5,6 +5,7 @@ import Carousel from './Carousel';
 import Button from '../../button/button';
 import Price from '../../price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../../theme';
+import SOCIAL_LINKS from '../../../constants/socialLinks';
 
 const propGetter = (obj, propName, placeholder = '-') => (obj && obj[propName]) ? obj[propName] : placeholder;
 
@@ -14,6 +15,8 @@ const ItemPage = ({ item, isLoading }) => {
   const images = propGetter(item, 'images', []);
   const price = propGetter(item, 'price', null);
   
+  const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
+
   return (
     <RootContainer alignItems='stretch' justifyContent='flex-start' fullWidth>
       <Carousel images={images} />
@@ -23,7 +26,7 @@ const ItemPage = ({ item, isLoading }) => {
         <Compound>{compound}</Compound>
         <Label>Цена</Label>
         <Price>{price}</Price>
-        <Button>Заказать</Button>
+        <Button onClick={offerClickHandler}>Заказать</Button>
       </Content>
     </RootContainer>
   );

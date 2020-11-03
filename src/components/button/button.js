@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Button = ({ onClick, ...props }) => {
+  console.log('button props: ', props);
   const ClickHandler = (e) => {
     const ripple = document.createElement("span"); 
 
@@ -11,15 +12,13 @@ const Button = ({ onClick, ...props }) => {
     const x = e.clientX - e.currentTarget.offsetLeft;
     const y = e.clientY - e.currentTarget.offsetTop; 
 
-    console.log({ x, y})
-
     ripple.style.left = `${x}px`; 
     ripple.style.top = `${y}px`; 
 
     setTimeout(() => { 
         ripple.remove(); 
     }, 300);
-
+    console.log('is onclick: ', onClick)
     if (onClick) onClick(e);
   };
 

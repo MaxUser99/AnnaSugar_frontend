@@ -10,6 +10,7 @@ import WhatsupIcon from '../assets/icons/whatsup-btn.svg';
 import MessangerIcon from '../assets/icons/messanger-btn.svg';
 import Input from '../components/input/input';
 import { BREAKPOINTS, $maxWidth } from '../theme';
+import SOCIAL_LINKS from '../constants/socialLinks';
 
 const Contact = () => {
   const {
@@ -20,6 +21,7 @@ const Contact = () => {
   } = useForm();
 
   const submitHandler = data => console.log('data: ', data); 
+  const socialClickHandler = link => () => window.open(link);
 
   return (
     <Layout>
@@ -29,19 +31,19 @@ const Contact = () => {
           <SubHeader>( Do you have any questions? )</SubHeader>
           <Buttons justifyContent='space-around' fullWidth>
             <ButtonWrapper direction='column'>
-              <SocialButton>
+              <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.TELEGRAM)}>
                 <img src={TelegramIcon} alt='' />
               </SocialButton>
               <Caption>Подписаться на канал</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
-              <SocialButton>
+              <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}>
                 <img src={WhatsupIcon} alt='' />
               </SocialButton>
               <Caption>Подписаться на канал</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
-              <SocialButton>
+              <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}>
                 <img src={MessangerIcon} alt='' />
               </SocialButton>
               <Caption>Подписаться на канал</Caption>

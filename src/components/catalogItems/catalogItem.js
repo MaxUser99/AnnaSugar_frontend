@@ -6,6 +6,7 @@ import CartIcon from '../../assets/icons/cart.inline.svg';
 import Price from '../price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import Button from '../button/button';
+import SOCIAL_LINKS from '../../constants/socialLinks';
 
 const CatalogItem = ({ item, onClick }) => {
   const { id, images, name, brief, price } = item;
@@ -13,6 +14,7 @@ const CatalogItem = ({ item, onClick }) => {
 
   const imageLoadHandler = () => setImageLoaded(true);
   const nameClickHandler = () => onClick(item);
+  const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
 
   return (
     <Wrapper
@@ -30,7 +32,7 @@ const CatalogItem = ({ item, onClick }) => {
             <CartIcon />
             <span>Консультация</span>
           </Button> */}
-          <StyledButton>Заказать</StyledButton>
+          <StyledButton onClick={offerClickHandler}>Заказать</StyledButton>
         </Purchase>
       </Content>
     </Wrapper>
