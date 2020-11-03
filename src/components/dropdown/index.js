@@ -29,7 +29,7 @@ const Dropdown = ({
     <Container className={className} direction='column'>
       <Label>{label}</Label>
       <Root onClick={rootClickHandler} ref={rootRef} fullWidth>
-        <p>{value.text}</p>
+        <p className='value'>{value.text}</p>
         <StyledDropdown
           $minWidth={minWidth}
           options={options}

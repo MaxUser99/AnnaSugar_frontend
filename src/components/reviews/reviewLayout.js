@@ -13,7 +13,7 @@ const ReviewLayout = ({
   <>
     <Title>{title}</Title>
     <ImageContainer justifyContent='center' alignItems='center' fullWidth>
-      <img src={image} alt='' />
+      <img src={'/' + image} alt='' />
       <ZoomButton onClick={zoomClickHandler}>
         <img src={zoomIcon} alt='' />
       </ZoomButton>

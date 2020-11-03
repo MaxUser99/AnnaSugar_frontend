@@ -21,7 +21,7 @@ const Review = ({
       <Image src={image} alt='' />
     </ImageWrapper>
     <Title>{title}</Title>
-    <Text>{short}</Text>
+    <Text>{short || text}</Text>
     <Link to={`/reviews/${id}`}>Read &gt;</Link>
   </StyledContainer>
 );

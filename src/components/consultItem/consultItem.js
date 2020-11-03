@@ -16,8 +16,8 @@ const ACTIONS = {
   RESET: 'RESET'
 }
 
-const setDropdown = (name, value) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value }});
-const setSelect = (value) => ({ type: ACTIONS.SET_SELECT_LIST, payload: value});
+const setDropdown = (name, value, dirty = true) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value, dirty }});
+const setSelect = (value, dirty = true) => ({ type: ACTIONS.SET_SELECT_LIST, payload: { value, dirty }});
 const reset = () => ({ type: ACTIONS.RESET });
 
 const initialState = {
@@ -32,14 +32,18 @@ function reducer(state, action) {
       ...state,
       [ConsultDataType.DROPDOWNS]: {
         ...state[ConsultDataType.DROPDOWNS],
-        [action.payload.name]: action.payload.value
+        [action.payload.name]: {
+          value: action.payload.value,
+          dirty: action.payload.dirty,
+        }
       }
     };;
     case ACTIONS.SET_SELECT_LIST: return {
       ...state,
       [ConsultDataType.SELECT_LIST]: {
         ...state[ConsultDataType.SELECT_LIST],
-        selected: action.payload
+        selected: action.payload.value,
+        dirty: action.payload.dirty,
       }
     };
     default: return state;
@@ -63,14 +67,12 @@ const ConsultItem = ({ item }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState, (s) => {
     if (type === ConsultDataType.DROPDOWNS) {
       return data.reduce((currState, { name, options }) => {
-        return reducer(currState, setDropdown(name, options[0]));
+        return reducer(currState, setDropdown(name, options[0], false));
       }, s);
     }
     if (type === ConsultDataType.SELECT_LIST) {
-      console.log('case')
-
       const value = data[0];
-      return reducer(s, setSelect(value));
+      return reducer(s, setSelect(value), false);
     }
 
     return s;
@@ -115,7 +117,8 @@ const ConsultItem = ({ item }) => {
                 <StyledDropdown
                   key={x.name}
                   options={x.options}
-                  value={state[ConsultDataType.DROPDOWNS][x.name] || x.options[0]}
+                  value={state[ConsultDataType.DROPDOWNS][x.name].value}
+                  $dirty={state[ConsultDataType.DROPDOWNS][x.name].dirty}
                   label={x.name}
                   changeHandler={dropDownChangeHandler(x.name)}
                 />
@@ -158,6 +161,9 @@ const ConsultItem = ({ item }) => {
 const StyledDropdown = styled(Dropdown)`
   + button {
     margin-top: 64px;
+  }
+  .value {
+    ${ ({ $dirty }) => $dirty && 'opacity: 1;'}
   }
 `;
 

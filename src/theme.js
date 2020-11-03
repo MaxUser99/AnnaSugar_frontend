@@ -24,6 +24,7 @@ export const theme =  {
 export const GlobalStyles = createGlobalStyle`
   body {
     font-family: "Montserrat Alternates";
+    min-width: 375px;
   }
 `;
 

@@ -90,10 +90,10 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 20px;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   min-width: 40px;
   text-align: center;
   color: ${({ theme }) => theme.color.black};

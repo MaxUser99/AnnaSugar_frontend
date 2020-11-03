@@ -11,7 +11,7 @@ const Footer = () => (
   <AbsoluteBlock id='footer'>
     <Block1 fullWidth>
       <ContentWrapper direction='column' alignItems='center'>
-        <Header>Хочешь узнать о всем первым</Header>
+        <Header>Хочешь узнавать обо всем первым?</Header>
         <Button outlined>Подпишись</Button>
       </ContentWrapper>
     </Block1>

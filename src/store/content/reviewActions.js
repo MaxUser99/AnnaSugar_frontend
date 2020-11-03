@@ -15,8 +15,7 @@ export const loadReviews = page => {
     dispatch(setReviewsLoading());
     const transformedReviews = mockReviews.map(x => ({
       ...x,
-      image: mockReviewImg,
-      date: new Date()
+      date: new Date(x.date)
     }));
     delay(1500).then(() => dispatch(pushReviews(transformedReviews, page)));
   }
@@ -28,8 +27,7 @@ export const loadReviewItem = id => {
     const transformedReview = review
       ? {
         ...review,
-        image: mockReviewImg,
-        date: new Date()
+        date: new Date(review.date)
       }
       : null;
     await delay(1000).then(() => dispatch(setReviewItem(transformedReview)));
