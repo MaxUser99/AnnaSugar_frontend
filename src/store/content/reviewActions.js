@@ -1,5 +1,4 @@
 import mockReviews from '../mocks/mockReviews.json';
-import mockReviewImg from '../../assets/images/mock-review.svg';
 
 export const SET_REVIEWS_LOADING = 'SET_REVIEWS_LOADING';
 export const PUSH_REVIEWS = 'PUSH_REVIEWS';

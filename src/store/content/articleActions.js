@@ -1,7 +1,6 @@
 import RESOURCE_STATUS from '../../constants/resourceStatus';
 
 import mockArticles from '../mocks/mockArticles.json';
-import randomImage from '../../assets/images/random-image.svg';
 
 export const SET_ARTICLES_LOADING = 'SET_ARTICLES_LOADING';
 export const PUSH_ARTICLES = 'PUSH_ARTICLES';
@@ -33,7 +32,6 @@ export const loadReviewArticle = id => {
     const transformedArticle = article
       ? {
           ...article,
-          image: randomImage,
           date: new Date(article.date)
         }
       : null;

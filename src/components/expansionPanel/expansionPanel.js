@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import Container from '../container/container';
 
@@ -9,18 +9,35 @@ const ExpansionPanel = ({ className, title, text, HeaderComponent, activeIndicat
   const headerRef = useRef();
   const contentRef = useRef();
 
-  useEffect(() => {
+  const calcContentHeight = () => {
     if (contentRef.current) {
       const { height } = contentRef.current.getBoundingClientRect();
       setContentHeight(height);
     }
-  }, [ headerHeight, contentRef ])
+  }
   
-  useEffect(() => {
+  const calcHeaderHeight = () => {
     if (headerRef.current) {
       const { height } = headerRef.current.getBoundingClientRect();
       setHeaderHeight(height);
     }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', calcContentHeight);
+    window.addEventListener('resize', calcHeaderHeight);
+    return () => {
+      window.removeEventListener('resize', calcContentHeight);
+      window.removeEventListener('resize', calcHeaderHeight);
+    }
+  }, []);
+
+  useEffect(() => {
+    calcContentHeight();
+  }, [ headerHeight, contentRef ])
+  
+  useEffect(() => {
+    calcHeaderHeight();
   }, [headerRef]);
 
   const toggleOpen = () => setOpen(prev => !prev);

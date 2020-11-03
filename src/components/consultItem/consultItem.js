@@ -184,7 +184,7 @@ const StyledPanel = styled(ExpansionPanel)`
 const MainBlock = styled(Container)`
   margin-top: 48px;
   margin-bottom: 64px;
-  ${ $maxWidth(BREAKPOINTS.TABLET, `
+  ${ $maxWidth(700, `
     flex-direction: column;
     align-items: center;
   `)}

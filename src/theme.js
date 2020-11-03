@@ -38,8 +38,8 @@ export const ThemeWrapper = ({ children }) => (
 );
 
 export const BREAKPOINTS = {
-  MOBILE: 375,
-  TABLET: 600,
+  MOBILE: 475,
+  TABLET: 700,
   DESCTOP: 1200,
 };
 
