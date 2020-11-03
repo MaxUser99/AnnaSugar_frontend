@@ -43,25 +43,28 @@ const Footer = () => (
         $hideAfter={BREAKPOINTS.TABLET}
         maxWidth='wide'
         direction='column'>
-          <StyledContainer justifyContent='space-between' fullWidth>
+          <MobileWrapper justifyContent='space-between' fullWidth>
             <Text>Anna Sugar&copy;</Text>
             <SocialButton>
               <VkIcon />
             </SocialButton>
-          </StyledContainer>
-          <Container justifyContent='space-between' fullWidth>
+          </MobileWrapper>
+          <MobileWrapper justifyContent='space-between' fullWidth>
             <Text>All rights reserved</Text>
             <SocialButton>
               <InstaIcon />
             </SocialButton>
-          </Container>
+          </MobileWrapper>
         </StyledContentWrapper>
     </Block2>
   </AbsoluteBlock>
 );
 
-const StyledContainer = styled(Container)`
-  margin-bottom: 12px;
+const MobileWrapper = styled(Container)`
+  :first-of-type {
+    margin-bottom: 12px;
+  }
+  ${ $maxWidth(BREAKPOINTS.MOBILE, 'justify-content: center;')}
 `;
 
 const AbsoluteBlock = styled.div`
@@ -133,6 +136,7 @@ const SocialButton = styled.button`
       fill: white;
     }
   }
+  ${ $maxWidth(BREAKPOINTS.MOBILE, 'display: none;')}
 `;
 
 export default Footer;
