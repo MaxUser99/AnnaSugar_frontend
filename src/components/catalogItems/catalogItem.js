@@ -5,6 +5,7 @@ import Container from '../container/container';
 import CartIcon from '../../assets/icons/cart.inline.svg';
 import Price from '../price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
+import Button from '../button/button';
 
 const CatalogItem = ({ item, onClick }) => {
   const { id, images, name, brief, price } = item;
@@ -16,7 +17,6 @@ const CatalogItem = ({ item, onClick }) => {
   return (
     <Wrapper
       alignItems='stretch'
-      // justifyContent='space-between'
       fullWidth>
       <ImageWrapper imageLoaded={imageLoaded}>
         <img onLoad={imageLoadHandler} src={`/${images[0]}`} alt='' />
@@ -26,15 +26,22 @@ const CatalogItem = ({ item, onClick }) => {
         <Brief>{brief}</Brief>
         <Purchase alignItems='center' justifyContent='space-between' fullWidth>
           <Price>{price}</Price>
-          <Button>
+          {/* <Button>
             <CartIcon />
             <span>Консультация</span>
-          </Button>
+          </Button> */}
+          <StyledButton>Заказать</StyledButton>
         </Purchase>
       </Content>
     </Wrapper>
   );
 };
+
+const StyledButton = styled(Button)`
+  width: auto;
+  height: auto;
+  padding: 20px 30px;
+`;
 
 const Wrapper = styled(Container)`
   padding: 32px 0;
@@ -130,42 +137,6 @@ const Brief = styled.p`
   overflow: hidden;
   margin: 0 0 50px;
   color: ${({ theme }) => theme.text.default};
-`;
-
-const Button = styled.button`
-  margin: 0;
-  padding: 0;
-  outline: none;
-  background-color: transparent;
-  font-size: 16px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.3s;
-
-  border: 1px solid transparent;
-  padding: 10px;
-  border-radius: 4px;
-
-  /* img {
-    margin-right: 20px;
-    ${ $maxWidth(BREAKPOINTS.DESCTOP, 'margin-right: 0;')}
-  } */
-
-  span {
-    transition: 0.3s;
-    /* opacity: 0.5; */
-    /* color: red; */
-    /* color: ${({ theme }) => theme.text.lighter2}; */
-    margin-left: 20px;
-    ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;')}
-  }
-
-  :hover {
-    opacity: 0.7;
-  }
 `;
 
 export default CatalogItem;

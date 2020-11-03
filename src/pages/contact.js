@@ -48,7 +48,7 @@ const Contact = () => {
             </ButtonWrapper>
           </Buttons>
           <Form onSubmit={handleSubmit(submitHandler)}>
-            <FormTitle>Свяжитесь с нами,<br />будем рады Вам помочь!</FormTitle>
+            <FormTitle>Cвяжитесь со мной,<br /> буду рада вам помочь!</FormTitle>
             <Input
               name='email'
               type='text'

@@ -26,7 +26,6 @@ const initialState = {
 }
 
 function reducer(state, action) {
-  console.log('action: ', action);
   switch (action.type) {
     case ACTIONS.SET_DROPDOWN: return {
       ...state,
@@ -49,6 +48,7 @@ function reducer(state, action) {
     default: return state;
   }
 }
+
 
 const ConsultItem = ({ item }) => {
   const {
@@ -82,7 +82,6 @@ const ConsultItem = ({ item }) => {
 
   const setSelected = (selectItem) => dispatch(setSelect(selectItem));
 
-  console.log('state: ', state);
   return (
     <Container direction='column' fullWidth>
       <MainBlock alignItems='flex-start' justifyContent='space-between' fullWidth>
@@ -144,7 +143,7 @@ const ConsultItem = ({ item }) => {
                 }>{state[ConsultDataType.SELECT_LIST].selected.price}</StyledPrice>
             </>
           }
-          <Button>заказать</Button>
+          <Button>записаться</Button>
         </ContentBlock>
       </MainBlock>
       {
