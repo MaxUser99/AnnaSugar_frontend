@@ -19,7 +19,7 @@ const ExpansionPanel = ({ className, title, text, HeaderComponent, activeIndicat
   const calcHeaderHeight = () => {
     if (headerRef.current) {
       const { height } = headerRef.current.getBoundingClientRect();
-      setHeaderHeight(height);
+      setHeaderHeight(height + 2);
     }
   }
 
@@ -55,11 +55,11 @@ const ExpansionPanel = ({ className, title, text, HeaderComponent, activeIndicat
       direction='column'
       onClick={containerClick}
       className={className}
-      $maxHeight={open ? headerHeight + contentHeight : headerHeight}
+      $height={open ? headerHeight + contentHeight : headerHeight}
       $withTransition={!!contentHeight}
       $open={open}
       fullWidth>
-      <Header className='header' ref={headerRef} alignItems='center' $minHeight={headerHeight} fullWidth>
+      <Header className='header' ref={headerRef} alignItems='center' fullWidth>
         {
           HeaderComponent
           ? <HeaderComponent />
@@ -87,18 +87,16 @@ const ExpansionPanel = ({ className, title, text, HeaderComponent, activeIndicat
 };
 
 const Wrapper = styled(Container)`
+  position: relative;
+
   overflow: hidden;
   margin-top: 10px;
   border-radius: 4px;
-  /* padding: 0 30px; */
-
-  box-sizing: border-box;
   padding: 0;
 
-  /* padding: 15px 30px; */
   border: 1px solid ${({ theme }) => theme.color.darkBeige};
   background-color: ${({ $open, theme }) => ($open ? theme.color.darkBeige : 'transparent')};
-  max-height: ${({ $maxHeight }) => ($maxHeight === 0 ? 'auto' : `${$maxHeight}px`)};
+  height: ${({ $height }) => ($height === 0 ? 'auto' : `${$height}px`)};
 
   &:first-of-type {
     margin-top: 64px;
@@ -107,7 +105,8 @@ const Wrapper = styled(Container)`
     margin-bottom: 64px;
   }
 
-  ${({ $withTransition }) => $withTransition && 'transition: 0.3s'};
+  transition: 0.3s;
+  // ${({ $withTransition }) => $withTransition && 'transition: 0.3s'};
 
   :hover > div:first-of-type p.title {
     transition: 0.3s;
@@ -116,7 +115,11 @@ const Wrapper = styled(Container)`
 `;
 
 const Content = styled(Container)`
-  transition: 0.3s;
+  position: absolute;
+  bottom: 0;
+  visibility: ${({ $open }) => ($open ? 'visible' : 'hidden')};
+
+  transition: opacity 0.15s 0.3s;
   opacity: ${({ $open }) => ($open ? '1' : '0')};
   line-height: 28px;
   padding: 0px 32px 32px;
@@ -124,14 +127,9 @@ const Content = styled(Container)`
   .text {
     margin: 0;
   }
-  /* ${ ({ $open }) => !$open && `
-    height: 0;
-    padding: 0;
-  `} */
 `;
 
 const Header = styled(Container)`
-  // background-color: #aaa;
   padding: 4px 32px;
   box-sizing: border-box;
 
