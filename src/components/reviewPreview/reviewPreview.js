@@ -59,7 +59,12 @@ const Text = styled.p`
   font-style: italic;
   font-size: 14px;
   line-height: 24px;
+  max-height: 96px;
+  overflow: hidden;
   color: ${({ theme }) => theme.text.lighter};
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 `;
 
 const Link = styled(BrowserLink)`

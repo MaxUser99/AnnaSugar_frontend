@@ -132,7 +132,14 @@ const ConsultItem = ({ item }) => {
           {
             price && <>
               <Label>Цена</Label>
-              <StyledPrice remark={`(${priceRemark})`}>{price}</StyledPrice>
+              <StyledPrice
+                remark={
+                  priceRemark
+                  ? `(${priceRemark})`
+                  : null
+              }>
+                {price}
+              </StyledPrice>
             </>
           }
           {
@@ -167,6 +174,12 @@ const StyledDropdown = styled(Dropdown)`
   .value {
     ${ ({ $dirty }) => $dirty && 'opacity: 1;'}
   }
+  ${ $maxWidth(BREAKPOINTS.TABLET, `
+    width: 100%;
+    > div {
+      width: 100%;
+    }
+  `)}
 `;
 
 const StyledPanel = styled(ExpansionPanel)`

@@ -59,8 +59,7 @@ const ExpansionPanel = ({ className, title, text, HeaderComponent, activeIndicat
       $withTransition={!!contentHeight}
       $open={open}
       fullWidth>
-      <Header className='header' ref={headerRef} alignItems='center' fullWidth>
-        {/* <p className='title'>{title}</p> */}
+      <Header className='header' ref={headerRef} alignItems='center' $minHeight={headerHeight} fullWidth>
         {
           HeaderComponent
           ? <HeaderComponent />
@@ -125,6 +124,10 @@ const Content = styled(Container)`
   .text {
     margin: 0;
   }
+  /* ${ ({ $open }) => !$open && `
+    height: 0;
+    padding: 0;
+  `} */
 `;
 
 const Header = styled(Container)`
@@ -142,6 +145,7 @@ const Header = styled(Container)`
     padding-right: 12px;
     word-break: break-word;
   }
+  ${({ $minHeight }) => $minHeight && `min-height: ${$minHeight}px;`}
 `;
 
 const Indicator = styled.span`

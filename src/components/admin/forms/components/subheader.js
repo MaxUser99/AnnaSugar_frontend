@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Container from '../../../container/container';
-import LangButton from '../../../header/components/langButton';
-import LANGS from '../../../../constants/langs';
+// import LangButton from '../../../header/components/langButton';
+// import LANGS from '../../../../constants/langs';
 
 const SubHeader = ({
   date,
@@ -12,7 +12,7 @@ const SubHeader = ({
   <Root justifyContent='space-between' fullWidth>
     <Date>{date.toString()}</Date>
     <Container>
-      <LangButton
+      {/* <LangButton
         onClick={() => setLang(LANGS.RU)}
         active={activeLang === LANGS.RU}
         lang={LANGS.RU}
@@ -21,7 +21,7 @@ const SubHeader = ({
         onClick={() => setLang(LANGS.EN)}
         active={activeLang === LANGS.EN}
         lang={LANGS.EN}
-      />
+      /> */}
     </Container>
   </Root>
 )
