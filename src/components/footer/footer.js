@@ -6,59 +6,64 @@ import Button from '../button/button';
 import VkIcon from '../../assets/icons/vk-black.inline.svg';
 import InstaIcon from '../../assets/icons/instagram.inline.svg';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
+import SOCIAL_LINKS from '../../constants/socialLinks';
 
-const Footer = () => (
-  <AbsoluteBlock id='footer'>
-    <Block1 fullWidth>
-      <ContentWrapper direction='column' alignItems='center'>
-        <Header>Хочешь узнавать обо всем первым?</Header>
-        <Button outlined>Подпишись</Button>
-      </ContentWrapper>
-    </Block1>
-    <Block2 fullWidth>
-      {/* default footer */}
-      <StyledContentWrapper
-        $hideUntill={BREAKPOINTS.TABLET}
-        maxWidth='wide'
-        justifyContent='space-between'
-        alignItems='center'>
-        <FooterItem>
-          <Text>Anna Sugar&copy;</Text>
-        </FooterItem>
-        <FooterItem justifyContent='center'>
-          <Text>All rights reserved</Text>
-        </FooterItem>
-        <FooterItem alignItems='center' justifyContent='flex-end'>
-          <SocialButton>
-            <VkIcon />
-          </SocialButton>
-          <SocialButton>
-            <InstaIcon />
-          </SocialButton>
-        </FooterItem>
-      </StyledContentWrapper>
+const Footer = () => {
+  const subscribeCLickHandler = () => window.open(SOCIAL_LINKS.TELEGRAM);
 
-      {/* mobile footer */}
-      <StyledContentWrapper
-        $hideAfter={BREAKPOINTS.TABLET}
-        maxWidth='wide'
-        direction='column'>
-          <MobileWrapper justifyContent='space-between' fullWidth>
+  return (
+    <AbsoluteBlock id='footer'>
+      <Block1 fullWidth>
+        <ContentWrapper direction='column' alignItems='center'>
+          <Header>Хочешь узнавать обо всем первым?</Header>
+          <Button onClick={subscribeCLickHandler} outlined>Подпишись</Button>
+        </ContentWrapper>
+      </Block1>
+      <Block2 fullWidth>
+        {/* default footer */}
+        <StyledContentWrapper
+          $hideUntill={BREAKPOINTS.TABLET}
+          maxWidth='wide'
+          justifyContent='space-between'
+          alignItems='center'>
+          <FooterItem>
             <Text>Anna Sugar&copy;</Text>
+          </FooterItem>
+          <FooterItem justifyContent='center'>
+            <Text>All rights reserved</Text>
+          </FooterItem>
+          <FooterItem alignItems='center' justifyContent='flex-end'>
             <SocialButton>
               <VkIcon />
             </SocialButton>
-          </MobileWrapper>
-          <MobileWrapper justifyContent='space-between' fullWidth>
-            <Text>All rights reserved</Text>
             <SocialButton>
               <InstaIcon />
             </SocialButton>
-          </MobileWrapper>
+          </FooterItem>
         </StyledContentWrapper>
-    </Block2>
-  </AbsoluteBlock>
-);
+
+        {/* mobile footer */}
+        <StyledContentWrapper
+          $hideAfter={BREAKPOINTS.TABLET}
+          maxWidth='wide'
+          direction='column'>
+            <MobileWrapper justifyContent='space-between' fullWidth>
+              <Text>Anna Sugar&copy;</Text>
+              <SocialButton>
+                <VkIcon />
+              </SocialButton>
+            </MobileWrapper>
+            <MobileWrapper justifyContent='space-between' fullWidth>
+              <Text>All rights reserved</Text>
+              <SocialButton>
+                <InstaIcon />
+              </SocialButton>
+            </MobileWrapper>
+          </StyledContentWrapper>
+      </Block2>
+    </AbsoluteBlock>
+  );
+}
 
 const MobileWrapper = styled(Container)`
   :first-of-type {

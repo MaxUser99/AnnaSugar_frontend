@@ -25,7 +25,7 @@ const Reviews = ({ reviews, loadReviews, page }) => {
   return (
     <Root fullWidth>
       <StyledWrapper direction='column' alignItems='center'>
-        <Title>Отзывы</Title>
+        <Title id='reviews'>Отзывы</Title>
         <ReviewsContainer fullWidth justifyContent='space-between' alignItems='stretch'>
           {
             reviews.slice(0, PREVIEW_ITEMS_COUNT).map(review => (

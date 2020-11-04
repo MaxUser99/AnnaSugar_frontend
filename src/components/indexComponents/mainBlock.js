@@ -11,9 +11,13 @@ import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 
 const MainBlock = () => {
-  const fabClickHandler = () => {
-    window.open(SOCIAL_LINKS.WHATS_UP);
+  const fabClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
+
+  const scrollToReviews = () => {
+    const target = document.getElementById('reviews');
+    if (target) target.scrollIntoView({ behavior: "smooth" });
   }
+
   // const data = useStaticQuery(graphql`
   //   query MyQuery {
   //     file(relativePath: {eq: "image.png"}) {
@@ -68,15 +72,21 @@ const MainBlock = () => {
           </Paragraph>
           <Paragraph><StyledLink>А еще...</StyledLink></Paragraph>
         </TextContainer>
-        <div>
+        <Container direction='column' alignItems='center'>
           <Image src={MainImage} alt='' />
+          <ReviewsButton onClick={scrollToReviews} outlined>отзывы</ReviewsButton>
           {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
-        </div>
+        </Container >
         <Fab onClick={fabClickHandler} $absolute><FabImg src={FabIcon} alt='' /></Fab>
       </StyledWrapper>
     </Container>
   );
 };
+
+const ReviewsButton = styled(Button)`
+  margin-top: 20px;
+  margin-left: 20px;
+`;
 
 const Image = styled.img`
   width: 366px;

@@ -40,13 +40,13 @@ const Contact = () => {
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}>
                 <img src={WhatsupIcon} alt='' />
               </SocialButton>
-              <Caption>Подписаться на канал</Caption>
+              <Caption>Ответы на Русском</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}>
                 <img src={MessangerIcon} alt='' />
               </SocialButton>
-              <Caption>Подписаться на канал</Caption>
+              <Caption>Answers in English</Caption>
             </ButtonWrapper>
           </Buttons>
           <Form onSubmit={handleSubmit(submitHandler)}>
@@ -92,14 +92,15 @@ const Buttons = styled(Container)`
 `;
 
 const ButtonWrapper = styled(Container)`
-  max-width: 98px;
+  /* max-width: 98px; */
   align-items: center;
-  ${ $maxWidth(BREAKPOINTS.TABLET, `max-width: 68px;`)}
+  /* ${ $maxWidth(BREAKPOINTS.TABLET, `max-width: 68px;`)} */
 `;
 
 const Caption = styled.p`
   font-size: 14px;
   line-height: 24px;
+  padding: 0 5px;
   color: ${({ theme }) => theme.text.default};
 `;
 
