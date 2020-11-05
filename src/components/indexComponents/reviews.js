@@ -27,7 +27,7 @@ const Reviews = ({ reviews, loadReviews, page }) => {
   return (
     <Root fullWidth>
       <StyledWrapper direction='column' alignItems='center'>
-        <Title id='reviews'>Отзывы</Title>
+        <Title id='reviews'>{t('reviews')}</Title>
         <ReviewsContainer fullWidth justifyContent='space-between' alignItems='stretch'>
           {
             reviews.slice(0, PREVIEW_ITEMS_COUNT).map(review => (
@@ -51,6 +51,7 @@ const StyledWrapper = styled(ContentWrapper)`
 `;
 
 const Title = styled.h2`
+  text-transform: capitalize;
   font-family: "Cormorant Infant";
   font-weight: bold;
   font-size: 48px;

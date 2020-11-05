@@ -1,10 +1,13 @@
 {
-  "// nav": "",
+  "// NAV": "",
   "Главная": "Main",
   "Каталог": "Catalog",
   "Консультации": "Consultations",
   "Вопросы": "FAQ",
   "Контакты": "Contacts",
+
+  "// FOOTER": "",
+  "Хочешь узнавать обо всем первым?": "Do you want to know about everything first?",
 
   "// MAIN BLOCK": "",
   "// DESCTOP TEXT": "",
@@ -26,6 +29,9 @@
   "reviews": "reviews",
   "write to me": "write to me",
   "all": "all",
-  "more": "еще"
+  "more": "more",
+  "": "",
+  "": "",
+  "": ""
 
 }

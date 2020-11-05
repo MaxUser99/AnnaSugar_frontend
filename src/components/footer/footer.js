@@ -6,8 +6,11 @@ import Button from '../button/button';
 import InstaIcon from '../../assets/icons/instagram.inline.svg';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import SOCIAL_LINKS from '../../constants/socialLinks';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const Footer = () => {
+  const { t } = useLocalization();
+
   const subscribeCLickHandler = () => window.open(SOCIAL_LINKS.TELEGRAM);
 
   const subInstagram = () => window.open(SOCIAL_LINKS.INSTAGRAM);
@@ -16,8 +19,8 @@ const Footer = () => {
     <AbsoluteBlock id='footer'>
       <Block1 fullWidth>
         <ContentWrapper direction='column' alignItems='center'>
-          <Header>Хочешь узнавать обо всем первым?</Header>
-          <Button onClick={subscribeCLickHandler} outlined>Подпишись</Button>
+          <Header>{t('Хочешь узнавать обо всем первым?')}</Header>
+          <Button onClick={subscribeCLickHandler} outlined>{t('subscribe')}</Button>
         </ContentWrapper>
       </Block1>
       <Block2 fullWidth>
