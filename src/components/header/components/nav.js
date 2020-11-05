@@ -4,18 +4,16 @@ import { Link } from 'gatsby';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { userLinks } from '../../../constants/links';
 import CloseIcon from '../../../assets/icons/close.inline.svg';
+import { useLocalization } from '../../../hooks/useLocalization';
 
 const Nav = ({ open, setOpen }) => {
   const menuRef = useRef();
+  const { t } = useLocalization();
 
   const menuClickHandler = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
   }
-
-  // const documentClickHandler = () => setOpen(false);
-
-  // const linkClickHandler = () => setOpen(false);
 
   const closeModal = () => setOpen(false);
 
@@ -52,7 +50,7 @@ const Nav = ({ open, setOpen }) => {
                 key={href}
                 onClick={closeModal}
                 to={href}>
-                  {title}
+                  {t(title)}
                 </StyledLink>
             ))
           }
