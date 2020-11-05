@@ -40,7 +40,7 @@ const Contact = () => {
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}>
                 <img src={WhatsupIcon} alt='' />
               </SocialButton>
-              <Caption>Ответы на Русском</Caption>
+              <Caption>Связаться</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}>

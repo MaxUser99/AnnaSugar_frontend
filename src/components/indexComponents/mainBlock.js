@@ -72,7 +72,7 @@ const MainBlock = () => {
           </Paragraph>
           <Paragraph><StyledLink>А еще...</StyledLink></Paragraph>
         </TextContainer>
-        <Container direction='column' alignItems='center'>
+        <Container direction='column' alignItems='center' fullWidth>
           <Image src={MainImage} alt='' />
           <ReviewsButton onClick={scrollToReviews} outlined>отзывы</ReviewsButton>
           {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
@@ -84,8 +84,13 @@ const MainBlock = () => {
 };
 
 const ReviewsButton = styled(Button)`
-  margin-top: 20px;
+  margin-top: 14px;
   margin-left: 20px;
+  ${ $maxWidth(BREAKPOINTS.TABLET, `
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 24px;
+  `)}
 `;
 
 const Image = styled.img`
@@ -135,6 +140,7 @@ const Title = styled.h1`
   line-height: 68px;
   margin: 0 0 10px;
   ${ $maxWidth(BREAKPOINTS.TABLET, 'margin: 0 auto 10px auto;') }
+  ${ $maxWidth(BREAKPOINTS.TABLET, 'font-size: 48px;')}
 `;
 
 const Paragraph = styled.p`

@@ -114,6 +114,7 @@ const TextContainer = styled(Container)`
 
 const ImageWrapper = styled(Container)`
   width: 100%;
+  ${ $maxWidth(BREAKPOINTS.TABLET, 'justify-content: center;')};
 `;
 
 const Image = styled.img`
