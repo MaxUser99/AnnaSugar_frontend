@@ -40,7 +40,7 @@ const Reviews = ({ reviews, loadReviews, page }) => {
 }
 
 const Root = styled(Container)`
-  ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;')}
+  /* ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;')} */
 `;
 
 const StyledWrapper = styled(ContentWrapper)`
@@ -57,9 +57,16 @@ const Title = styled.h2`
 `;
 
 const ReviewsContainer = styled(Container)`
-  & + button {
+  + button {
     margin-top: 64px;
   }
+  ${ $maxWidth(BREAKPOINTS.TABLET, `
+    flex-direction: column;
+    align-items: center;
+    > div:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  `)}
 `;
 
 export default connect(

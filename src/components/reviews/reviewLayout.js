@@ -37,6 +37,10 @@ const ImageContainer = styled(Container)`
   margin: 32px 0;
   overflow: hidden;
   position: relative;
+  > img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
 
 const Text = styled.p`
