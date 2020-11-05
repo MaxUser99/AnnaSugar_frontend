@@ -5,6 +5,7 @@ import Container from '../container/container';
 import { amountTransformer } from '../price/price';
 import CheckedIcon from '../../assets/icons/checked.svg';
 import UncheckedIcon from '../../assets/icons/unchecked.svg';
+import { $maxWidth, BREAKPOINTS } from '../../theme';
 
 const SelectList = ({
   selected,
@@ -31,9 +32,7 @@ const SelectList = ({
           } else if (x.remark) {
             remark = x.remark;
           }
-          console.log('selected: ', selected);
-          console.log('x: ', x);
-          console.log('is equal: ', x === selected);
+
           return (
             <StyledPanel
               key={x.title}
@@ -72,10 +71,11 @@ const StyledPanel = styled(ExpansionPanel)`
 
 const CheckedIndicator = styled.span`
   width: 23px;
+  min-width: 23px;
   height: 20px;
   margin-right: 31px;
-  background: url(${ ({ $checked }) => ($checked ? CheckedIcon : UncheckedIcon)});
-  /* background: url(${UncheckedIcon}); */
+  ${ $maxWidth(BREAKPOINTS.DESCTOP, `margin-right: 20px;`)}
+  background: url(${ ({ $checked }) => ($checked ? CheckedIcon : UncheckedIcon)}) no-repeat center center;
 `;
 
 const Title = styled.h3`

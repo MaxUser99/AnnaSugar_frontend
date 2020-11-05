@@ -66,6 +66,7 @@ const Cents = styled.span`
 `;
 
 const Remark = styled.span`
+  white-space: pre;
   letter-spacing: normal;
 `;
 

@@ -94,7 +94,6 @@ const MainBlock = () => {
             Я владею различными методиками коррекции судьбы и помогу вам изменить вашу жизнь с помощью различных знаний. 
             В своей работе помимо астрологии я использую карты Таро, ритуалы на основе Рун, а также технику Access Bars.
           </Paragraph>
-          <Paragraph><StyledLink>А еще...</StyledLink></Paragraph>
         </TextContainer>
         <Container direction='column' alignItems='center' fullWidth>
           <Image src={MainImage} alt='' />

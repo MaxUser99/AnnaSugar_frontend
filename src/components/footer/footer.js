@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import Container from '../container/container';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import Button from '../button/button';
-import VkIcon from '../../assets/icons/vk-black.inline.svg';
 import InstaIcon from '../../assets/icons/instagram.inline.svg';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 
 const Footer = () => {
   const subscribeCLickHandler = () => window.open(SOCIAL_LINKS.TELEGRAM);
+
+  const subInstagram = () => window.open(SOCIAL_LINKS.INSTAGRAM);
 
   return (
     <AbsoluteBlock id='footer'>
@@ -33,10 +34,7 @@ const Footer = () => {
             <Text>All rights reserved</Text>
           </FooterItem>
           <FooterItem alignItems='center' justifyContent='flex-end'>
-            <SocialButton>
-              <VkIcon />
-            </SocialButton>
-            <SocialButton>
+            <SocialButton onClick={subInstagram}>
               <InstaIcon />
             </SocialButton>
           </FooterItem>
@@ -47,17 +45,14 @@ const Footer = () => {
           $hideAfter={BREAKPOINTS.TABLET}
           maxWidth='wide'
           direction='column'>
-            <MobileWrapper justifyContent='space-between' fullWidth>
+            <MobileWrapper justifyContent='center' fullWidth>
               <Text>Anna Sugar&copy;</Text>
-              <SocialButton>
-                <VkIcon />
-              </SocialButton>
-            </MobileWrapper>
-            <MobileWrapper justifyContent='space-between' fullWidth>
-              <Text>All rights reserved</Text>
-              <SocialButton>
+              {/* <SocialButton>
                 <InstaIcon />
-              </SocialButton>
+              </SocialButton> */}
+            </MobileWrapper>
+            <MobileWrapper justifyContent='center' fullWidth>
+              <Text>All rights reserved</Text>
             </MobileWrapper>
           </StyledContentWrapper>
       </Block2>
