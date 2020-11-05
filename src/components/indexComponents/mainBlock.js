@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Container from '../container/container';
 import Button from '../button/button';
@@ -9,14 +9,18 @@ import FabIcon from '../../assets/images/whatsup-fab.svg';
 // import { useStaticQuery, graphql } from 'gatsby';
 import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
 import SOCIAL_LINKS from '../../constants/socialLinks';
+import ExpandableText from './expandableText';
 
 const MainBlock = () => {
+  const [ textHidden, hideText ] = useState(true)
   const fabClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
 
   const scrollToReviews = () => {
     const target = document.getElementById('reviews');
     if (target) target.scrollIntoView({ behavior: "smooth" });
   }
+
+  const showMoreClickHandler = () => hideText(prev => !prev);
 
   // const data = useStaticQuery(graphql`
   //   query MyQuery {
@@ -41,8 +45,28 @@ const MainBlock = () => {
           <Container alignItems='stretch' fullWidth>
             <Container direction='column'>
               <Paragraph>
-                Официальный Сайт  Эзотерики Anna Sugar – Мастера Таро, Рун, Бацзы И Других Мантических Инструментов.
+                Здравствуйте!<br />
+                Добро пожаловать на официальный сайт Эзотерики Anna Sugar - Мастера Таро, Рун, Бацзы И Других Мантических Инструментов.<br />
+                Если вы попали на мой сайт, значит в вашей жизни пришло время перемен. <ReadMore onClick={showMoreClickHandler}>А еще</ReadMore>
               </Paragraph>
+              <ExpandableText hidden={textHidden}>
+                <Paragraph>
+                  Меня зовут <b>Сахарова Анна.</b><br /> 
+                  Я анализирую и нахожу решения проблем в картах.
+                </Paragraph>
+                <Paragraph>
+                  <b>Чем я могу быть вам полезна?</b><br />
+                  С помощью астрологии я расскажу куда вам двигаться, как улучшить вашу жизнь по всем сферам. После консультации вы поймете, как оттолкнуться от дна и увидите путь вверх!
+                </Paragraph>
+                <Paragraph>
+                  Я владею различными методиками коррекции судьбы и помогу вам изменить вашу жизнь с помощью различных знаний. 
+                  В своей работе помимо астрологии я использую карты Таро, ритуалы на основе Рун, а также технику Access Bars.
+                </Paragraph>
+              </ExpandableText>
+
+              {/* <Paragraph>
+                Официальный Сайт  Эзотерики Anna Sugar – Мастера Таро, Рун, Бацзы И Других Мантических Инструментов.
+              </Paragraph> */}
               <Subscribe>Записаться</Subscribe>
             </Container>
             <FabWrapper alignItems='center' direction='column'>
@@ -83,6 +107,11 @@ const MainBlock = () => {
   );
 };
 
+const ReadMore = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 const ReviewsButton = styled(Button)`
   margin-top: 14px;
   margin-left: 20px;
@@ -105,6 +134,7 @@ const Subscribe = styled(Button)`
 `;
 
 const FabWrapper = styled(Container)`
+  margin-top: auto;
   ${ $maxWidth(BREAKPOINTS.TABLET, 'display: none;') }
   p {
     transform: rotate(-90deg);
@@ -148,6 +178,14 @@ const Paragraph = styled.p`
   font-weight: normal;
   font-size: 14px;
   line-height: 28px;
+  transition: 0.3s;
+  margin: 0;
+  padding: 1rem 0;
+  /* ${ ({ $hidden }) => $hidden && `
+    height: 0;
+    visibility: hidden;
+    margin: 0;
+  `} */
 `;
 
 const StyledWrapper = styled(ContentWrapper)`
