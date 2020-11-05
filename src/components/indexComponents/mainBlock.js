@@ -10,8 +10,10 @@ import FabIcon from '../../assets/images/whatsup-fab.svg';
 import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 import ExpandableText from './expandableText';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const MainBlock = () => {
+  const { t } = useLocalization();
   const [ textHidden, hideText ] = useState(true)
   const fabClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
 
@@ -40,67 +42,56 @@ const MainBlock = () => {
   return (
     <Container fullWidth>
       <StyledWrapper alignItems='flex-start'>
+        <TextContainer $show='desctop' direction='column'>
+          <Title>Anna Sugar</Title>
+          <Paragraph>{ t('paragraph1')}</Paragraph>
+          <Paragraph>
+            {t('paragraph2.1')}
+            <b> {t('paragraph2.2')} </b>
+            {t('paragraph2.3')}
+          </Paragraph>
+          <Paragraph>
+            <b> {t('paragraph3.1')} </b><br />
+            {t('paragraph3.2')}
+          </Paragraph>
+          <Paragraph>{t('paragraph4')}</Paragraph>
+        </TextContainer>
+        <Container direction='column' alignItems='center' fullWidth>
+          <Image src={MainImage} alt='' />
+          <ReviewsButton onClick={scrollToReviews} outlined>{t('reviews')}</ReviewsButton>
+          {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
+        </Container >
+        <Fab onClick={fabClickHandler} $absolute><FabImg src={FabIcon} alt='' /></Fab>
+
         <TextContainer $show='mobile' direction='column'>
           <Title>Anna Sugar</Title>
           <Container alignItems='stretch' fullWidth>
             <Container direction='column'>
               <Paragraph>
-                Здравствуйте!<br />
-                Добро пожаловать на официальный сайт Эзотерики Anna Sugar - Мастера Таро, Рун, Бацзы И Других Мантических Инструментов.<br />
-                Если вы попали на мой сайт, значит в вашей жизни пришло время перемен. <ReadMore onClick={showMoreClickHandler}>А еще</ReadMore>
+                {t('paragraph5')}
+                <ReadMore onClick={showMoreClickHandler}>{t('paragraph5.readMore')}</ReadMore>
               </Paragraph>
               <ExpandableText hidden={textHidden}>
                 <Paragraph>
-                  Меня зовут <b>Сахарова Анна.</b><br /> 
-                  Я анализирую и нахожу решения проблем в картах.
+                  {t('paragraph2.1')}<b> {t('paragraph2.2')}</b><br />
+                  {t('paragraph6')}
                 </Paragraph>
                 <Paragraph>
-                  <b>Чем я могу быть вам полезна?</b><br />
-                  С помощью астрологии я расскажу куда вам двигаться, как улучшить вашу жизнь по всем сферам. После консультации вы поймете, как оттолкнуться от дна и увидите путь вверх!
+                  <b>{t('paragraph3.1')}</b><br />
+                  {t('paragraph3.2')}
                 </Paragraph>
                 <Paragraph>
-                  Я владею различными методиками коррекции судьбы и помогу вам изменить вашу жизнь с помощью различных знаний. 
-                  В своей работе помимо астрологии я использую карты Таро, ритуалы на основе Рун, а также технику Access Bars.
+                  {t('paragraph4')}
                 </Paragraph>
               </ExpandableText>
-
-              {/* <Paragraph>
-                Официальный Сайт  Эзотерики Anna Sugar – Мастера Таро, Рун, Бацзы И Других Мантических Инструментов.
-              </Paragraph> */}
-              <Subscribe>Записаться</Subscribe>
+              <Subscribe>{t('subscribe')}</Subscribe>
             </Container>
             <FabWrapper alignItems='center' direction='column'>
-              <p>Написать Мне</p>
+              <p>{t('write to me')}</p>
               <Fab onClick={fabClickHandler}><FabImg src={FabIcon} alt='' /></Fab>
             </FabWrapper>
           </Container>
         </TextContainer>
-
-        <TextContainer $show='desctop' direction='column'>
-          <Title>Anna Sugar</Title>
-          <Paragraph>
-            Здравствуйте! Добро пожаловать на мой официальный сайт. <br />
-            Если вы попали на мой сайт, значит в вашей жизни пришло время перемен. 
-          </Paragraph>
-          <Paragraph>
-            Меня зовут <b>Сахарова Анна.</b><br /> 
-            Я анализирую и нахожу решения проблем в картах.
-          </Paragraph>
-          <Paragraph>
-            <b>Чем я могу быть вам полезна?</b><br />
-            С помощью астрологии я расскажу куда вам двигаться, как улучшить вашу жизнь по всем сферам. После консультации вы поймете, как оттолкнуться от дна и увидите путь вверх!
-          </Paragraph>
-          <Paragraph>
-            Я владею различными методиками коррекции судьбы и помогу вам изменить вашу жизнь с помощью различных знаний. 
-            В своей работе помимо астрологии я использую карты Таро, ритуалы на основе Рун, а также технику Access Bars.
-          </Paragraph>
-        </TextContainer>
-        <Container direction='column' alignItems='center' fullWidth>
-          <Image src={MainImage} alt='' />
-          <ReviewsButton onClick={scrollToReviews} outlined>отзывы</ReviewsButton>
-          {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
-        </Container >
-        <Fab onClick={fabClickHandler} $absolute><FabImg src={FabIcon} alt='' /></Fab>
       </StyledWrapper>
     </Container>
   );
@@ -173,6 +164,7 @@ const Title = styled.h1`
 `;
 
 const Paragraph = styled.p`
+  white-space: pre-line;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

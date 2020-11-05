@@ -8,11 +8,13 @@ import Container from '../container/container';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import Button from '../button/button';
 import { $maxWidth, BREAKPOINTS } from '../../theme';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const PREVIEW_ITEMS_COUNT = 3;
 
 const Reviews = ({ reviews, loadReviews, page }) => {
   const navigate = useNavigate();
+  const { t } = useLocalization();
 
   const buttonClickHandler = () => {
     navigate('/reviews/');
@@ -33,7 +35,7 @@ const Reviews = ({ reviews, loadReviews, page }) => {
             ))
           }
         </ReviewsContainer>
-        <Button onClick={buttonClickHandler}>еще</Button>
+        <Button onClick={buttonClickHandler}>{t('more')}</Button>
       </StyledWrapper>
     </Root>
   )

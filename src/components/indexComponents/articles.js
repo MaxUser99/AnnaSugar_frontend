@@ -51,7 +51,7 @@ const Articles = ({
             />
           ))
         }
-        <StyledButton onClick={buttonClickHandler}>все</StyledButton>
+        <StyledButton onClick={buttonClickHandler}>{t('all')}</StyledButton>
       </ContentWrapper>
     </Container>
   );

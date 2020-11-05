@@ -6,6 +6,26 @@
   "Вопросы": "FAQ",
   "Контакты": "Contacts",
 
-  "// mainBlock": "",
-  "Статьи": "Articles" 
+  "// MAIN BLOCK": "",
+  "// DESCTOP TEXT": "",
+  "paragraph1": "Hello! Welcome to my official site.\nIf you came to my site, then it’s time for a changes in your life.. ",
+  "paragraph2.1": "My name is",
+  "paragraph2.2": "Anna Sugar.",
+  "paragraph2.3": "I analyze and find solutions to problems in cards.",
+  "paragraph3.1": "How can I help you?",
+  "paragraph3.2": "With the help of astrology, I will tell you where to go, how to improve your life in all areas. After consultation, you will understand how to push off the bottom and see the way up!",
+  "paragraph4": "I own various methods of fate correction and will help you change your life with the help of various knowledge. In my work, in addition to astrology, I use Tarot cards, Rune-based rituals, as well as the Access Bars technique.",
+  "// MOBILE TEXT": "",
+  "paragraph5": "Hello!\nWelcome to the official site of Anna Sugar Esotericism - Masters of Tarot, Runes, Bazi And Other Mantic Instruments.\nIf you came to my site, then it’s time for a change in your life. ",
+  "paragraph5.readMore": "And also",
+  "paragraph6": "I analyze and find solutions to problems in cards.",
+  "Статьи": "Articles" ,
+
+  "// BUTTONS": "",
+  "subscribe": "subscribe",
+  "reviews": "reviews",
+  "write to me": "write to me",
+  "all": "all",
+  "more": "еще"
+
 }
