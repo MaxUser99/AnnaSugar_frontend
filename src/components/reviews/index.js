@@ -5,6 +5,7 @@ import Breadscrumb from '../breadscrumb/breadscrumb';
 import Button from '../button/button';
 import ReviewPreview from '../reviewPreview/reviewPreview';
 import Container from '../container/container';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const breadscrumbs = [
   {
@@ -18,20 +19,24 @@ const breadscrumbs = [
   }
 ];
 
-const ReviewIndex = ({ reviews }) => (
-  <>
-    <Breadscrumb breadscrumbs={breadscrumbs} />
-    <Title>Отзывы</Title>
-    <Container alignItems='stretch' justifyContent='space-between' fullWidth flexWrap>
-      {
-        reviews.map(review => (
-          <StyledPreview key={review.id} review={review} />
-        ))
-      }
-    </Container>
-    <StyledButton>больше</StyledButton>
-  </>
-);
+const ReviewIndex = ({ reviews }) => {
+  const { t } = useLocalization();
+
+  return (
+    <>
+      <Breadscrumb breadscrumbs={breadscrumbs} />
+      <Title>{t('reviews')}</Title>
+      <Container alignItems='stretch' justifyContent='space-between' fullWidth flexWrap>
+        {
+          reviews.map(review => (
+            <StyledPreview key={review.id} review={review} />
+          ))
+        }
+      </Container>
+      <StyledButton>{t('more')}</StyledButton>
+    </>
+  );
+}
 
 const StyledPreview = styled(ReviewPreview)`
   margin-bottom: 64px;
@@ -48,6 +53,7 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 68px;
   line-height: 68px;
+  text-transform: capitalize;
 `;
 
 export default connect(

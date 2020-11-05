@@ -5,6 +5,7 @@
   "Консультации": "Consultations",
   "Вопросы": "FAQ",
   "Контакты": "Contacts",
+  "Отзывы": "Reviews",
 
   "// FOOTER": "",
   "Хочешь узнавать обо всем первым?": "Do you want to know about everything first?",
@@ -24,12 +25,23 @@
   "paragraph6": "I analyze and find solutions to problems in cards.",
   "Статьи": "Articles" ,
 
+  "// CONTACT US": "",
+  "Do you have any questions?": "Do you have any questions?",
+  "Cвяжитесь со мной": "Contact me",
+  "буду рада вам помочь": "I will be glad to help you",
+  "Почта": "Email",
+  "Напиши свое сообщение": "Enter your message",
+  "Сообщение": "Message",
+
   "// BUTTONS": "",
   "subscribe": "subscribe",
   "reviews": "reviews",
   "write to me": "write to me",
   "all": "all",
   "more": "more",
+  "Подписаться на канал": "Subscribe to chanel",
+  "Связаться": "Contact me",
+  "отправить": "send",
   "": "",
   "": "",
   "": ""

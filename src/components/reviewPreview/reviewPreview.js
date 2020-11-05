@@ -29,6 +29,7 @@ const Review = ({
 const StyledContainer = styled(Container)`
   max-width: 302px;
   padding: 0 10px;
+  box-sizing: border-box;
   // &:not(:last-child) {
   //   margin-right: 26px;
   // }

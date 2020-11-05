@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link as BrowserLink } from 'gatsby';
 import { BREAKPOINTS, $maxWidth } from '../../theme';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const Breadscrumb = ({ breadscrumbs }) => {
+  const { t } = useLocalization();
+
   const LinkClickHandler = isDisabled => e => {
     if (isDisabled) {
       e.preventDefault();
@@ -22,7 +25,7 @@ const Breadscrumb = ({ breadscrumbs }) => {
                 to={href}
                 onClick={LinkClickHandler(disabled)}
                 disabled={disabled}>
-                {title}
+                {t(title)}
               </Link>
             </Item>
             { showSlash && '/' }

@@ -11,8 +11,11 @@ import MessangerIcon from '../assets/icons/messanger-btn.svg';
 import Input from '../components/input/input';
 import { BREAKPOINTS, $maxWidth } from '../theme';
 import SOCIAL_LINKS from '../constants/socialLinks';
+import { useLocalization } from '../hooks/useLocalization';
+import LANGS from '../constants/langs';
 
 const Contact = () => {
+  const { t, lang } = useLocalization();
   const {
     register,
     handleSubmit,
@@ -27,20 +30,23 @@ const Contact = () => {
     <Layout>
       <Container fullWidth>
         <StyledWrapper direction='column' alignItems='center'>
-          <Header>Если у Вас остались вопросы?</Header>
-          <SubHeader>( Do you have any questions? )</SubHeader>
+          <Header>{t('Do you have any questions?')}</Header>
+          {
+            lang === LANGS.RU &&
+            <SubHeader>( Do you have any questions? )</SubHeader>
+          }
           <Buttons justifyContent='space-around' fullWidth>
             <ButtonWrapper direction='column'>
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.TELEGRAM)}>
                 <img src={TelegramIcon} alt='' />
               </SocialButton>
-              <Caption>Подписаться на канал</Caption>
+              <Caption>{t('Подписаться на канал')}</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}>
                 <img src={WhatsupIcon} alt='' />
               </SocialButton>
-              <Caption>Связаться</Caption>
+              <Caption>{t('Связаться')}</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
               <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}>
@@ -50,24 +56,24 @@ const Contact = () => {
             </ButtonWrapper>
           </Buttons>
           <Form onSubmit={handleSubmit(submitHandler)}>
-            <FormTitle>Cвяжитесь со мной,<br /> буду рада вам помочь!</FormTitle>
+            <FormTitle>{t('Cвяжитесь со мной')},<br /> {t('буду рада вам помочь')}!</FormTitle>
             <Input
               name='email'
               type='text'
               placeholder='example@email.com'
-              label='Почта'
+              label={t('Почта')}
               inputRef={register({ required: true })}
               error={'email' in errors}
             />
             <Input
               name='message'
-              placeholder='Напиши свое сообщение'
-              label='Сообщение'
+              placeholder={t('Напиши свое сообщение')}
+              label={t('Сообщение')}
               type='text'
               inputRef={register({ required: true })}
               error={'message' in errors}
             />
-            <SubmitButton type='submit'>отправить</SubmitButton>
+            <SubmitButton type='submit'>{t('отправить')}</SubmitButton>
           </Form>
         </StyledWrapper>
       </Container>
@@ -88,6 +94,7 @@ const SubmitButton = styled(Button)`
 
 const Buttons = styled(Container)`
   margin-bottom: 64px;
+  margin-top: 64px;
   overflow: hidden;
 `;
 
@@ -123,7 +130,6 @@ const Header = styled.h1`
 const SubHeader = styled.h2`
   font-size: 14px;
   line-height: 34px;
-  margin: 0 0 64px;
   color: ${({ theme }) => theme.text.lighter2};
 `;
 
