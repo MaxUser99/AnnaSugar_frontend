@@ -10,6 +10,7 @@ import Dropdown from '../../components/dropdown';
 import { ConsultDataType } from '../../constants/consultDataType';
 import ExpansionPanel from '../expansionPanel/expansionPanel';
 import SOCIAL_LINKS from '../../constants/socialLinks';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const ACTIONS = {
   SET_DROPDOWN: 'SET_DROPDOWN',
@@ -65,6 +66,7 @@ const ConsultItem = ({ item }) => {
     data
   } = item;
 
+  const { t } = useLocalization();
   const [ state, dispatch ] = useReducer(reducer, initialState, (s) => {
     if (type === ConsultDataType.DROPDOWNS) {
       return data.reduce((currState, { name, options }) => {
@@ -131,7 +133,7 @@ const ConsultItem = ({ item }) => {
           { imageInfo && <Info $showBefore={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
           {
             price && <>
-              <Label>Цена</Label>
+              <Label>{t('Цена')}</Label>
               <StyledPrice
                 remark={
                   priceRemark
@@ -144,7 +146,7 @@ const ConsultItem = ({ item }) => {
           }
           {
             state[ConsultDataType.SELECT_LIST].selected && state[ConsultDataType.SELECT_LIST].selected.price && <>
-              <Label>Цена</Label>
+              <Label>{t('Цена')}</Label>
               <StyledPrice
                 remark={
                   state[ConsultDataType.SELECT_LIST].selected.time
@@ -153,13 +155,13 @@ const ConsultItem = ({ item }) => {
                 }>{state[ConsultDataType.SELECT_LIST].selected.price}</StyledPrice>
             </>
           }
-          <Button onClick={offerClickHandler}>записаться</Button>
+          <Button onClick={offerClickHandler}>{t('записаться')}</Button>
         </ContentBlock>
       </MainBlock>
       {
         description &&
         <Descritption direction='column'>
-          <strong>Описание:</strong>
+          <strong>{t('Описание')}:</strong>
           <p>{ description }</p>
         </Descritption>
       }

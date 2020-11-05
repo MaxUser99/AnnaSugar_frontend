@@ -5,24 +5,29 @@ import Container from '../container/container';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import TabMenu from '../tabMenu/tabMenu';
 import { BREAKPOINTS, $maxWidth } from '../../theme';
+import { useLocalization } from '../../hooks/useLocalization';
 
-const FaqLayout = ({ title, tabs, children }) => (
-  <StyledLayout>
-    <HeaderBlock direction='column' fullWidth>
-      <ContentWrapper justifyContent='center' alignItems='center'>
-        <PageTitle>{title}</PageTitle>
-      </ContentWrapper>
-      <MenuWrapper justifyContent='center' alignItems='center'>
-        <TabMenu tabs={tabs} />
-      </MenuWrapper>
-    </HeaderBlock>
-    <Container fullWidth>
-      <ContentWrapper direction='column' alignItems='center' fullWidth>
-        { children }
-      </ContentWrapper>
-    </Container>
-  </StyledLayout>
-);
+const FaqLayout = ({ title, tabs, children }) => {
+  const { t } = useLocalization();
+
+  return (
+    <StyledLayout>
+      <HeaderBlock direction='column' fullWidth>
+        <ContentWrapper justifyContent='center' alignItems='center'>
+          <PageTitle>{t(title)}</PageTitle>
+        </ContentWrapper>
+        <MenuWrapper justifyContent='center' alignItems='center'>
+          <TabMenu tabs={tabs} />
+        </MenuWrapper>
+      </HeaderBlock>
+      <Container fullWidth>
+        <ContentWrapper direction='column' alignItems='center' fullWidth>
+          { children }
+        </ContentWrapper>
+      </Container>
+    </StyledLayout>
+  );
+}
 
 const MenuWrapper = styled(ContentWrapper)`
   ${ $maxWidth(BREAKPOINTS.TABLET, 'padding: 0;')}

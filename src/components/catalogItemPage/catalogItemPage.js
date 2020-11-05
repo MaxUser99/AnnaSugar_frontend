@@ -9,6 +9,7 @@ import ItemPage from './components/itemPage';
 import Features from './components/features';
 import Description from './components/descriptions';
 import Button from '../button/button';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const SUB_PAGES = {
   DESCRIPTION: 'DESCRIPTION',
@@ -16,6 +17,7 @@ const SUB_PAGES = {
 };
 
 const CatalogItemPage = ({ itemId, reviewItem, clearHandler, loadItem }) => {
+  const { t } = useLocalization();
   const { isLoading, shouldRedirect } = useLoading(!reviewItem, () => loadItem(itemId));
   const [ subPage, setSubPage ] = useState(SUB_PAGES.DESCRIPTION);
 
@@ -35,12 +37,12 @@ const CatalogItemPage = ({ itemId, reviewItem, clearHandler, loadItem }) => {
             <Tab
               onClick={() => setSubPage(SUB_PAGES.DESCRIPTION)}
               $active={subPage === SUB_PAGES.DESCRIPTION}>
-                Описание
+                {t('Описание')}
               </Tab>
             <Tab
               onClick={() => setSubPage(SUB_PAGES.FEATURES)}
               $active={subPage === SUB_PAGES.FEATURES}>
-                Характеристики
+                {t('Характеристики')}
               </Tab>
           </TabMenu>
         </ContentWrapper>

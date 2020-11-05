@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import Tab from './tab';
 import Container from '../container/container';
 import { $maxWidth } from '../../theme';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const TabMenu = ({ tabs }) => {
+  const { t } = useLocalization();
+
   return (
     <Menu
       justifyContent='center'
@@ -14,7 +17,7 @@ const TabMenu = ({ tabs }) => {
       {
         tabs.map(({ title, href }) => (
           <Tab key={href} href={href}>
-            {title}
+            {t(title)}
           </Tab>
         ))
       }

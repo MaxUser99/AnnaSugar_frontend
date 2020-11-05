@@ -6,6 +6,14 @@
   "Вопросы": "FAQ",
   "Контакты": "Contacts",
   "Отзывы": "Reviews",
+  "Астро": "Astro",
+  "Браслеты": "Bracelets",
+  "Четки": "Сhaplets",
+  "Свечи": "Kindles",
+  "Другое": "Others",
+  "Таро": "Taros",
+  "Руны": "Runes",
+  "Ритуалы": "Rituals",
 
   "// FOOTER": "",
   "Хочешь узнавать обо всем первым?": "Do you want to know about everything first?",
@@ -33,6 +41,10 @@
   "Напиши свое сообщение": "Enter your message",
   "Сообщение": "Message",
 
+  "// CATALOG": "",
+  "Описание": "Description",
+  "Характеристики": "Characteristics",
+
   "// BUTTONS": "",
   "subscribe": "subscribe",
   "reviews": "reviews",
@@ -42,8 +54,11 @@
   "Подписаться на канал": "Subscribe to chanel",
   "Связаться": "Contact me",
   "отправить": "send",
-  "": "",
-  "": "",
-  "": ""
+  "Заказать": "Order",
+
+  "// GENERAL": "",
+  "Цена": "Price",
+  "Состав": "Compound",
+  "записаться": "Sign Up"
 
 }

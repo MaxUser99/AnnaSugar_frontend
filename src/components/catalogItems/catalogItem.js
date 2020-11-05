@@ -7,6 +7,7 @@ import Price from '../price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import Button from '../button/button';
 import SOCIAL_LINKS from '../../constants/socialLinks';
+import { useLocalization } from '../../hooks/useLocalization';
 
 const CatalogItem = ({
   item,
@@ -16,6 +17,7 @@ const CatalogItem = ({
 }) => {
   const { id, images, name, brief, price } = item;
   const [ imageLoaded, setImageLoaded ] = useState(false);
+  const { t } = useLocalization();
 
   const imageLoadHandler = (e) => {
     setImageLoaded(true);
@@ -44,7 +46,7 @@ const CatalogItem = ({
             <CartIcon />
             <span>Консультация</span>
           </Button> */}
-          <StyledButton onClick={offerClickHandler}>Заказать</StyledButton>
+          <StyledButton onClick={offerClickHandler}>{t('Заказать')}</StyledButton>
         </Purchase>
       </Content>
     </Wrapper>

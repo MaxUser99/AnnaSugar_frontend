@@ -6,10 +6,12 @@ import Button from '../../button/button';
 import Price from '../../price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../../theme';
 import SOCIAL_LINKS from '../../../constants/socialLinks';
+import { useLocalization } from '../../../hooks/useLocalization';
 
 const propGetter = (obj, propName, placeholder = '-') => (obj && obj[propName]) ? obj[propName] : placeholder;
 
 const ItemPage = ({ item, isLoading }) => {
+  const { t } = useLocalization();
   const name = propGetter(item, 'name');
   const compound = propGetter(item, 'compound');
   const images = propGetter(item, 'images', []);
@@ -22,11 +24,11 @@ const ItemPage = ({ item, isLoading }) => {
       <Carousel images={images} />
       <Content direction='column' fullWidth>
         <Name $loading={isLoading}>{name}</Name>
-        <Label>Состав</Label>
+        <Label>{t('Состав')}</Label>
         <Compound>{compound}</Compound>
-        <Label>Цена</Label>
+        <Label>{t('Цена')}</Label>
         <Price>{price}</Price>
-        <Button onClick={offerClickHandler}>Заказать</Button>
+        <Button onClick={offerClickHandler}>{t('Заказать')}</Button>
       </Content>
     </RootContainer>
   );
