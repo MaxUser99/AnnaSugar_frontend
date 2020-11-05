@@ -210,8 +210,8 @@ const Fab = styled.button`
     ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;') }
     position: absolute;
     // right: 3.25%;
-    right: 5%;
-    top: 517px;
+    right: 8%;
+    top: 0;
   `}
   transition: 0.3s;
   :hover {
