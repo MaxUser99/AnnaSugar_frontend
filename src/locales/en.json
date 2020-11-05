@@ -1,3 +1,11 @@
 {
+  "// nav": "",
+  "Главная": "Main",
+  "Каталог": "Catalog",
+  "Консультации": "Consultations",
+  "Вопросы": "FAQ",
+  "Контакты": "Contacts",
+
+  "// mainBlock": "",
   "Статьи": "Articles" 
 }

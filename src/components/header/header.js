@@ -13,7 +13,7 @@ import { useLocalization } from '../../hooks/useLocalization';
 
 const Header = () => {
   const { pathname } = useLocation();
-  const { setLang, lang } = useLocalization();
+  const { setLang, lang, t } = useLocalization();
 
   return (
     <RootContainer id='header' alignItems='center' fullWidth>
@@ -28,7 +28,7 @@ const Header = () => {
                 key={href}
                 active={isActive(pathname)}
                 to={href}>
-                  {title}
+                  {t(title)}
               </StyledLink>
             ))
           }
