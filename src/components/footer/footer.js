@@ -7,6 +7,7 @@ import InstaIcon from '../../assets/icons/instagram.inline.svg';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 import { useLocalization } from '../../hooks/useLocalization';
+import { navigate } from 'gatsby';
 
 const Footer = () => {
   const { t } = useLocalization();
@@ -14,6 +15,8 @@ const Footer = () => {
   const subscribeCLickHandler = () => window.open(SOCIAL_LINKS.TELEGRAM);
 
   const subInstagram = () => window.open(SOCIAL_LINKS.INSTAGRAM);
+
+  const termsClickHandler = () => navigate('/terms');
 
   return (
     <AbsoluteBlock id='footer'>
@@ -36,6 +39,9 @@ const Footer = () => {
           <FooterItem justifyContent='center'>
             <Text>All rights reserved</Text>
           </FooterItem>
+          <FooterItem justifyContent='center'>
+            <Text onClick={termsClickHandler}>{t('Условия сотрудничества')}</Text>
+          </FooterItem>
           <FooterItem alignItems='center' justifyContent='flex-end'>
             <SocialButton onClick={subInstagram}>
               <InstaIcon />
@@ -50,12 +56,12 @@ const Footer = () => {
           direction='column'>
             <MobileWrapper justifyContent='center' fullWidth>
               <Text>Anna Sugar&copy;</Text>
-              {/* <SocialButton>
-                <InstaIcon />
-              </SocialButton> */}
             </MobileWrapper>
             <MobileWrapper justifyContent='center' fullWidth>
               <Text>All rights reserved</Text>
+            </MobileWrapper>
+            <MobileWrapper justifyContent='center' fullWidth>
+              <Text onClick={termsClickHandler}>{t('Условия сотрудничества')}</Text>
             </MobileWrapper>
           </StyledContentWrapper>
       </Block2>
@@ -64,7 +70,7 @@ const Footer = () => {
 }
 
 const MobileWrapper = styled(Container)`
-  :first-of-type {
+  :not(:last-of-type) {
     margin-bottom: 12px;
   }
   ${ $maxWidth(BREAKPOINTS.MOBILE, 'justify-content: center;')}
@@ -77,7 +83,7 @@ const AbsoluteBlock = styled.div`
 `;
 
 const FooterItem = styled(Container)`
-  width: 130px;
+  /* width: 130px; */
 `;
 
 const Block1 = styled(Container)`
@@ -115,6 +121,13 @@ const Text = styled.p`
   white-space: nowrap;
   // line-height: 14px;
   color: ${({ theme }) => theme.text.lighter2};
+  ${ ({ onClick }) => !!onClick && `
+    cursor: pointer;
+    transition: 0.3s;
+    :hover {
+      opacity: 0.7;
+    }
+  `}
 `;
 
 const SocialButton = styled.button`

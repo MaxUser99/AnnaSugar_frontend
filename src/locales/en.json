@@ -17,6 +17,7 @@
 
   "// FOOTER": "",
   "Хочешь узнавать обо всем первым?": "Do you want to know about everything first?",
+  "Условия сотрудничества": "Terms of cooperation",
 
   "// MAIN BLOCK": "",
   "// DESCTOP TEXT": "",
@@ -44,6 +45,13 @@
   "// CATALOG": "",
   "Описание": "Description",
   "Характеристики": "Characteristics",
+
+  "// TERMS": "",
+  "terms.subheader1": "Rules for ordering jewelry (bracelets, rosary, neck jewelry):",
+  "terms.subheader2": "Terms of service:",
+  "terms.text1": "⁃ The appearance of the bracelet depends on your birth data. This is not a beauty accessory or an addition to a costume, first of all it is an amulet and a source of energy. \n ⁃ The bracelet can be ordered only with a 50% prepayment to the card of one of the banks. The second part of the payment is made when the jewelry is ready, before it is shipped. \n - The order is made 3-5 days from the date of prepayment. \n ⁃ The order is made according to the data provided by the customer: date, time, city (+ wrist coverage when ordering a bracelet ). \n ⁃ The customer is responsible for errors in wrist measurement. Changing the size of the bracelet, both to reduce it and to increase it, costs 1000 rubles in addition. \n ⁃ Delivery of the order is carried out at the expense of the buyer. Russian Post (Ukraine, USA and other countries) is paid when ordering, delivery of CDEK (Russia, Belarus, Kazakhstan) is paid by the customer upon receipt. CDEK delivery cost is 400 rubles, Russian Post - according to tariffs. \n ⁃ The set with the decoration includes a bag, a list of used minerals, a business card, information on which energy center the product was collected. \n ⁃ You cannot exchange or return jewelry.",
+  "terms.text2": "Rules for booking and consulting: \n ⁃ Reservations are made on 100% prepayment to a card of one of the banks. Payment must be made within 24 hours after the application and preliminary agreement on the consultation. Reservation is not possible without prepayment. \n консультации The consultation can be postponed if the customer informs about the change of plans more than 24 hours before the previously agreed date. In this case, the meeting is postponed once to a convenient date, no additional payments are required. \n ⁃ The consultation cannot be rescheduled if the customer informs about the change of plans or cancellation of the meeting less than 24 hours in advance. In this case, the meeting is not postponed, the client only receives a written consultation, the consultation fee is not refundable. \n ⁃ The cost of a child consultation is similar to the “adult” rates. \n ⁃ The consultation is based on an astrological natal chart and is based on the data provided by the customer. \n ⁃ The duration of the consultation depends on its tariff and it starts at a pre-agreed time. If the client is late for the consultation, the meeting time is not extended, and it ends after the time allotted for its holding. \nFor example, a general astrological consultation takes 90 minutes. If the client is 30 minutes late, the time for our meeting is only 60 minutes. \n ⁃ The time of birth for the consultation is required as accurate as possible. If the range of birth time is not accurate and the spread is large (up to two hours, for example, from 2 pm to 4 pm), then additional data from you will be needed to establish the exact time of birth. This procedure costs 2000 rubles extra. \n Restoring the time of birth, when it is, in principle, unknown (rectification), I do not do!",
+
 
   "// BUTTONS": "",
   "subscribe": "subscribe",
