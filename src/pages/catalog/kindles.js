@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Router } from '@reach/router';
 import styled from 'styled-components';
-import { loadKindles, loadKindlesItem, setReviewKindle } from '../../store/content/catalogActions';
+import { loadKindles, loadKindlesItem, setReviewKindle, reloadKindles } from '../../store/content/catalogActions';
+import { onLangChange } from '../../hooks/onLangChange';
 import ItemPage from '../../components/catalogItemPage/catalogItemPage';
 import CatalogItems from '../../components/catalogItems/catalogItems';
 
@@ -12,8 +13,11 @@ const Kindles = ({
   reviewItem,
   loadKindles,
   loadReviewKindle,
-  clearHandler
+  clearHandler,
+  reloadKindles
 }) => {
+  onLangChange(() => reloadKindles(0));
+
   useEffect(() => {
     if (page === null) loadKindles(0);
   }, []);
@@ -45,7 +49,8 @@ export default connect(
   }),
   dispatch => ({
     loadKindles: page => dispatch(loadKindles(page)),
+    reloadKindles: page => dispatch(reloadKindles(page)),
     loadReviewKindle: id => dispatch(loadKindlesItem(id)),
-    clearHandler: () => dispatch(setReviewKindle(null))
+    clearHandler: () => dispatch(setReviewKindle(null)),
   })
 )(Kindles);

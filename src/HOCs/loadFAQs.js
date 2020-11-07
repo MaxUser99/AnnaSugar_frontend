@@ -37,7 +37,6 @@ const loadFAQs = (Component) => (
 
     useEffect(() => {
       if (prevLang !== language) {
-        console.error('should reload: ', language)
         reloadFaqs();
         setLang(language);
       }

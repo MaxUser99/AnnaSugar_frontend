@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Router } from '@reach/router';
 import styled from 'styled-components';
-import { loadBracelets, loadBraceletsItem, setReviewBracelet } from '../../store/content/catalogActions';
+import { loadBracelets, loadBraceletsItem, setReviewBracelet, reloadBracelets } from '../../store/content/catalogActions';
+import { onLangChange } from '../../hooks/onLangChange';
 import CatalogItems from '../../components/catalogItems/catalogItems';
 import ItemPage from '../../components/catalogItemPage/catalogItemPage';
 
@@ -12,8 +13,11 @@ const Bracelets = ({
   reviewItem,
   loadBracelets,
   loadReviewBracelet,
-  clearHandler
+  clearHandler,
+  reloadBracelets
 }) => {
+  onLangChange(() => reloadBracelets(0));
+
   useEffect(() => {
     if (page === null) loadBracelets(0);
   }, []);
@@ -46,6 +50,7 @@ export default connect(
   dispatch => ({
     loadBracelets: page => dispatch(loadBracelets(page)),
     loadReviewBracelet: id => dispatch(loadBraceletsItem(id)),
-    clearHandler: () => dispatch(setReviewBracelet(null))
+    clearHandler: () => dispatch(setReviewBracelet(null)),
+    reloadBracelets: page => dispatch(reloadBracelets(page))
   })
 )(Bracelets);

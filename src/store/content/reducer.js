@@ -16,6 +16,10 @@ import {
   SET_REVIEW_KINDLE,
   SET_REVIEW_BEAD,
   SET_REVIEW_OTHER,
+  RESET_BRACELETS,
+  RESET_KINDLES,
+  RESET_BEADS,
+  RESET_OTHERS,
 } from './catalogActions';
 import {
   SET_ASTRO_LOADING,
@@ -145,6 +149,15 @@ export default (state = initialState, action) => {
         page: action.payload.page
       }
     };
+    case RESET_BRACELETS: return {
+      ...state,
+      bracelets: {
+        ...state.bracelets,
+        status: RESOURCE_STATUS.LOADED,
+        data: [ ...action.payload.data ],
+        page: action.payload.page
+      }
+    };
     case SET_REVIEW_BRACELET: return {
       ...state,
       bracelets: {
@@ -168,6 +181,15 @@ export default (state = initialState, action) => {
         ...state.beads,
         status: RESOURCE_STATUS.LOADED,
         data: [...state.beads.data, ...action.payload.data],
+        page: action.payload.page
+      }
+    };
+    case RESET_BEADS: return {
+      ...state,
+      beads: {
+        ...state.beads,
+        status: RESOURCE_STATUS.LOADED,
+        data: [ ...action.payload.data ],
         page: action.payload.page
       }
     };
@@ -197,6 +219,15 @@ export default (state = initialState, action) => {
         page: action.payload.page
       }
     };
+    case RESET_KINDLES: return {
+      ...state,
+      kindles: {
+        ...state.kindles,
+        status: RESOURCE_STATUS.LOADED,
+        data: [ ...action.payload.data ],
+        page: action.payload.page
+      }
+    };
     case SET_REVIEW_KINDLE: return {
       ...state,
       kindles: {
@@ -220,6 +251,15 @@ export default (state = initialState, action) => {
         ...state.others,
         status: RESOURCE_STATUS.LOADED,
         data: [...state.others.data, ...action.payload.data],
+        page: action.payload.page
+      }
+    };
+    case RESET_OTHERS: return {
+      ...state,
+      others: {
+        ...state.others,
+        status: RESOURCE_STATUS.LOADED,
+        data: [ ...action.payload.data ],
         page: action.payload.page
       }
     };

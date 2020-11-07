@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Router } from '@reach/router';
-import { loadBeads, setReviewBead, loadBeadsItem } from '../../store/content/catalogActions';
+import { loadBeads, setReviewBead, loadBeadsItem, reloadBeads } from '../../store/content/catalogActions';
+import { onLangChange } from '../../hooks/onLangChange';
 import CatalogItems from '../../components/catalogItems/catalogItems';
 import ItemPage from '../../components/catalogItemPage/catalogItemPage';
 
@@ -12,8 +13,11 @@ const Beads = ({
   reviewItem,
   loadBeads,
   loadReviewBead,
-  clearHandler
+  clearHandler,
+  reloadBeads
 }) => {
+  onLangChange(() => reloadBeads(0));
+
   useEffect(() => {
     if (page === null) loadBeads(0);
   }, []);
@@ -45,6 +49,7 @@ export default connect(
   }),
   dispatch => ({
     loadBeads: page => dispatch(loadBeads(page)),
+    reloadBeads: page => dispatch(reloadBeads(page)),
     loadReviewBead: id => dispatch(loadBeadsItem(id)),
     clearHandler: () => dispatch(setReviewBead(null))
   })

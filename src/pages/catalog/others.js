@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Router } from '@reach/router';
 import styled from 'styled-components';
-import { loadOthers, setReviewOther, loadOthersItem } from '../../store/content/catalogActions';
+import { loadOthers, setReviewOther, loadOthersItem, reloadOthers } from '../../store/content/catalogActions';
+import { onLangChange } from '../../hooks/onLangChange';
 import CatalogItems from '../../components/catalogItems/catalogItems';
 import ItemPage from '../../components/catalogItemPage/catalogItemPage';
 
@@ -12,8 +13,11 @@ const Others = ({
   loadOthers,
   reviewItem,
   loadReviewItem,
-  clearHandler
+  clearHandler,
+  reloadOthers
 }) => {
+  onLangChange(() => reloadOthers(0));
+
   useEffect(() => {
     if (page === null) loadOthers(0);
   }, []);
@@ -45,6 +49,7 @@ export default connect(
   }),
   dispatch => ({
     loadOthers: page => dispatch(loadOthers(page)),
+    reloadOthers: page => dispatch(reloadOthers(page)),
     loadReviewItem: id => dispatch(loadOthersItem(id)),
     clearHandler: () => dispatch(setReviewOther(null))
   })
