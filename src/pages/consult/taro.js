@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { consultLinks } from '../../constants/links';
 import Layout from '../../components/layout/faqLayout';
 import ConsultItem from '../../components/consultItem/consultItem';
+import { consultWrapper } from './index';
 
 const Taro = ({ items }) => (
   <Layout title='Консультации' tabs={consultLinks}>
@@ -12,9 +13,9 @@ const Taro = ({ items }) => (
   </Layout>
 );
 
-export default connect(
-  ({ content: { taro: { data }}}) => ({
-    items: data
-  }),
-  null
-)(Taro);
+const mapStateToProps = ({ content: { taro: { data }}}) => ({
+  items: data
+});
+
+export default consultWrapper(connect(mapStateToProps)(Taro));
+

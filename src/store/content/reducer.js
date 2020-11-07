@@ -26,10 +26,10 @@ import {
   SET_TARO_LOADING,
   SET_RUNE_LOADING,
   SET_RITUAL_LOADING,
-  PUSH_ASTRO,
-  PUSH_TARO,
-  PUSH_RUNE,
-  PUSH_RITUAL,
+  SET_ASTRO,
+  SET_TARO,
+  SET_RUNE,
+  SET_RITUAL,
 } from './consultActions';
 
 const SIMPLE_LOADABLE_CONTENT = {
@@ -281,12 +281,12 @@ export default (state = initialState, action) => {
         status: RESOURCE_STATUS.LOADING
       }
     };
-    case PUSH_ASTRO: return {
+    case SET_ASTRO: return {
       ...state,
       astro: {
         ...state.astro,
         status: RESOURCE_STATUS.LOADED,
-        data: [...state.astro.data, ...action.payload]
+        data: [...action.payload]
       }
     };
     // taro actions
@@ -298,12 +298,12 @@ export default (state = initialState, action) => {
         status: RESOURCE_STATUS.LOADING
       }
     };
-    case PUSH_TARO: return {
+    case SET_TARO: return {
       ...state,
       taro: {
         ...state.taro,
         status: RESOURCE_STATUS.LOADED,
-        data: [...state.taro.data, ...action.payload]
+        data: [...action.payload]
       }
     };
     // rune actions
@@ -315,12 +315,12 @@ export default (state = initialState, action) => {
         status: RESOURCE_STATUS.LOADING
       }
     };;
-    case PUSH_RUNE: return {
+    case SET_RUNE: return {
       ...state,
       rune: {
         ...state.rune,
         status: RESOURCE_STATUS.LOADED,
-        data: [...state.rune.data, ...action.payload]
+        data: [...action.payload]
       }
     };
     // ritual actions
@@ -332,12 +332,12 @@ export default (state = initialState, action) => {
         status: RESOURCE_STATUS.LOADING
       }
     };;
-    case PUSH_RITUAL: return {
+    case SET_RITUAL: return {
       ...state,
       ritual: {
         ...state.ritual,
         status: RESOURCE_STATUS.LOADED,
-        data: [...state.ritual.data, ...action.payload]
+        data: [...action.payload]
       }
     };
 

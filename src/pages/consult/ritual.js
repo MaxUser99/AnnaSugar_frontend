@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { consultLinks } from '../../constants/links';
 import Layout from '../../components/layout/faqLayout';
 import ConsultItem from '../../components/consultItem/consultItem';
+import { consultWrapper } from './index';
 
 const Ritual = ({ items }) => (
   <Layout title='Консультации' tabs={consultLinks}>
@@ -12,9 +13,8 @@ const Ritual = ({ items }) => (
   </Layout>
 );
 
-export default connect(
-  ({ content: { ritual: { data }}}) => ({
-    items: data
-  }),
-  null
-)(Ritual);
+const mapStateToProps = ({ content: { ritual: { data }}}) => ({
+  items: data
+});
+
+export default consultWrapper(connect(mapStateToProps)(Ritual));

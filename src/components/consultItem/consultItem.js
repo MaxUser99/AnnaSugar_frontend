@@ -20,7 +20,7 @@ const ACTIONS = {
 
 const setDropdown = (name, value, dirty = true) => ({ type: ACTIONS.SET_DROPDOWN, payload: { name, value, dirty }});
 const setSelect = (value, dirty = true) => ({ type: ACTIONS.SET_SELECT_LIST, payload: { value, dirty }});
-const reset = () => ({ type: ACTIONS.RESET });
+const reset = newState => ({ type: ACTIONS.RESET, payload: newState });
 
 const initialState = {
   [ConsultDataType.DROPDOWNS]: {},
@@ -47,6 +47,7 @@ function reducer(state, action) {
         dirty: action.payload.dirty,
       }
     };
+    case ACTIONS.RESET: return action.payload;
     default: return state;
   }
 }
@@ -66,8 +67,7 @@ const ConsultItem = ({ item }) => {
     data
   } = item;
 
-  const { t } = useLocalization();
-  const [ state, dispatch ] = useReducer(reducer, initialState, (s) => {
+  const init = (s) => {
     if (type === ConsultDataType.DROPDOWNS) {
       return data.reduce((currState, { name, options }) => {
         return reducer(currState, setDropdown(name, options[0], false));
@@ -79,13 +79,23 @@ const ConsultItem = ({ item }) => {
     }
 
     return s;
-  });
+  }
+
+  const { t } = useLocalization();
+  const [ state, dispatch ] = useReducer(reducer, initialState, init);
+
+  useEffect(() => {
+    const newState = init(initialState);
+    console.log('new state: ', newState);
+    dispatch(reset(newState));
+  }, [item]);
 
   const dropDownChangeHandler = (name) => value => dispatch(setDropdown(name, value[0]));
 
   const setSelected = (selectItem) => dispatch(setSelect(selectItem));
 
   const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
+  console.log(' state: ', state);
 
   return (
     <Container direction='column' fullWidth>
