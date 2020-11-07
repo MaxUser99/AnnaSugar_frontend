@@ -6,10 +6,25 @@ import { getLangHeader, faqsUrl } from '../api';
 export const SET_FAQs = 'SET_FAQs';
 export const SET_FAQs_LOADING = 'SET_FAQs_LOADING';
 export const SET_ON_EDIT_FAQ = 'SET_ON_EDIT_FAQ';
+export const RESET_FAQs = 'RESET_FAQs';
 
 export const setFaqs = faqs => ({ type: SET_FAQs, payload: faqs });
 export const setFaqsLoading = () => ({ type: SET_FAQs_LOADING });
 export const editFAQ = item => ({ type: SET_ON_EDIT_FAQ, payload: item });
+export const resetFAQs = faqs => ({ type: RESET_FAQs, payload: faqs });
+
+export const reloadFaqs = () => {
+  return async (dispatch, getState, api) => {
+    const { ui: { language }} = getState();
+    const url = faqsUrl();
+    const headers = getLangHeader(language);
+    const newFqs = await api.get(url, { headers })
+      .then(({ data: { data }}) => data.map(faqNormalizer))
+      .catch(() => []);
+    dispatch(resetFAQs(newFqs));
+    return newFqs;
+  }
+}
 
 export const loadFaqs = () => {
   return async (dispatch, getState, api) => {

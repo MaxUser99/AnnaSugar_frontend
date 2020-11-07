@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import RESOURCE_STATUS from '../constants/resourceStatus';
-import { loadFaqs } from '../store/content/faqActions';
+import { loadFaqs, reloadFaqs } from '../store/content/faqActions';
 
 const mapStateToProps = ({ ui: { language }, content: { faq: { astro, beads, bracelets, bars, status }}}) => ({
   data: [...astro, ...beads, ...bracelets, ...bars],
@@ -10,7 +10,8 @@ const mapStateToProps = ({ ui: { language }, content: { faq: { astro, beads, bra
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadFaqs: () => dispatch(loadFaqs())
+  loadFaqs: () => dispatch(loadFaqs()),
+  reloadFaqs: () => dispatch(reloadFaqs()) 
 });
 
 const loadFAQs = (Component) => (
@@ -22,16 +23,25 @@ const loadFAQs = (Component) => (
     status,
     data,
     loadFaqs,
+    reloadFaqs,
     language,
     ...props
   }) => {
+    const [prevLang, setLang] = useState(language);
+
     useEffect(() => {
       if (!data.length && status !== RESOURCE_STATUS.LOADING) {
         loadFaqs();
-      }
+      } 
     }, []);
 
-    
+    useEffect(() => {
+      if (prevLang !== language) {
+        console.error('should reload: ', language)
+        reloadFaqs();
+        setLang(language);
+      }
+    }, [language]);
 
     return <Component {...props} />;
   })
