@@ -1,1 +1,0 @@
-export { default as ReviewForm } from '../article/articleForm';

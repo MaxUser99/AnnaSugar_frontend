@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import RESOURCE_STATUS from '../constants/resourceStatus';
 import { loadFaqs } from '../store/content/faqActions';
 
-const mapStateToProps = ({ content: { faq: { astro, beads, bracelets, bars, status }}}) => ({
+const mapStateToProps = ({ ui: { language }, content: { faq: { astro, beads, bracelets, bars, status }}}) => ({
   data: [...astro, ...beads, ...bracelets, ...bars],
+  language,
   status
 });
 
@@ -21,6 +22,7 @@ const loadFAQs = (Component) => (
     status,
     data,
     loadFaqs,
+    language,
     ...props
   }) => {
     useEffect(() => {
@@ -28,6 +30,8 @@ const loadFAQs = (Component) => (
         loadFaqs();
       }
     }, []);
+
+    
 
     return <Component {...props} />;
   })

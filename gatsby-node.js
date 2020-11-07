@@ -1,5 +1,5 @@
 const userRouterPages = [
-  'admin',
+  // 'admin',
   'blog',
   'reviews',
   'catalog/bracelets',
