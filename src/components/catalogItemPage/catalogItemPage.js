@@ -10,6 +10,7 @@ import Features from './components/features';
 import Description from './components/descriptions';
 import Button from '../button/button';
 import { useLocalization } from '../../hooks/useLocalization';
+import { onLangChange } from '../../hooks/onLangChange';
 
 const SUB_PAGES = {
   DESCRIPTION: 'DESCRIPTION',
@@ -20,6 +21,8 @@ const CatalogItemPage = ({ itemId, reviewItem, clearHandler, loadItem }) => {
   const { t } = useLocalization();
   const { isLoading, shouldRedirect } = useLoading(!reviewItem, () => loadItem(itemId));
   const [ subPage, setSubPage ] = useState(SUB_PAGES.DESCRIPTION);
+
+  onLangChange(() => loadItem(itemId));
 
   useEffect(() => clearHandler, []);
 
