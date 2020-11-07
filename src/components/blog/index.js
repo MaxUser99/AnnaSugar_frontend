@@ -21,7 +21,7 @@ const breadscrumbs = [
 
 const BlogIndex = ({ articles, setReviewArticle }) => {
   const { t } = useLocalization();
-
+  console.log('blog articles: ', articles);
   return (
     <>
       <Breadscrumb breadscrumbs={breadscrumbs} />

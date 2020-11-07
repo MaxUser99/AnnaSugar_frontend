@@ -33,7 +33,8 @@ const CatalogItem = ({
       <ImageWrapper $targetWidth={targetImageWidth} imageLoaded={imageLoaded}>
         <img
           onLoad={imageLoadHandler}
-          src={`/${images[0]}`}
+          src={images[0]}
+          // src={`/${images[0]}`}
           alt=''
         />
       </ImageWrapper>

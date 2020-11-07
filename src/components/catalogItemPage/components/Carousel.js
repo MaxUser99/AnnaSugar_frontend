@@ -24,7 +24,8 @@ const Carousel = ({ images }) => {
   return (
     <Container direction='column' alignItems='center'>
       <ImageWrapper justifyContent='center' alignItems='center'>
-        {previewItem && <img src={`/${previewItem}`} />}
+        {previewItem && <img src={previewItem} />}
+        {/* {previewItem && <img src={`/${previewItem}`} />} */}
       </ImageWrapper>
       <PreviewImagesContainer justifyContent='space-between' alignItems='center' fullWidth>
         <Button onClick={prevButtonClickHandler} disabled={disableButtons}>
@@ -35,7 +36,8 @@ const Carousel = ({ images }) => {
             <SmallImage
               key={image}
               onClick={() => setPreviewItem(image)}
-              src={`/${image}`}
+              src={image}
+              // src={`/${image}`}
               alt=''
             />
           ))

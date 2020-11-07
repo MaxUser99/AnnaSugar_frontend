@@ -95,7 +95,8 @@ const ConsultItem = ({ item }) => {
           justifyContent='center'
           alignItems='center'
           fullWidth>
-            <img src={`/${image}`} alt='' />
+            <img src={image} alt='' />
+            {/* <img src={`/${image}`} alt='' /> */}
             { imageInfo && <Info $showFrom={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
         </ImageContainer>
         <ContentBlock direction='column' fullWidth>
