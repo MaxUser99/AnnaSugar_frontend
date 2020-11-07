@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
 import { Router } from '@reach/router';
-import { loadArticles } from '../store/content/articleActions';
+import loadArticles from '../components/indexComponents/loadArticles';
 import { useEmptySpace } from '../hooks/useEmptySpace';
 import Container from '../components/container/container';
 import ContentWrapper from '../components/contentWrapper/contentWrapper';
@@ -10,12 +9,8 @@ import Layout from '../components/layout/layout';
 import BlogIndex from '../components/blog/index';
 import BlogArticle from '../components/blog/BlogArticle';
 
-const Blog = ({ loadArticles, page }) => {
+const Blog = () => {
   const minHeight = useEmptySpace(74); // 74 is padding.bottom + padding.top of StyledWrapper
-
-  useEffect(() => {
-    if (page === null) loadArticles(0);
-  }, []);
 
   return (
     <Layout>
@@ -44,11 +39,4 @@ const StyledWrapper = styled(ContentWrapper)`
   padding-bottom: 64px;
 `;
 
-export default connect(
-  ({ content: { articles: { page }}}) => ({
-    page
-  }),
-  dispatch => ({
-    loadArticles: page => dispatch(loadArticles(page))
-  })
-)(Blog);
+export default loadArticles(Blog);

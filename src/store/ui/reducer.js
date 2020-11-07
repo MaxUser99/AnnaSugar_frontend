@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log('ui: ', action);
   switch (action.type) {
     case OPEN_MODAL: return {
       ...state,

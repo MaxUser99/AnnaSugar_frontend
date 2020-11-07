@@ -1,34 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useNavigate } from "@reach/router";
 import Container from '../container/container';
 import ContentWrapper from '../contentWrapper/contentWrapper';
-import { loadArticles } from '../../store/content/articleActions';
 import Preview from '../preview/preview';
 import Button from '../button/button';
 import { setReviewArticle } from '../../store/content/articleActions';
 import { $maxWidth, BREAKPOINTS } from '../../theme';
 import { useLocalization } from '../../hooks/useLocalization';
+import loadArticles from '../indexComponents/loadArticles';
 
 const PREVIEW_ITEMS_COUNT = 4;
 
-const Articles = ({
-  articles,
-  loadArticles,
-  page,
-  setReviewArticle
-}) => {
+const Articles = ({ articles, setReviewArticle }) => {
   const { t } = useLocalization();
   const navigate = useNavigate();
 
   const buttonClickHandler = () => {
     navigate('/blog');
   }
-
-  useEffect(() => {
-    if (page === null) loadArticles(0);
-  }, []);
 
   return (
     <Container fullWidth>
@@ -71,13 +62,12 @@ const StyledButton = styled(Button)`
   ${ $maxWidth(BREAKPOINTS.DESCTOP, 'margin-bottom: 64px;')}
 `;
 
-export default connect(
-  ({content: { articles: { data, page }}}) => ({ 
-    articles: data,
-    page
-  }), 
-  (dispatch) => ({
-    loadArticles: page => dispatch(loadArticles(page)),
-    setReviewArticle: article => dispatch(setReviewArticle(article))
-  })
-)(Articles);
+const mapStateToProps = ({content: { articles: { data }}}) => ({ 
+  articles: data,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setReviewArticle: article => dispatch(setReviewArticle(article))
+});
+
+export default loadArticles(connect(mapStateToProps, mapDispatchToProps)(Articles));

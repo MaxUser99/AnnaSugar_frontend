@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useLoading } from '../../hooks/useLoading';
@@ -24,8 +24,10 @@ const BlogArticle = ({
   article,
   loadReviewArticle,
   clearReviewArticle,
-  navigate
+  navigate,
+  lang
 }) => {
+  const [ prevLang, setLang ] = useState(lang)
   const { shouldRedirect, isLoading } = useLoading(!article, loadReviewArticle);
 
   const breadscrumbs = useMemo(() => {
@@ -35,6 +37,13 @@ const BlogArticle = ({
 
     return [...baseBreadscrumbs, { title, href: '#', disabled: true }];
   }, [ article ]);
+
+  useEffect(() => {
+    if (lang !== prevLang) {
+      loadReviewArticle();
+      setLang(lang);
+    }
+  }, [ lang ]);
 
   useEffect(() => clearReviewArticle, []);
 
@@ -67,13 +76,18 @@ const RedirectButton = styled(Button)`
   margin-bottom: auto;
 `;
 
+const mapStateToProps = ({ ui: { language }, content: { articles: { reviewItem}}}) => ({
+  article: reviewItem,
+  lang: language
+});
+
+const mapDispatchToProps = (dispatch, { articleId, navigate }) => ({
+  loadReviewArticle: () => dispatch(loadReviewArticle(parseInt(articleId, 10))),
+  clearReviewArticle: () => dispatch(setReviewArticle(null)),
+  navigate
+})
+
 export default connect(
-  ({ content: { articles: { reviewItem }}}) => ({
-    article: reviewItem
-  }),
-  (dispatch, { articleId, navigate }) => ({
-    loadReviewArticle: () => dispatch(loadReviewArticle(parseInt(articleId, 10))),
-    clearReviewArticle: () => dispatch(setReviewArticle(null)),
-    navigate
-  })
+  mapStateToProps,
+  mapDispatchToProps
 )(BlogArticle);

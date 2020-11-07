@@ -1,7 +1,7 @@
 import RESOURCE_STATUS from '../../constants/resourceStatus';
 import FAQs_TYPES from '../../constants/FAQs';
 import { RESET_FAQs, SET_FAQs, SET_FAQs_LOADING, SET_ON_EDIT_FAQ } from './faqActions';
-import { PUSH_ARTICLES, SET_ARTICLES_LOADING, SET_REVIEW_ARTICLE } from './articleActions';
+import { RESET_ARTICLES, PUSH_ARTICLES, SET_ARTICLES_LOADING, SET_REVIEW_ARTICLE } from './articleActions';
 import { PUSH_REVIEWS, SET_REVIEWS_LOADING, SET_REVIEW_ITEM } from './reviewActions';
 import {
   SET_BRACELETS_LOADING,
@@ -84,6 +84,13 @@ export default (state = initialState, action) => {
         status: RESOURCE_STATUS.LOADED,
         data: [...state.articles.data, ...action.payload.articles],
         page: action.payload.page
+      }
+    };
+    case RESET_ARTICLES: return {
+      ...state,
+      articles: {
+        ...state.articles,
+        data: [ ...action.payload ]
       }
     };
     case SET_REVIEW_ARTICLE: return {
