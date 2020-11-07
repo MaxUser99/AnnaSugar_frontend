@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Container from '../container/container';
 
 const ArticleLayout = ({ article: { title, image, text, date } }) => {
-  console.log('text: ', text);
-  console.log('text: ', unescape(text));
   return (
     <>
       <Title>{title}</Title>

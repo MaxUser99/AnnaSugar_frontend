@@ -49,8 +49,6 @@ const Carousel = ({ gallery, setGallery }) => {
     setGallery(gallery.filter(x => x !== image));
   }
 
-  console.log('gallery: ', gallery);
-
   return (
     <Root alignItems='center' fullWidth>
       { 

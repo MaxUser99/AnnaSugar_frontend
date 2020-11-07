@@ -29,7 +29,7 @@ const Articles = ({
   useEffect(() => {
     if (page === null) loadArticles(0);
   }, []);
-  console.log('res: ', t("Статьи"))
+
   return (
     <Container fullWidth>
       <ContentWrapper direction='column' alignItems='center'>

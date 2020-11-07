@@ -14,8 +14,6 @@ const EditFaqForm = ({
   const [ submitAction, setSubmitAction ] = useState();
 
   const submitHandler = (data) => {
-    console.log('submit: ', data);
-    console.log('submit action: ', submitAction);
   }
 
   const saveClickHandler = () => setSubmitAction(SUBMIT_ACTION.SAVE);

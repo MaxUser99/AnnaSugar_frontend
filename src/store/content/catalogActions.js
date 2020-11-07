@@ -56,42 +56,6 @@ export const publishKindle = id => itemPublisher(id, CATALOG_DATA_TYPE.KINDLES);
 export const publishBead = id => itemPublisher(id, CATALOG_DATA_TYPE.BEADS);
 export const publishOther = id => itemPublisher(id, CATALOG_DATA_TYPE.OTHERS);
 
-function itemPublisher(data, contentType) {
-  console.log('data: ', data);
-  switch (contentType) {
-    case CATALOG_DATA_TYPE.BRACELETS:
-      console.log('should publish BRACELETS');
-      break;
-    case CATALOG_DATA_TYPE.KINDLES:
-      console.log('should publish KINDLES');
-      break;
-    case CATALOG_DATA_TYPE.BEADS:
-      console.log('should publish BEADS');
-      break;
-    case CATALOG_DATA_TYPE.OTHERS:
-      console.log('should publish OTHERS');
-      break;
-  }
-}
-
-function itemCreator(data, contentType) {
-  console.log('data: ', data);
-  switch (contentType) {
-    case CATALOG_DATA_TYPE.BRACELETS:
-      console.log('should create BRACELETS');
-      break;
-    case CATALOG_DATA_TYPE.KINDLES:
-      console.log('should create KINDLES');
-      break;
-    case CATALOG_DATA_TYPE.BEADS:
-      console.log('should create BEADS');
-      break;
-    case CATALOG_DATA_TYPE.OTHERS:
-      console.log('should create OTHERS');
-      break;
-  }
-}
-
 function itemsLoader(page, contentType) {
   let setLoading;
   let pushItems;
@@ -149,6 +113,42 @@ function itemLoader(id, contentType) {
 
     await delay(400).then(() => dispatch(setReviewItem(item)));
     return item;
+  }
+}
+
+function itemPublisher(data, contentType) {
+  console.log('data: ', data);
+  switch (contentType) {
+    case CATALOG_DATA_TYPE.BRACELETS:
+      console.log('should publish BRACELETS');
+      break;
+    case CATALOG_DATA_TYPE.KINDLES:
+      console.log('should publish KINDLES');
+      break;
+    case CATALOG_DATA_TYPE.BEADS:
+      console.log('should publish BEADS');
+      break;
+    case CATALOG_DATA_TYPE.OTHERS:
+      console.log('should publish OTHERS');
+      break;
+  }
+}
+
+function itemCreator(data, contentType) {
+  console.log('data: ', data);
+  switch (contentType) {
+    case CATALOG_DATA_TYPE.BRACELETS:
+      console.log('should create BRACELETS');
+      break;
+    case CATALOG_DATA_TYPE.KINDLES:
+      console.log('should create KINDLES');
+      break;
+    case CATALOG_DATA_TYPE.BEADS:
+      console.log('should create BEADS');
+      break;
+    case CATALOG_DATA_TYPE.OTHERS:
+      console.log('should create OTHERS');
+      break;
   }
 }
 

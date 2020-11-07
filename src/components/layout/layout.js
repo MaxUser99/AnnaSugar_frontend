@@ -8,7 +8,6 @@ import ImageModal from '../ImageModal/imageModal';
 
 const Layout = ({ className, children }) => {
   const footerHeight = useFooterHeight();
-  console.log({ footerHeight })
   return (
     <StyledContainer
       id='root'

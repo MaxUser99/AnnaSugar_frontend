@@ -2,6 +2,7 @@ import React from 'react';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import api from './api';
 
 import contentReducer from './content/reducer';
 import userReducer from './user/reducer';
@@ -14,7 +15,7 @@ const rootReducer = combineReducers({
   ui: uiReducer
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument(api)));
 
 store.dispatch(onStoreCreate());
 

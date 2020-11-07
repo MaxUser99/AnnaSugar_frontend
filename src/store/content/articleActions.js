@@ -1,4 +1,5 @@
 import RESOURCE_STATUS from '../../constants/resourceStatus';
+import { getLangHeader, articlesUrl, articleUrl } from '../api';
 
 import mockArticles from '../mocks/mockArticles.json';
 
@@ -11,33 +12,37 @@ export const pushArticles = (articles, page) => ({ type: PUSH_ARTICLES, payload:
 export const setReviewArticle = article => ({ type: SET_REVIEW_ARTICLE, payload: article });
 
 export const loadArticles = page => {
-  return async (dispatch, getState) => {
-    const { content: { articles: { status }}} = getState();
+  return async (dispatch, getState, api) => {
+    const { content: { articles: { status }}, ui: { language }} = getState();
 
     if (status === RESOURCE_STATUS.LOADING) return;
 
     dispatch(setArticlesLoading());
-    const transformedArticles = mockArticles.map(({ date, ...rest}) => ({
-      ...rest,
-      date: new Date(date)
-    }));
 
-    return delay(500).then(() => dispatch(pushArticles(transformedArticles, page)));
+    const url = articlesUrl();
+    const headers = getLangHeader(language);
+    const articles = await api.get(url, { headers })
+      .then(({ data: { data }}) => data.map(articleNormalizer))
+      .catch(() => []);
+
+    console.log('loaded articles: ', articles);
+
+    return dispatch(pushArticles(articles, page));
   };
 };
 
 export const loadReviewArticle = id => {
-  return async (dispatch) => {
-    const article = mockArticles.find(x => x.id === id);
-    const transformedArticle = article
-      ? {
-          ...article,
-          date: new Date(article.date)
-        }
-      : null;
+  return async (dispatch, getState, api) => {
+    const { ui: { language }} = getState();
+    const url = articleUrl(+id);
+    const headers = getLangHeader(language);
+    const article = await api.get(url, { headers })
+      .then(({ data }) => articleNormalizer(data))
+      .catch(() => null);
+    console.log('loaded article: ', article);
 
-    await delay(500).then(() => dispatch(setReviewArticle(transformedArticle)));
-    return transformedArticle;
+    dispatch(setReviewArticle(article));
+    return article;
   }
 }
 
@@ -59,6 +64,11 @@ export const createArticle = data => {
     return null;
   }
 }
+
+const articleNormalizer = ({ date, ...rest }) => ({
+  ...rest,
+  date: new Date(date)
+});
 
 // test
 function delay(ms) {

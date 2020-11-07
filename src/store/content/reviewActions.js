@@ -1,4 +1,5 @@
 import mockReviews from '../mocks/mockReviews.json';
+import { reviewUrl, reviewsUrl, getLangHeader } from '../api';
 
 export const SET_REVIEWS_LOADING = 'SET_REVIEWS_LOADING';
 export const PUSH_REVIEWS = 'PUSH_REVIEWS';
@@ -10,13 +11,17 @@ export const setReviewItem = review => ({ type: SET_REVIEW_ITEM, payload: review
 export const editReview = () => {};
 
 export const loadReviews = page => {
-  return dispatch => {
+  return (dispatch, getState, api) => {
     dispatch(setReviewsLoading());
-    const transformedReviews = mockReviews.map(x => ({
-      ...x,
-      date: new Date(x.date)
-    }));
-    delay(1500).then(() => dispatch(pushReviews(transformedReviews, page)));
+    const { ui: { language }} = getState();
+    const url = reviewsUrl();
+    const headers = getLangHeader(language);
+    // const reviews = 
+    // const transformedReviews = mockReviews.map(x => ({
+    //   ...x,
+    //   date: new Date(x.date)
+    // }));
+    // delay(1500).then(() => dispatch(pushReviews(transformedReviews, page)));
   }
 }
 
