@@ -1,4 +1,4 @@
-import { FormProvider } from 'react-hook-form';
+import { productsUrl, getLangHeader, productUrl } from '../api';
 import { CATALOG_DATA_TYPE } from '../../constants/catalogDataType';
 
 import mockBracelets from '../mocks/mockBracelets.json';
@@ -56,100 +56,58 @@ export const publishKindle = id => itemPublisher(id, CATALOG_DATA_TYPE.KINDLES);
 export const publishBead = id => itemPublisher(id, CATALOG_DATA_TYPE.BEADS);
 export const publishOther = id => itemPublisher(id, CATALOG_DATA_TYPE.OTHERS);
 
+const typeIds = {
+  [CATALOG_DATA_TYPE.BRACELETS]: 1,
+  [CATALOG_DATA_TYPE.KINDLES]: 2,
+  [CATALOG_DATA_TYPE.BEADS]: 3,
+  [CATALOG_DATA_TYPE.OTHERS]: 4,
+}
+
+const itemsLoaderSettings = {
+  [CATALOG_DATA_TYPE.BRACELETS]: { setOnReview: setReviewBracelet, setLoading: setBraceletsLoading, pushItems: pushBracelets, url: productsUrl(typeIds[CATALOG_DATA_TYPE.BRACELETS])},
+  [CATALOG_DATA_TYPE.KINDLES]: { setOnReview: setReviewKindle, setLoading: setKindlesLoading, pushItems: pushKindles, url: productsUrl(typeIds[CATALOG_DATA_TYPE.KINDLES])},
+  [CATALOG_DATA_TYPE.BEADS]: { setOnReview: setReviewBead, setLoading: setBeadsLoading, pushItems: pushBeads, url: productsUrl(typeIds[CATALOG_DATA_TYPE.BEADS])},
+  [CATALOG_DATA_TYPE.OTHERS]: { setOnReview: setReviewOther, setLoading: setOthersLoading, pushItems: pushOthers, url: productsUrl(typeIds[CATALOG_DATA_TYPE.OTHERS])},
+}
+
 function itemsLoader(page, contentType) {
-  let setLoading;
-  let pushItems;
-  let items;
+  return async function (dispatch, getState, api) {
+    const { ui: { language }} = getState();
+    const { setLoading, pushItems, url} = itemsLoaderSettings[contentType];
 
-  switch (contentType) {
-    case CATALOG_DATA_TYPE.BRACELETS:
-      setLoading = setBraceletsLoading;
-      pushItems = pushBracelets;
-      items = mockBracelets;
-      break;
-    case CATALOG_DATA_TYPE.KINDLES:
-      setLoading = setKindlesLoading;
-      pushItems = pushKindles;
-      items = mockKindles;
-      break;
-    case CATALOG_DATA_TYPE.BEADS:
-      setLoading = setBeadsLoading;
-      pushItems = pushBeads;
-      items = mockBeads;
-      break;
-    case CATALOG_DATA_TYPE.OTHERS:
-      setLoading = setOthersLoading;
-      pushItems = pushOthers;
-      items = mockOthers;
-      break;
-  }
-
-  return async function (dispatch) {
     dispatch(setLoading());
 
-    return delay(400).then(() => dispatch(pushItems(items, page)));
+    const headers = getLangHeader(language);
+    const items = await api.get(url, { headers })
+      .then(({ data: { data }}) => data)
+      .catch(() => []);
+    console.log('items: ', items);
+    return dispatch(pushItems(items, page));
   }
 }
 
 function itemLoader(id, contentType) {
-  let setReviewItem;
-  switch (contentType) {
-    case CATALOG_DATA_TYPE.BRACELETS:
-      setReviewItem = setReviewBracelet;
-      break;
-    case CATALOG_DATA_TYPE.KINDLES:
-      setReviewItem = setReviewKindle;
-      break;
-    case CATALOG_DATA_TYPE.BEADS:
-      setReviewItem = setReviewBead;
-      break;
-    case CATALOG_DATA_TYPE.OTHERS:
-      setReviewItem = setReviewOther;
-      break; 
-  }
-  console.log(id, typeof id, contentType);
-  return async function (dispatch) {
-    const item = mockBracelets.find(x => x.id === +id) || null;
+  return async function (dispatch, getState, api) {
+    const { setOnReview } = itemsLoaderSettings[contentType];
+    const { ui: { language }} = getState();
+    const url = productUrl(+id);
+    const headers = getLangHeader(language);
+    const item = await api.get(url, { headers })
+      .then(({ data }) => data)
+      .catch(() => []);
 
-    await delay(400).then(() => dispatch(setReviewItem(item)));
+    dispatch(setOnReview(item));
+
     return item;
   }
 }
 
 function itemPublisher(data, contentType) {
   console.log('data: ', data);
-  switch (contentType) {
-    case CATALOG_DATA_TYPE.BRACELETS:
-      console.log('should publish BRACELETS');
-      break;
-    case CATALOG_DATA_TYPE.KINDLES:
-      console.log('should publish KINDLES');
-      break;
-    case CATALOG_DATA_TYPE.BEADS:
-      console.log('should publish BEADS');
-      break;
-    case CATALOG_DATA_TYPE.OTHERS:
-      console.log('should publish OTHERS');
-      break;
-  }
 }
 
 function itemCreator(data, contentType) {
   console.log('data: ', data);
-  switch (contentType) {
-    case CATALOG_DATA_TYPE.BRACELETS:
-      console.log('should create BRACELETS');
-      break;
-    case CATALOG_DATA_TYPE.KINDLES:
-      console.log('should create KINDLES');
-      break;
-    case CATALOG_DATA_TYPE.BEADS:
-      console.log('should create BEADS');
-      break;
-    case CATALOG_DATA_TYPE.OTHERS:
-      console.log('should create OTHERS');
-      break;
-  }
 }
 
 // test

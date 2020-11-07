@@ -11,31 +11,30 @@ export const setReviewItem = review => ({ type: SET_REVIEW_ITEM, payload: review
 export const editReview = () => {};
 
 export const loadReviews = page => {
-  return (dispatch, getState, api) => {
+  return async (dispatch, getState, api) => {
     dispatch(setReviewsLoading());
     const { ui: { language }} = getState();
     const url = reviewsUrl();
     const headers = getLangHeader(language);
-    // const reviews = 
-    // const transformedReviews = mockReviews.map(x => ({
-    //   ...x,
-    //   date: new Date(x.date)
-    // }));
-    // delay(1500).then(() => dispatch(pushReviews(transformedReviews, page)));
+    const reviews = await api.get(url, { headers })
+      .then(({ data: { data }}) => data.map(reviewNormalizer))
+      .catch(() => []);
+
+      dispatch(pushReviews(reviews, page));
   }
 }
 
 export const loadReviewItem = id => {
-  return async (dispatch) => {
-    const review = mockReviews.find(x => x.id === id);
-    const transformedReview = review
-      ? {
-        ...review,
-        date: new Date(review.date)
-      }
-      : null;
-    await delay(1000).then(() => dispatch(setReviewItem(transformedReview)));
-    return transformedReview;
+  return async (dispatch, getState, api) => {
+    const { ui: { language }} = getState();
+    const url = reviewUrl(+id);
+    const headers = getLangHeader(language);
+    const review = await api.get(url, { headers })
+      .then(({ data }) => reviewNormalizer(data))
+      .catch(() => null);
+    console.log('review: ', review);
+    dispatch(setReviewItem(review));
+    return review;
   }
 }
 
@@ -50,6 +49,11 @@ export const publishReview = date => {
     return null;
   }
 }
+
+const reviewNormalizer = ({ date, ...rest }) => ({
+  ...rest,
+  date: new Date(date)
+});
 
 // test
 function delay(ms) {

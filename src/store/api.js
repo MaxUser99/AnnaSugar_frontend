@@ -15,8 +15,7 @@ const langHeaders = {
 
 export const faqsUrl = () => '/faqs';
 export const faqUrl = (category) => `/faqs/c/${category}`;
-export const consultsUrl = () => '/services';
-export const consultUrl = (category) => `/services/c/${category}`;
+export const consultsUrl = (category) => `/services/c/${category}`;
 export const productsUrl = (category) => `/products/c/${category}`;
 export const productUrl = (id) => `/products/${id}`;
 export const reviewsUrl = () => '/reviews';

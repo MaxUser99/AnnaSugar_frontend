@@ -2,6 +2,7 @@ import mockTaroConsult from '../mocks/mockTaroConsult.json';
 import mockAstroConsult from '../mocks/mockAstroConsult.json';
 import mockRuneConsult from '../mocks/mockRuneConsult.json';
 import mockRitualConsult from '../mocks/mockRitualConsult.json';
+import { consultsUrl, getLangHeader } from '../api';
 
 const DATA_TYPE = {
   ASTRO: 'ASTRO',
@@ -45,38 +46,30 @@ export const loadTaro = () => loader(DATA_TYPE.TARO);
 export const loadRune = () => loader(DATA_TYPE.RUNE);
 export const loadRitual = () => loader(DATA_TYPE.RITUAL);
 
+const typeIds = {
+  [DATA_TYPE.ASTRO]: 1,
+  [DATA_TYPE.TARO]: 2,
+  [DATA_TYPE.RUNE]: 3,
+  [DATA_TYPE.RITUAL]: 4,
+}
+const loaderSettings = {
+  [DATA_TYPE.ASTRO]: { setLoading: setAstroLoading, pushItems: pushAstro, url: consultsUrl(typeIds[DATA_TYPE.ASTRO])},
+  [DATA_TYPE.TARO]: { setLoading: setTaroLoading, pushItems: pushTaro, url: consultsUrl(typeIds[DATA_TYPE.TARO])},
+  [DATA_TYPE.RUNE]: { setLoading: setRuneLoading, pushItems: pushRune, url: consultsUrl(typeIds[DATA_TYPE.RUNE])},
+  [DATA_TYPE.RITUAL]: { setLoading: setRitualLoading, pushItems: pushRitual, url: consultsUrl(typeIds[DATA_TYPE.RITUAL])},
+}
+
 function loader(contentType) {
-  let setLoading;
-  let pushItems;
-  let data;
-
-  switch (contentType) {
-    case DATA_TYPE.ASTRO:
-      setLoading = setAstroLoading;
-      pushItems = pushAstro;
-      data = mockAstroConsult;
-      break;
-    case DATA_TYPE.TARO:
-      setLoading = setTaroLoading;
-      pushItems = pushTaro;
-      data = mockTaroConsult;
-      break;
-    case DATA_TYPE.RUNE:
-      setLoading = setRuneLoading;
-      pushItems = pushRune;
-      data = mockRuneConsult;
-      break;
-    case DATA_TYPE.RITUAL:
-      setLoading = setRitualLoading;
-      pushItems = pushRitual;
-      data = mockRitualConsult;
-      break;
-  }
-
-  return async function (dispatch) {
+  return async function (dispatch, getState, api) {
+    const { ui: { language }} = getState();
+    const { pushItems, url, setLoading } = loaderSettings[contentType];
     dispatch(setLoading());
-
-    return delay(400).then(() => dispatch(pushItems(data)));
+    const headers = getLangHeader(language);
+    const items = await api.get(url, { headers })
+      .then(({ data: { data }}) => data)
+      .catch(() => []);
+    console.log('items: ', items);
+    return dispatch(pushItems(items));
   }
 }
 
