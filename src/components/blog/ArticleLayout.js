@@ -14,7 +14,8 @@ const ArticleLayout = ({ article: { title, image, text, date } }) => {
         `} 
       </Date>
       <ImageContainer justifyContent='center' fullWidth>
-        <img src={"/" + image} alt='' />
+        {/* <img src={"/" + image} alt='' /> */}
+        <img src={image} alt='' />
       </ImageContainer>
       {/* <Text dangerouslySetInnerHTML={{ __html: text }} /> */}
       <Text>{text}</Text>

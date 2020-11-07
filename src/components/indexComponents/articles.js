@@ -38,7 +38,7 @@ const Articles = ({
           articles.slice(0, PREVIEW_ITEMS_COUNT).map(article => (
             <Preview
               key={article.id}
-              image={"/" + article.image}
+              image={article.image}
               name={article.title}
               description={article.short}
               date={article.date}
