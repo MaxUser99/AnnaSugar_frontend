@@ -4,7 +4,7 @@ import { useLocation } from '@reach/router';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import Container from '../container/container';
 import Link from './components/link';
-import LangButton from './components/langButton';
+import LangButton from '../langButton/langButton';
 import LANGS from '../../constants/langs';
 import { BREAKPOINTS, $maxWidth } from '../../theme';
 import MenuButton from './components/menuButton';
@@ -13,7 +13,7 @@ import { useLocalization } from '../../hooks/useLocalization';
 
 const Header = () => {
   const { pathname } = useLocation();
-  const { setLang, lang, t } = useLocalization();
+  const { t } = useLocalization();
 
   return (
     <RootContainer id='header' alignItems='center' fullWidth>
@@ -34,8 +34,8 @@ const Header = () => {
           }
         </LinksContainer>
         <FixedWidthContainer $hidden justifyContent='flex-end'>
-          <LangButton onClick={() => setLang(LANGS.RU)} active={lang === LANGS.RU} lang={LANGS.RU} />
-          <LangButton onClick={() => setLang(LANGS.EN)} active={lang === LANGS.EN} lang={LANGS.EN} />
+          <LangButton lang={LANGS.RU} />
+          <LangButton lang={LANGS.EN} />
         </FixedWidthContainer>
         <MenuButton />
       </StyledContentWrapper>

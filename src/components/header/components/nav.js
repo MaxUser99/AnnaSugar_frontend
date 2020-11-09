@@ -5,6 +5,9 @@ import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'bo
 import { userLinks } from '../../../constants/links';
 import CloseIcon from '../../../assets/icons/close.inline.svg';
 import { useLocalization } from '../../../hooks/useLocalization';
+import LangButton from '../../langButton/langButton';
+import Container from '../../container/container';
+import LANGS from '../../../constants/langs';
 
 const Nav = ({ open, setOpen }) => {
   const menuRef = useRef();
@@ -54,6 +57,10 @@ const Nav = ({ open, setOpen }) => {
                 </StyledLink>
             ))
           }
+          <Container>
+            <LangButton lang={LANGS.RU} />
+            <LangButton lang={LANGS.EN} />
+          </Container>
       </Menu>
     </>
   );
