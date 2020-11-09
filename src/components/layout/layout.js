@@ -5,6 +5,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import Container from '../container/container';
 import ImageModal from '../ImageModal/imageModal';
+import { Helmet } from 'react-helmet';
 
 const Layout = ({ className, children }) => {
   const footerHeight = useFooterHeight();
@@ -14,6 +15,10 @@ const Layout = ({ className, children }) => {
       $footerHeight={footerHeight}
       className={className}
       direction='column'>
+        <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+          <title>Anna Suggar</title>
+        </Helmet>
         <ImageModal />
         <Header />
           { children}

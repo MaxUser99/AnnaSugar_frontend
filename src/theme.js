@@ -26,6 +26,12 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Montserrat Alternates";
     min-width: 375px;
   }
+  button {
+    outline: none;
+    :focus, :active {
+      outline: none;
+    } 
+  }
 `;
 
 export const ThemeWrapper = ({ children }) => (

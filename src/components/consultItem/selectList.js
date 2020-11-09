@@ -60,6 +60,8 @@ const SelectList = ({
 }
 
 const StyledPanel = styled(ExpansionPanel)`
+  min-width: 350px;
+  ${ $maxWidth(BREAKPOINTS.DESCTOP, 'min-width: 320px;')}
   .indicator {
     display: flex;
     width: 40px;

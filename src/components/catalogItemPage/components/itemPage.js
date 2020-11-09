@@ -42,7 +42,7 @@ const RootContainer = styled(Container)`
 const Content = styled(Container)`
   max-width: 464px;
   padding-left: 100px;
-  ${ $minWidth(BREAKPOINTS.DESCTOP, `max-height: 390px;`)}
+  /* ${ $minWidth(BREAKPOINTS.DESCTOP, `max-height: 390px;`)} */
   ${ $maxWidth(BREAKPOINTS.DESCTOP, `padding-left: 64px;`)}
   ${ $maxWidth(BREAKPOINTS.TABLET, `
     padding-left: 0;
@@ -50,9 +50,7 @@ const Content = styled(Container)`
   `)}
   & > button {
     margin-top: auto;
-    ${ $maxWidth(BREAKPOINTS.TABLET, `
-      width: 100%;
-    `)}
+    ${ $maxWidth(BREAKPOINTS.TABLET, `width: 100%;`)}
   }
 `;
 

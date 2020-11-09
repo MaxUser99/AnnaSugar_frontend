@@ -188,6 +188,11 @@ const StyledWrapper = styled(ContentWrapper)`
   }
 `;
 
+// position: fixed;
+// bottom: 11%;
+// right: 7.5%;
+// z-index: 1;
+
 const Fab = styled.button`
   border: none;
   border-radius: 50%;

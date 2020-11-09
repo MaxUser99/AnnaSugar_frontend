@@ -98,6 +98,7 @@ const ImageWrapper = styled(Container)`
   }
   & > img {
     /* max-width: 100%; */
+    transition: 0.5s;
     max-width: ${({ $targetWidth }) => ($targetWidth ? `${$targetWidth}px;` : '100%;')};
     max-height: 100%;
     /* width: 100%; */

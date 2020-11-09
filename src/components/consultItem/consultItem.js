@@ -107,7 +107,7 @@ const ConsultItem = ({ item }) => {
           fullWidth>
             <img src={image} alt='' />
             {/* <img src={`/${image}`} alt='' /> */}
-            { imageInfo && <Info $showFrom={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
+            { imageInfo && <Info $showFrom={800}>{imageInfo}</Info>}
         </ImageContainer>
         <ContentBlock direction='column' fullWidth>
           <Title>{ title }</Title>
@@ -141,7 +141,7 @@ const ConsultItem = ({ item }) => {
             )
           }
           { info && <Info>{info}</Info>}
-          { imageInfo && <Info $showBefore={BREAKPOINTS.TABLET}>{imageInfo}</Info>}
+          { imageInfo && <Info $showBefore={800}>{imageInfo}</Info>}
           {
             price && <>
               <Label>{t('Цена')}</Label>
@@ -213,7 +213,7 @@ const StyledPanel = styled(ExpansionPanel)`
 const MainBlock = styled(Container)`
   margin-top: 48px;
   margin-bottom: 64px;
-  ${ $maxWidth(700, `
+  ${ $maxWidth(800, `
     flex-direction: column;
     align-items: center;
   `)}
@@ -244,6 +244,7 @@ const ContentBlock = styled(Container)`
   /* max-width: 508px; */
   /* margin-left: 25px; */
   margin-left: 110px;
+  ${ $maxWidth(1400, 'margin-left: 64px;')}
   ${ $maxWidth(BREAKPOINTS.DESCTOP, 'margin-left: 38px;')}
   ${ $maxWidth(BREAKPOINTS.TABLET, 'margin-left: 0;')}
   ${ $maxWidth(BREAKPOINTS.TABLET, 'button { width: 100%; }')}

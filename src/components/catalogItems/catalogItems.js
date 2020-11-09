@@ -12,7 +12,7 @@ const CatalogItems = ({ items, itemClickHandler }) => {
     ? width
     : prev
   ))
-  
+  console.log('min width: ', minWidth)
   return (
     <Layout title='Каталог' tabs={catalogLinks}>
       {
