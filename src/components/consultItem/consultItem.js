@@ -143,7 +143,7 @@ const ConsultItem = ({ item }) => {
           { info && <Info>{info}</Info>}
           { imageInfo && <Info $showBefore={800}>{imageInfo}</Info>}
           {
-            price && <>
+            !!price && <>
               <Label>{t('Цена')}</Label>
               <StyledPrice
                 remark={
@@ -156,7 +156,7 @@ const ConsultItem = ({ item }) => {
             </>
           }
           {
-            state[ConsultDataType.SELECT_LIST].selected && state[ConsultDataType.SELECT_LIST].selected.price && <>
+            !!state[ConsultDataType.SELECT_LIST].selected && !!state[ConsultDataType.SELECT_LIST].selected.price && <>
               <Label>{t('Цена')}</Label>
               <StyledPrice
                 remark={
