@@ -1,4 +1,3 @@
-import mockReviews from '../mocks/mockReviews.json';
 import { reviewUrl, reviewsUrl, getLangHeader } from '../api';
 
 export const SET_REVIEWS_LOADING = 'SET_REVIEWS_LOADING';

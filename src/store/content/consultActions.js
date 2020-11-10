@@ -1,7 +1,3 @@
-import mockTaroConsult from '../mocks/mockTaroConsult.json';
-import mockAstroConsult from '../mocks/mockAstroConsult.json';
-import mockRuneConsult from '../mocks/mockRuneConsult.json';
-import mockRitualConsult from '../mocks/mockRitualConsult.json';
 import { consultsUrl, getLangHeader } from '../api';
 
 const DATA_TYPE = {

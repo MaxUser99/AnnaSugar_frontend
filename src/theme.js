@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import 'normalize.css';
 import 'fontsource-cormorant-infant';
-import 'fontsource-montserrat-alternates/400.css';
+import 'fontsource-montserrat-alternates';
 
 export const theme =  {
   color: { 

@@ -1,8 +1,6 @@
 import RESOURCE_STATUS from '../../constants/resourceStatus';
 import { getLangHeader, articlesUrl, articleUrl } from '../api';
 
-import mockArticles from '../mocks/mockArticles.json';
-
 export const SET_ARTICLES_LOADING = 'SET_ARTICLES_LOADING';
 export const PUSH_ARTICLES = 'PUSH_ARTICLES';
 export const SET_REVIEW_ARTICLE = 'SET_REVIEW_ARTICLE';

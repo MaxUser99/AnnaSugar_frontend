@@ -1,5 +1,3 @@
-import mockFAQs from '../mocks/mockFAQs.json';
-import FAQsCATEGORIES from '../../constants/FAQs';
 import RESOURCE_STATUS from '../../constants/resourceStatus';
 import { getLangHeader, faqsUrl } from '../api';
 
