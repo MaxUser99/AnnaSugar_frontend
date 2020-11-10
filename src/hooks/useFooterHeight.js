@@ -4,8 +4,9 @@ export function useFooterHeight() {
   const [ height, setHeight ] = useState();
 
   useLayoutEffect(() => {
+    const footer = document.getElementById('footer');
+
     function calcHeight() {
-      const footer = document.getElementById('footer');
       if (!footer) return;
       const { height: footerHeight } = footer.getBoundingClientRect();
       setHeight(footerHeight);

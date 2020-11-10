@@ -4,18 +4,17 @@ import Container from '../container/container';
 import Button from '../button/button';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import MainImage from '../../assets/images/image.png';
-import FabIcon from '../../assets/images/whatsup-fab.svg';
+// import FabIcon from '../../assets/images/whatsup-fab.svg';
 // import Img from 'gatsby-image';
 // import { useStaticQuery, graphql } from 'gatsby';
 import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
-import SOCIAL_LINKS from '../../constants/socialLinks';
 import ExpandableText from './expandableText';
 import { useLocalization } from '../../hooks/useLocalization';
+import Fab from '../layout/components/fab';
 
 const MainBlock = () => {
   const { t } = useLocalization();
   const [ textHidden, hideText ] = useState(true)
-  const fabClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
 
   const scrollToReviews = () => {
     const target = document.getElementById('reviews');
@@ -61,7 +60,6 @@ const MainBlock = () => {
           <ReviewsButton onClick={scrollToReviews} outlined>{t('reviews')}</ReviewsButton>
           {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
         </Container >
-        <Fab onClick={fabClickHandler} $absolute><FabImg src={FabIcon} alt='' /></Fab>
 
         <TextContainer $show='mobile' direction='column'>
           <Title>Anna Sugar</Title>
@@ -86,9 +84,10 @@ const MainBlock = () => {
               </ExpandableText>
               <Subscribe>{t('subscribe')}</Subscribe>
             </Container>
+
             <FabWrapper alignItems='center' direction='column'>
               <p>{t('write to me')}</p>
-              <Fab onClick={fabClickHandler}><FabImg src={FabIcon} alt='' /></Fab>
+              <Fab />
             </FabWrapper>
           </Container>
         </TextContainer>
@@ -172,54 +171,15 @@ const Paragraph = styled.p`
   transition: 0.3s;
   margin: 0;
   padding: 1rem 0;
-  /* ${ ({ $hidden }) => $hidden && `
-    height: 0;
-    visibility: hidden;
-    margin: 0;
-  `} */
 `;
 
 const StyledWrapper = styled(ContentWrapper)`
   position: relative;
   margin-top: 20px;
   @media screen and (max-width: ${BREAKPOINTS.DESCTOP}px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
   }
 `;
-
-// position: fixed;
-// bottom: 11%;
-// right: 7.5%;
-// z-index: 1;
-
-const Fab = styled.button`
-  border: none;
-  border-radius: 50%;
-  padding: 0;
-  outline: none;
-  background: transparent;
-  margin-top: auto;
-  width: 98px;
-  height: 98px;
-  cursor: pointer;
-  ${({ $absolute }) => $absolute && `
-    ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;') }
-    position: absolute;
-    // right: 3.25%;
-    right: 8%;
-    top: 0;
-  `}
-  transition: 0.3s;
-  :hover {
-    opacity: 0.7;
-  }
-`;
-
-const StyledLink = styled.a`
-  text-decoration: underline;
-`;
-
-const FabImg = styled.img``;
 
 export default MainBlock;

@@ -27,7 +27,7 @@ const Contact = () => {
   const socialClickHandler = link => () => window.open(link);
 
   return (
-    <Layout>
+    <StyledLayout>
       <Container fullWidth>
         <StyledWrapper direction='column' alignItems='center'>
           <Header>{t('Do you have any questions?')}</Header>
@@ -77,9 +77,15 @@ const Contact = () => {
           </Form>
         </StyledWrapper>
       </Container>
-    </Layout>
+    </StyledLayout>
   );
 };
+
+const StyledLayout = styled(Layout)`
+  #default-fab {
+    display: none;
+  }
+`;
 
 const Form = styled.form`
   display: flex;
