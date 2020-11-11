@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Container from '../container/container';
 import arrowLeft from '../../assets/icons/arrow-left.svg';
@@ -8,6 +8,11 @@ const Gallery = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonsOffset, setButtonsOffset] = useState(images.map(() => 0));
   const [imagesHeight, setImagesHeight] = useState(images.map(() => 0));
+
+  useEffect(() => {
+    setButtonsOffset(images.map(() => 0));
+    setImagesHeight(images.map(() => 0));
+  }, [images])
 
   const loadHandler = i => ({ target: { offsetWidth, offsetHeight, parentNode } }) => {
     setButtonsOffset(prev => prev.map((offset, j) => {
@@ -32,8 +37,9 @@ const Gallery = ({ images }) => {
   ));
 
   return (
-    <Root>
+    <Root className='gallery-root'>
       <Button
+        className='gallery-prev'
         onClick={prevClickHandler}
         $offset={buttonsOffset[currentIndex]}
         $height={imagesHeight[currentIndex]}>
@@ -41,12 +47,13 @@ const Gallery = ({ images }) => {
       </Button>
       {
         images.map((image, i) => (
-          <ImageContainer key={image} $position={Math.sign(i - currentIndex)}>
-            <Image onLoad={loadHandler(i)} src={image} alt='' />
+          <ImageContainer key={image} className='gallery-container' $position={Math.sign(i - currentIndex)}>
+            <Image className='gallery-image' onLoad={loadHandler(i)} src={image} alt='' />
           </ImageContainer>
         ))
       }
       <Button
+        className='gallery-next'
         onClick={nextClickHandler}
         $offset={buttonsOffset[currentIndex]}
         $height={imagesHeight[currentIndex]}>
@@ -60,8 +67,9 @@ const Root = styled(Container)`
   overflow: hidden;
   position: relative;
   max-width: 300px;
+  min-height: 300px;
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   button {
     opacity: 0;
   }
@@ -77,7 +85,7 @@ const ImageContainer = styled(Container)`
   height: 100%;
   position: absolute;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   transition: height 0.3s, width 0.3s, left 0.3s, right 0.3s;
   background: ${ ({ theme }) => theme.color.beige};
   transition-timing-function: ease-in;

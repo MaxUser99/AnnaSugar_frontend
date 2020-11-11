@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Container from '../../container/container';
-import Carousel from './Carousel';
+import Gallery from '../../gallery/gallery';
 import Button from '../../button/button';
 import Price from '../../price/price';
 import { BREAKPOINTS, $maxWidth, $minWidth } from '../../../theme';
@@ -21,7 +21,7 @@ const ItemPage = ({ item, isLoading }) => {
 
   return (
     <RootContainer alignItems='stretch' justifyContent='flex-start' fullWidth>
-      <Carousel images={images} />
+      <Gallery images={images} />
       <Content direction='column' fullWidth>
         <Name $loading={isLoading}>{name}</Name>
         <Label>{t('Состав')}</Label>
@@ -37,6 +37,9 @@ const ItemPage = ({ item, isLoading }) => {
 const RootContainer = styled(Container)`
   padding-top: 36px;
   ${ $maxWidth(BREAKPOINTS.TABLET, 'flex-direction: column;')}
+  .gallery-container {
+    background: ${ ({ theme }) => theme.color.darkBeige}
+  }
 `;
 
 const Content = styled(Container)`

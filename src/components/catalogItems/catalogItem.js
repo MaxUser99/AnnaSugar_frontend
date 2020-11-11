@@ -12,17 +12,10 @@ import Gallery from '../gallery/gallery';
 const CatalogItem = ({
   item,
   onClick,
-  setImageWidth,
-  targetImageWidth
 }) => {
   const { id, images, name, brief, price } = item;
-  const [ imageLoaded, setImageLoaded ] = useState(false);
   const { t } = useLocalization();
 
-  const imageLoadHandler = (e) => {
-    setImageLoaded(true);
-    setImageWidth(e.target.width);
-  }
   const nameClickHandler = () => onClick(item);
   const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
 
@@ -30,15 +23,6 @@ const CatalogItem = ({
     <Wrapper
       alignItems='stretch'
       fullWidth>
-      {/* <ImageWrapper
-        $targetWidth={targetImageWidth}
-        imageLoaded={imageLoaded}>
-        <img
-          onLoad={imageLoadHandler}
-          src={images[0]}
-          alt=''
-        />
-      </ImageWrapper> */}
       <Gallery images={images} />
       <Content alignItems='stretch' direction='column' fullWidth>
         <Name onClick={nameClickHandler} to={`${id}`}>{name}</Name>
