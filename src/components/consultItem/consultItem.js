@@ -105,7 +105,7 @@ const ConsultItem = ({ item }) => {
           fullWidth>
             <img src={image} alt='' />
             {/* <img src={`/${image}`} alt='' /> */}
-            { imageInfo && <Info $showFrom={800}>{imageInfo}</Info>}
+            { imageInfo && <Info $showFrom={900}>{imageInfo}</Info>}
         </ImageContainer>
         <ContentBlock direction='column' fullWidth>
           <Title>{ title }</Title>
@@ -139,7 +139,7 @@ const ConsultItem = ({ item }) => {
             )
           }
           { info && <Info>{info}</Info>}
-          { imageInfo && <Info $showBefore={800}>{imageInfo}</Info>}
+          { imageInfo && <Info $showBefore={900}>{imageInfo}</Info>}
           {
             !!price && <>
               <Label>{t('Цена')}</Label>
@@ -211,7 +211,7 @@ const StyledPanel = styled(ExpansionPanel)`
 const MainBlock = styled(Container)`
   margin-top: 48px;
   margin-bottom: 64px;
-  ${ $maxWidth(800, `
+  ${ $maxWidth(900, `
     flex-direction: column;
     align-items: center;
   `)}

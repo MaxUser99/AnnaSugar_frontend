@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import { Link as BrowserLink } from 'gatsby';
 import Container from '../container/container';
 import Price from '../price/price';
-import { $maxWidth, BREAKPOINTS } from '../../theme';
+import { $maxWidth, BREAKPOINTS, $between } from '../../theme';
 
 const Preview = ({
   image,
   name,
   description,
   date,
-  onNameClick,
   price,
-  linkProps = {},
+  linkTo
 }) => {
   let dateString = '';
   if (date) {
@@ -40,13 +39,6 @@ const Preview = ({
     dateString = `${month}, ${day} ${year}`;
   }
 
-  const {
-    show: showLink,
-    text,
-    to,
-    onClick,
-  } = linkProps;
-
   return (
     <StyledContainer direction='column' fullWidth>
       { dateString && <Date>{dateString}</Date> }
@@ -55,16 +47,8 @@ const Preview = ({
           <Image src={image} />
         </ImageWrapper>
         <TextContainer direction='column' fullWidth>
-          <Title $clickable={!!onNameClick}>{name}</Title>
+          <Title to={linkTo}>{name}</Title>
           <Text>{description}</Text>
-          {
-            showLink &&
-            <Link
-              onClick={onClick}
-              to={to}
-              children={text}
-            />
-          }
           {
             price &&
             <StyledPrice>{price}</StyledPrice>
@@ -81,6 +65,7 @@ const StyledPrice = styled(Price)`
 `;
 
 const StyledContainer = styled(Container)`
+  ${ $between(BREAKPOINTS.DESCTOP, BREAKPOINTS.XL, `max-width: 800px;`)}
   &:not(:last-of-type) {
     margin-bottom: 32px;
   }
@@ -131,14 +116,19 @@ const Image = styled.img`
   }
 `;
 
-const Title = styled.h4`
+const Title = styled(BrowserLink)`
   margin: 0 0 10px;
   font-weight: bold;
   font-size: 32px;
   line-height: 32px;
   font-family: "Cormorant Infant";
+  transition: 0.3s;
+  text-decoration: none;
   color: ${({ theme }) => theme.text.header};
-  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'auto' )};
+  cursor: pointer;
+  :hover {
+    color: ${({ theme }) => theme.text.mutted};
+  }
   ${ $maxWidth(BREAKPOINTS.TABLET, 'margin-top: 32px;')}
 `;
 
@@ -149,17 +139,17 @@ const Text = styled.p`
   overflow: hidden;
 `;
 
-const Link = styled(BrowserLink)`
-  padding-top: 32px;
-  margin-top: auto;
-  text-decoration: none;
-  font-size: 14px;
-  color: ${({ theme }) => theme.text.default};
-  transition: 0.3s;
-  :hover {
-    color: ${({ theme }) => theme.text.mutted};
-  }
-`;
+// const Link = styled(BrowserLink)`
+//   padding-top: 32px;
+//   margin-top: auto;
+//   text-decoration: none;
+//   font-size: 14px;
+//   color: ${({ theme }) => theme.text.default};
+//   transition: 0.3s;
+//   :hover {
+//     color: ${({ theme }) => theme.text.mutted};
+//   }
+// `;
 
 Preview.propTypes = {
   nameClickHandler: PropTypes.func,

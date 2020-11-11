@@ -7,11 +7,13 @@ import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
 const PADDINGS = {
   default: css`
     padding: 0px 244px 0;
+    ${ $maxWidth(BREAKPOINTS.XL, `padding: 0px 100px 0px;`)}
     ${ $maxWidth(BREAKPOINTS.DESCTOP, `padding: 0px 88px 0px 88px;`)}
     ${ $maxWidth(BREAKPOINTS.MOBILE, `padding: 0 10px;`)}
   `,
   wide: css`
     padding: 0px 136px 0px 98px;
+    ${ $maxWidth(BREAKPOINTS.XL, `padding: 0px 80px 0px;`)}
     ${ $maxWidth(BREAKPOINTS.DESCTOP, `padding: 0px 64px 0px 64px;`)}
   `,
   none: css``

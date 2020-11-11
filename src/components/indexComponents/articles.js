@@ -13,7 +13,7 @@ import loadArticles from '../indexComponents/loadArticles';
 
 const PREVIEW_ITEMS_COUNT = 4;
 
-const Articles = ({ articles, setReviewArticle }) => {
+const Articles = ({ articles }) => {
   const { t } = useLocalization();
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Articles = ({ articles, setReviewArticle }) => {
 
   return (
     <Container fullWidth>
-      <ContentWrapper direction='column' alignItems='center'>
+      <StyledContentWrapper direction='column' alignItems='center'>
         <Title>{t("Статьи")}</Title>
         { 
           articles.slice(0, PREVIEW_ITEMS_COUNT).map(article => (
@@ -33,20 +33,18 @@ const Articles = ({ articles, setReviewArticle }) => {
               name={article.title}
               description={article.short}
               date={article.date}
-              linkProps={{
-                show: true,
-                text: 'Read \u003E',
-                to: `/blog/${article.id}`,
-                onClick: () => setReviewArticle(article)
-              }}
+              linkTo={`/blog/${article.id}`}
             />
           ))
         }
         <StyledButton onClick={buttonClickHandler}>{t('all')}</StyledButton>
-      </ContentWrapper>
+      </StyledContentWrapper>
     </Container>
   );
 };
+
+const StyledContentWrapper = styled(ContentWrapper)`
+`;
 
 const Title = styled.h2`
   font-weight: bold;

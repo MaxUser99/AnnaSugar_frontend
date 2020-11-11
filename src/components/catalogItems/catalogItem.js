@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import Container from '../container/container';
 import Price from '../price/price';
-import { BREAKPOINTS, $maxWidth } from '../../theme';
+import { BREAKPOINTS, $maxWidth, $between } from '../../theme';
 import Button from '../button/button';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 import { useLocalization } from '../../hooks/useLocalization';
@@ -56,36 +56,10 @@ const Wrapper = styled(Container)`
   }
 `;
 
-const ImageWrapper = styled(Container)`
-  width: 100%;
-
-  max-width: 340px;
-  max-height: 340px;
-
-  ${
-    $maxWidth(BREAKPOINTS.DESCTOP, `
-      max-width: 240px;
-      // max-height: 240px;
-    `)
-  }
-  ${
-    $maxWidth(BREAKPOINTS.TABLET, `
-      justify-content: center;
-      // max-width: none;
-      max-height: none;
-    `)
-  }
-  & > img {
-    transition: 0.5s;
-    max-width: ${({ $targetWidth }) => ($targetWidth ? `${$targetWidth}px;` : '100%;')};
-    max-height: 100%;
-  }
-  ${({ imageLoaded }) => !imageLoaded && 'min-height: 300px;'}
-`;
-
 const Content = styled(Container)`
   max-width: 464px;
   margin-left: 110px;
+  ${ $between(BREAKPOINTS.DESCTOP, BREAKPOINTS.XL, `max-width: 600px;`)}
   ${ $maxWidth(BREAKPOINTS.DESCTOP, 'margin-left: 64px;')}
   ${ $maxWidth(BREAKPOINTS.TABLET, 'margin-left: 0;')}
 `;

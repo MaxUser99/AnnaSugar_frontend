@@ -19,7 +19,7 @@ const breadscrumbs = [
   }
 ];
 
-const BlogIndex = ({ articles, setReviewArticle }) => {
+const BlogIndex = ({ articles }) => {
   const { t } = useLocalization();
 
   return (
@@ -34,12 +34,7 @@ const BlogIndex = ({ articles, setReviewArticle }) => {
             name={article.title}
             description={article.short}
             date={article.date}
-            linkProps={{
-              show: true,
-              text: 'Read \u003E',
-              to: `/blog/${article.id}`,
-              onClick: () => setReviewArticle(article)
-            }}
+            linkTo={`/blog/${article.id}`}
           />
         ))
       }

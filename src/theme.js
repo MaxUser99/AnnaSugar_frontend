@@ -46,8 +46,15 @@ export const ThemeWrapper = ({ children }) => (
 export const BREAKPOINTS = {
   MOBILE: 475,
   TABLET: 700,
-  DESCTOP: 1200,
+  DESCTOP: 1050,
+  XL: 1440
 };
+
+export const $between = (minBreakpoint, maxBreakpoint, css) => `
+  @media screen and (min-width: ${minBreakpoint}px) and (max-width: ${maxBreakpoint}px) {
+    ${ css }
+  }
+`;
 
 export const $maxWidth = (brekpoint, css) => `
   @media screen and (max-width: ${brekpoint}px) { ${ css } }

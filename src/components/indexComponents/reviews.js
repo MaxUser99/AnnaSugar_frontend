@@ -7,7 +7,7 @@ import ReviewPreview from '../reviewPreview/reviewPreview';
 import Container from '../container/container';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import Button from '../button/button';
-import { $maxWidth, BREAKPOINTS } from '../../theme';
+import { $maxWidth, $between, BREAKPOINTS } from '../../theme';
 import { useLocalization } from '../../hooks/useLocalization';
 
 const PREVIEW_ITEMS_COUNT = 3;
@@ -42,12 +42,12 @@ const Reviews = ({ reviews, loadReviews, page }) => {
 }
 
 const Root = styled(Container)`
-  /* ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;')} */
 `;
 
 const StyledWrapper = styled(ContentWrapper)`
   padding-top: 64px;
   padding-bottom: 64px;
+  ${ $between(BREAKPOINTS.DESCTOP, BREAKPOINTS.XL, `max-width: 1030px;`)}
 `;
 
 const Title = styled.h2`

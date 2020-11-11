@@ -26,7 +26,7 @@ const ReviewIndex = ({ reviews }) => {
     <>
       <Breadscrumb breadscrumbs={breadscrumbs} />
       <Title>{t('reviews')}</Title>
-      <Container alignItems='stretch' justifyContent='space-between' fullWidth flexWrap>
+      <Container alignItems='stretch' justifyContent='center' fullWidth flexWrap>
         {
           reviews.map(review => (
             <StyledPreview key={review.id} review={review} />
