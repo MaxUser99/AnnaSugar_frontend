@@ -60,8 +60,8 @@ const SelectList = ({
 }
 
 const StyledPanel = styled(ExpansionPanel)`
-  min-width: 350px;
-  ${ $maxWidth(BREAKPOINTS.DESCTOP, 'min-width: 320px;')}
+  min-width: 508px;
+  ${ $maxWidth(BREAKPOINTS.TABLET, 'min-width: unset;')} */
   :last-of-type {
     margin-bottom: 0;
     ${ $maxWidth(800, 'margin-bottom: 32px;')}
