@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+
 import Container from '../components/container/container';
 import ContentWrapper from '../components/contentWrapper/contentWrapper';
 import Layout from '../components/layout/layout';
+import Input from '../components/input/input';
 import Button from '../components/button/button';
+import SocialButton from '../components/socialButton/socialButton';
+
 import TelegramIcon from '../assets/icons/telegram-btn.svg';
 import WhatsupIcon from '../assets/icons/whatsup-btn.svg';
 import MessangerIcon from '../assets/icons/messanger-btn.svg';
-import Input from '../components/input/input';
+
 import { BREAKPOINTS, $maxWidth } from '../theme';
-import SOCIAL_LINKS from '../constants/socialLinks';
 import { useLocalization } from '../hooks/useLocalization';
+import SOCIAL_LINKS from '../constants/socialLinks';
 import LANGS from '../constants/langs';
 
 const Contact = () => {
@@ -37,21 +41,24 @@ const Contact = () => {
           }
           <Buttons justifyContent='space-around' fullWidth>
             <ButtonWrapper direction='column'>
-              <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.TELEGRAM)}>
-                <img src={TelegramIcon} alt='' />
-              </SocialButton>
+              <SocialButton
+                onClick={socialClickHandler(SOCIAL_LINKS.TELEGRAM)}
+                img={TelegramIcon}
+              />
               <Caption>{t('Подписаться на канал')}</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
-              <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}>
-                <img src={WhatsupIcon} alt='' />
-              </SocialButton>
+              <SocialButton
+                onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}
+                img={WhatsupIcon}
+              />
               <Caption>{t('Связаться')}</Caption>
             </ButtonWrapper>
             <ButtonWrapper direction='column'>
-              <SocialButton onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}>
-                <img src={MessangerIcon} alt='' />
-              </SocialButton>
+              <SocialButton
+                onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}
+                img={MessangerIcon}
+              />
               <Caption>Answers in English</Caption>
             </ButtonWrapper>
           </Buttons>
@@ -105,9 +112,7 @@ const Buttons = styled(Container)`
 `;
 
 const ButtonWrapper = styled(Container)`
-  /* max-width: 98px; */
   align-items: center;
-  /* ${ $maxWidth(BREAKPOINTS.TABLET, `max-width: 68px;`)} */
 `;
 
 const Caption = styled.p`
@@ -137,30 +142,6 @@ const SubHeader = styled.h2`
   font-size: 14px;
   line-height: 34px;
   color: ${({ theme }) => theme.text.lighter2};
-`;
-
-const SocialButton = styled.button`
-  margin: 0 0 12px 0;
-  padding: 0;
-  border: none;
-  outline: none;
-  border-radius: 50%;
-  background-color: #94949400;
-  transition: 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  :hover {
-    background-color: #94949466;
-  }
-  ${ $maxWidth(BREAKPOINTS.TABLET, `
-    img {
-      width: 68px;
-      height: 68px;
-    }
-  `) }
-
 `;
 
 const FormTitle = styled.h2`
