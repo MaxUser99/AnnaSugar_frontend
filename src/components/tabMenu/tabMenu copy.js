@@ -39,7 +39,6 @@ const TabMenu = ({ tabs }) => {
 
       if (shouldScroll) {
         const tabNodes = Array.prototype.slice.call(node.querySelectorAll('a'));
-        tabNodes.forEach(x => console.log(x.getBoundingClientRect()))
         const target = tabNodes.find(x => Math.trunc(x.getBoundingClientRect().left) < Math.trunc(left));
         const distance = target
           ? Math.trunc(target.getBoundingClientRect().left)

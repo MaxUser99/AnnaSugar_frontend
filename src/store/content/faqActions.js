@@ -43,14 +43,12 @@ export const loadFaqs = () => {
 
 export const createFaq = (faqData) => {
   return async (dispatch) => {
-    console.log('should create new FAQ');
     return null;
   }
 }
 
 export const publishFaq = (id) => {
   return async (dispatch) => {
-    console.log('should publish: ', id);
   }
 }
 

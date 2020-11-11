@@ -71,7 +71,6 @@ const itemsLoaderSettings = {
 }
 
 function itemsReloader(page, contentType) {
-  console.log('items reload')
   return async function (dispatch, getState, api) {
     const { ui: { language }} = getState();
     const { setLoading, reset, url} = itemsLoaderSettings[contentType];
@@ -83,7 +82,6 @@ function itemsReloader(page, contentType) {
       .then(({ data: { data }}) => data)
       .catch(() => []);
 
-    console.log('reset: ', reset);
     return dispatch(reset(items, page));
   }
 }
@@ -99,7 +97,6 @@ function itemsLoader(page, contentType) {
     const items = await api.get(url, { headers })
       .then(({ data: { data }}) => data)
       .catch(() => []);
-    console.log('items: ', items);
     return dispatch(pushItems(items, page));
   }
 }

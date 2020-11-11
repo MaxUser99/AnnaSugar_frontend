@@ -39,7 +39,7 @@ const Preview = ({
 
     dateString = `${month}, ${day} ${year}`;
   }
-  console.log('image path: ', image);
+
   const {
     show: showLink,
     text,

@@ -17,16 +17,6 @@ export const SET_TARO = 'SET_TARO';
 export const SET_RUNE = 'SET_RUNE';
 export const SET_RITUAL = 'SET_RITUAL';
 
-// export const PUSH_ASTRO = 'PUSH_ASTRO';
-// export const PUSH_TARO = 'PUSH_TARO';
-// export const PUSH_RUNE = 'PUSH_RUNE';
-// export const PUSH_RITUAL = 'PUSH_RITUAL';
-
-// export const RESET_ASTRO = 'RESET_ASTRO';
-// export const RESET_TARO = 'RESET_TARO';
-// export const RESET_RUNE = 'RESET_RUNE';
-// export const RESET_RITUAL = 'RESET_RITUAL';
-
 export const setAstroLoading = () => ({ type: SET_ASTRO_LOADING });
 export const setTaroLoading = () => ({ type: SET_TARO_LOADING });
 export const setRuneLoading = () => ({ type: SET_RUNE_LOADING });
@@ -37,25 +27,10 @@ export const setTaro = data => ({ type: SET_TARO, payload: data });
 export const setRune = data => ({ type: SET_RUNE, payload: data });
 export const setRitual = data => ({ type: SET_RITUAL, payload: data });
 
-// export const resetAstroLoading = () => ({ type: RESET_ASTRO });
-// export const resetTaroLoading = () => ({ type: RESET_TARO });
-// export const resetRuneLoading = () => ({ type: RESET_RUNE });
-// export const resetRitualLoading = () => ({ type: RESET_RITUAL });
-
-// export const pushAstro = data => ({ type: PUSH_ASTRO, payload: data });
-// export const pushTaro = data => ({ type: PUSH_TARO, payload: data });
-// export const pushRune = data => ({ type: PUSH_RUNE, payload: data });
-// export const pushRitual = data => ({ type: PUSH_RITUAL, payload: data });
-
 export const loadAstro = () => loader(DATA_TYPE.ASTRO);
 export const loadTaro = () => loader(DATA_TYPE.TARO);
 export const loadRune = () => loader(DATA_TYPE.RUNE);
 export const loadRitual = () => loader(DATA_TYPE.RITUAL);
-
-// export const reloadAstro = () => reloader(DATA_TYPE.ASTRO);
-// export const reloadTaro = () => reloader(DATA_TYPE.TARO);
-// export const reloadRune = () => reloader(DATA_TYPE.RUNE);
-// export const reloadRitual = () => reloader(DATA_TYPE.RITUAL);
 
 const typeIds = {
   [DATA_TYPE.ASTRO]: 1,
@@ -70,20 +45,6 @@ const loaderSettings = {
   [DATA_TYPE.RITUAL]: { setLoading: setRitualLoading, setItems: setRitual, url: consultsUrl(typeIds[DATA_TYPE.RITUAL])},
 }
 
-// function reloader(contentType) {
-//   return async function(dispatch, getState, api) {
-//     const { ui: { language }} = getState();
-//     const { reset, url, setLoading } = loaderSettings[contentType];
-//     dispatch(setLoading());
-//     const headers = getLangHeader(language);
-//     const items = await api.get(url, { headers })
-//       .then(({ data: { data }}) => data)
-//       .catch(() => []);
-//     console.log('items: ', items);
-//     return dispatch(reset(items));
-//   }
-// }
-
 function loader(contentType) {
   return async function (dispatch, getState, api) {
     const { ui: { language }} = getState();
@@ -93,7 +54,6 @@ function loader(contentType) {
     const items = await api.get(url, { headers })
       .then(({ data: { data }}) => data)
       .catch(() => []);
-    console.log('items: ', items);
     return dispatch(setItems(items));
   }
 }

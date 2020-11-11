@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import Container from '../container/container';
-import CartIcon from '../../assets/icons/cart.inline.svg';
 import Price from '../price/price';
-import { BREAKPOINTS, $maxWidth, $minWidth } from '../../theme';
+import { BREAKPOINTS, $maxWidth } from '../../theme';
 import Button from '../button/button';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 import { useLocalization } from '../../hooks/useLocalization';
@@ -34,7 +33,6 @@ const CatalogItem = ({
         <img
           onLoad={imageLoadHandler}
           src={images[0]}
-          // src={`/${images[0]}`}
           alt=''
         />
       </ImageWrapper>
@@ -43,10 +41,6 @@ const CatalogItem = ({
         <Brief>{brief}</Brief>
         <Purchase alignItems='center' justifyContent='space-between' fullWidth>
           <Price>{price}</Price>
-          {/* <Button>
-            <CartIcon />
-            <span>Консультация</span>
-          </Button> */}
           <StyledButton onClick={offerClickHandler}>{t('Заказать')}</StyledButton>
         </Purchase>
       </Content>
@@ -97,25 +91,9 @@ const ImageWrapper = styled(Container)`
     `)
   }
   & > img {
-    /* max-width: 100%; */
     transition: 0.5s;
     max-width: ${({ $targetWidth }) => ($targetWidth ? `${$targetWidth}px;` : '100%;')};
     max-height: 100%;
-    /* width: 100%; */
-    /* width: 340px;
-    height: 340px;
-    ${
-      $maxWidth(BREAKPOINTS.DESCTOP, `
-        width: 240px;
-        height: 240px;
-      `)
-    }
-    ${
-      $maxWidth(BREAKPOINTS.TABLET, `
-        width: 285px;
-        height: 240px;
-      `)
-    } */
   }
   ${({ imageLoaded }) => !imageLoaded && 'min-height: 300px;'}
 `;

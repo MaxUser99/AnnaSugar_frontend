@@ -31,7 +31,6 @@ export const loadReviewItem = id => {
     const review = await api.get(url, { headers })
       .then(({ data }) => reviewNormalizer(data))
       .catch(() => null);
-    console.log('review: ', review);
     dispatch(setReviewItem(review));
     return review;
   }

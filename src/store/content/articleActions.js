@@ -30,7 +30,6 @@ export const loadArticles = page => {
     dispatch(setArticlesLoading());
 
     const articles = await getArticles(api, language);
-    console.log('loaded articles: ', articles);
 
     return dispatch(pushArticles(articles, page));
   };
@@ -41,7 +40,6 @@ export const loadReviewArticle = id => {
     const { ui: { language }} = getState();
 
     const article = await getArticle(api, id, language);
-    console.log('loaded article: ', article);
 
     dispatch(setReviewArticle(article));
     return article;
@@ -66,7 +64,6 @@ async function getArticles(api, lang) {
 
 export const editArticle = (data) => {
   return async dispatch => {
-    console.log('should edit article: ', data);
     return null;
   }
 }

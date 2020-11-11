@@ -86,7 +86,6 @@ const ConsultItem = ({ item }) => {
 
   useEffect(() => {
     const newState = init(initialState);
-    console.log('new state: ', newState);
     dispatch(reset(newState));
   }, [item]);
 
@@ -95,7 +94,6 @@ const ConsultItem = ({ item }) => {
   const setSelected = (selectItem) => dispatch(setSelect(selectItem));
 
   const offerClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
-  console.log(' state: ', state);
 
   return (
     <Container direction='column' fullWidth>
