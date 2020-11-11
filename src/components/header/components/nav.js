@@ -2,23 +2,24 @@ import React, { useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-import { userLinks } from '../../../constants/links';
-import CloseIcon from '../../../assets/icons/close.inline.svg';
-import { useLocalization } from '../../../hooks/useLocalization';
+
 import LangButton from '../../langButton/langButton';
 import Container from '../../container/container';
+import { default as BaseSocialButton } from '../../socialButton/socialButton';
+
+import CloseIcon from '../../../assets/icons/close.inline.svg';
+import TelegramIcon from '../../../assets/icons/telegram-btn.svg';
+import WhatsupIcon from '../../../assets/icons/whatsup-btn.svg';
+import MessangerIcon from '../../../assets/icons/messanger-btn.svg';
+
+import { useLocalization } from '../../../hooks/useLocalization';
+import { userLinks } from '../../../constants/links';
 import LANGS from '../../../constants/langs';
+import SOCIAL_LINKS from '../../../constants/socialLinks';
 
 const Nav = ({ open, setOpen }) => {
   const menuRef = useRef();
   const { t } = useLocalization();
-
-  const menuClickHandler = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-  }
-
-  const closeModal = () => setOpen(false);
 
   useEffect(() => {
     if (open) {
@@ -36,6 +37,14 @@ const Nav = ({ open, setOpen }) => {
       clearAllBodyScrollLocks();
     }
   }, [open]);
+
+  const menuClickHandler = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+  }
+
+  const closeModal = () => setOpen(false);
+  const socialClickHandler = link => () => window.open(link);
 
   return (
     <>
@@ -61,10 +70,34 @@ const Nav = ({ open, setOpen }) => {
             <LangButton lang={LANGS.RU} />
             <LangButton lang={LANGS.EN} />
           </Container>
+          <Container>
+            <SocialButton
+              onClick={socialClickHandler(SOCIAL_LINKS.TELEGRAM)}
+              img={TelegramIcon}
+            />
+            <SocialButton
+              onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}
+              img={WhatsupIcon}
+            />
+            <SocialButton
+              onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}
+              img={MessangerIcon}
+            />
+          </Container>
       </Menu>
     </>
   );
 }
+
+const SocialButton = styled(BaseSocialButton)`
+  margin: 0 10px;
+  width: 50px;
+  height: 50px;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;
 
 const Button = styled.button`
   border-radius: 50%;
@@ -139,6 +172,9 @@ const Menu = styled.nav`
   align-items: center;
   right: -100%;
   transition: right 0.5s;
+  > div {
+    margin-bottom: 20px;
+  }
   > * {
     transition: opacity 1s;
     opacity: 0;
