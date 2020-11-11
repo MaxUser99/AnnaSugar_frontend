@@ -58,7 +58,7 @@ const Layout = ({ className, children }) => {
           <meta name="theme-color" content="#ffffff" />
 
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-          <title>Anna Suggar</title>
+          <title>Anna Sugar</title>
         </Helmet>
         <ImageModal />
         <Header />
