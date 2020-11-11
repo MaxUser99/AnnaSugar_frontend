@@ -9,10 +9,7 @@ import SOCIAL_LINKS from '../../constants/socialLinks';
 import { useLocalization } from '../../hooks/useLocalization';
 import Gallery from '../gallery/gallery';
 
-const CatalogItem = ({
-  item,
-  onClick,
-}) => {
+const CatalogItem = ({ item, onClick }) => {
   const { id, images, name, brief, price } = item;
   const { t } = useLocalization();
 
