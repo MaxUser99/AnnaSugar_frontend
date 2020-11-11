@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import Container from '../components/container/container';
 import ContentWrapper from '../components/contentWrapper/contentWrapper';
@@ -17,8 +18,10 @@ import { BREAKPOINTS, $maxWidth } from '../theme';
 import { useLocalization } from '../hooks/useLocalization';
 import SOCIAL_LINKS from '../constants/socialLinks';
 import LANGS from '../constants/langs';
+import { postMessage } from '../store/user/actions';
 
 const Contact = () => {
+  const dispatch = useDispatch();
   const { t, lang } = useLocalization();
   const {
     register,
@@ -27,7 +30,7 @@ const Contact = () => {
     errors
   } = useForm();
 
-  const submitHandler = data => console.log('data: ', data); 
+  const submitHandler = data => dispatch(postMessage(data)); 
   const socialClickHandler = link => () => window.open(link);
 
   return (
