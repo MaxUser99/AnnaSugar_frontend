@@ -24,23 +24,16 @@ const Gallery = ({ images }) => {
     setImagesHeight(prev => prev.map((height, j) => j === i ? offsetHeight : height));
   }
 
-  const nextClickHandler = () => setCurrentIndex(prev => (
-    prev + 1 < images.length
-    ? prev + 1
-    : prev
-  ));
+  const nextClickHandler = () => setCurrentIndex(currentIndex + 1);
 
-  const prevClickHandler = () => setCurrentIndex(prev => (
-    prev - 1 >= 0
-    ? prev - 1
-    : prev
-  ));
+  const prevClickHandler = () => setCurrentIndex(currentIndex - 1);
 
   return (
     <Root className='gallery-root'>
       <Button
         className='gallery-prev'
         onClick={prevClickHandler}
+        disabled={!imagesHeight[currentIndex - 1]}
         $offset={buttonsOffset[currentIndex]}
         $height={imagesHeight[currentIndex]}>
         <img src={arrowLeft} alt='' />
@@ -55,6 +48,7 @@ const Gallery = ({ images }) => {
       <Button
         className='gallery-next'
         onClick={nextClickHandler}
+        disabled={!imagesHeight[currentIndex + 1]}
         $offset={buttonsOffset[currentIndex]}
         $height={imagesHeight[currentIndex]}>
         <img src={arrowRight} alt='' />
@@ -139,7 +133,9 @@ const Button = styled.button`
   }
   :hover {
     img {
-      transform: scale(2)
+      ${ ({ disabled }) => !disabled && `
+        transform: scale(2);
+      `}
     }
   }
 `;
