@@ -7,6 +7,7 @@ import { BREAKPOINTS, $maxWidth } from '../../theme';
 import Button from '../button/button';
 import SOCIAL_LINKS from '../../constants/socialLinks';
 import { useLocalization } from '../../hooks/useLocalization';
+import Gallery from '../gallery/gallery';
 
 const CatalogItem = ({
   item,
@@ -29,13 +30,16 @@ const CatalogItem = ({
     <Wrapper
       alignItems='stretch'
       fullWidth>
-      <ImageWrapper $targetWidth={targetImageWidth} imageLoaded={imageLoaded}>
+      {/* <ImageWrapper
+        $targetWidth={targetImageWidth}
+        imageLoaded={imageLoaded}>
         <img
           onLoad={imageLoadHandler}
           src={images[0]}
           alt=''
         />
-      </ImageWrapper>
+      </ImageWrapper> */}
+      <Gallery images={images} />
       <Content alignItems='stretch' direction='column' fullWidth>
         <Name onClick={nameClickHandler} to={`${id}`}>{name}</Name>
         <Brief>{brief}</Brief>
