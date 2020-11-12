@@ -16,7 +16,7 @@ const Others = ({
   clearHandler,
   reloadOthers
 }) => {
-  onLangChange(() => reloadOthers(0));
+  onLangChange(() => reloadOthers(0), 'reloadOthers');
 
   useEffect(() => {
     if (page === null) loadOthers(0);

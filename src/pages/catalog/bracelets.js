@@ -16,7 +16,7 @@ const Bracelets = ({
   clearHandler,
   reloadBracelets
 }) => {
-  onLangChange(() => reloadBracelets(0));
+  onLangChange(() => reloadBracelets(0), 'reloadBracelets');
 
   useEffect(() => {
     if (page === null) loadBracelets(0);

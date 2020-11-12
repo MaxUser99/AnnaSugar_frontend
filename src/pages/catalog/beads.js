@@ -16,7 +16,7 @@ const Beads = ({
   clearHandler,
   reloadBeads
 }) => {
-  onLangChange(() => reloadBeads(0));
+  onLangChange(() => reloadBeads(0), 'reloadBeads');
 
   useEffect(() => {
     if (page === null) loadBeads(0);

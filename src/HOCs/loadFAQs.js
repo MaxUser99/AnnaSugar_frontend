@@ -12,11 +12,11 @@ const loadFAQs = (Component) => (
       status
     }));
 
-    onLangChange(() => dispatch(reloadFaqs()));
+    onLangChange(() => dispatch(reloadFaqs()), 'reloadFaqs');
 
     useEffect(() => {
       if (!data.length && status !== RESOURCE_STATUS.LOADING) {
-        loadFaqs();
+        dispatch(loadFaqs());
       } 
     }, []);
 

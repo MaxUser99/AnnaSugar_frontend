@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -22,15 +22,24 @@ store.dispatch(onStoreCreate());
 export const LangContext = React.createContext();
 
 export default ({ children }) => {
-  const { ui: { language }} = store.getState();
-  const [ prevLang, setLang ] = useState(language);
+  const [ callbacksMap, setCallbacksMap ] = useState(new Map());
+
+  const saveCallback = useCallback((key, lang, callback) => {
+    if (!key) return;
+
+    const { lang: prevLang } = callbacksMap.get(key) || {};
+  
+    if (!!prevLang && prevLang !== lang) {
+      callback();
+    }
+  
+    const updatedMap = callbacksMap.set(key, { lang, callback });
+    setCallbacksMap(new Map(updatedMap));
+  }, [ callbacksMap, setCallbacksMap ]);
 
   return (
     <Provider store={store}>
-      <LangContext.Provider value={{
-        prevLang,
-        setLang
-      }}>
+      <LangContext.Provider value={{ callbacksMap, saveCallback }}>
         {children}
       </LangContext.Provider>
     </Provider>

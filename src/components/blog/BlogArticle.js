@@ -39,7 +39,7 @@ const BlogArticle = ({
     return [...baseBreadscrumbs, { title, href: '#', disabled: true }];
   }, [ article ]);
 
-  onLangChange(() => loadReviewArticle());
+  onLangChange(() => loadReviewArticle(), 'reloadReviewArticle');
 
   useEffect(() => clearReviewArticle, []);
 

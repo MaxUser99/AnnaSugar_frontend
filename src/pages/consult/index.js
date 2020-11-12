@@ -25,7 +25,7 @@ export const consultWrapper = Component => {
       dispatch(loadTaro());
       dispatch(loadRune());
       dispatch(loadRitual());
-    });
+    }, 'reloadConsultations');
 
     return <Component {...props} />;
   }

@@ -22,7 +22,7 @@ const CatalogItemPage = ({ itemId, reviewItem, clearHandler, loadItem }) => {
   const { isLoading, shouldRedirect } = useLoading(!reviewItem, () => loadItem(itemId));
   const [ subPage, setSubPage ] = useState(SUB_PAGES.DESCRIPTION);
 
-  onLangChange(() => loadItem(itemId));
+  onLangChange(() => loadItem(itemId), 'reloadCatalogItem');
 
   useEffect(() => clearHandler, []);
 

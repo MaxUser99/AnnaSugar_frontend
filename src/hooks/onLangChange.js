@@ -2,17 +2,11 @@ import { useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LangContext } from '../store/reduxWrapper';
 
-export function onLangChange(callback) {
+export function onLangChange(callback, key) {
   const lang = useSelector(({ ui: { language }}) => language);
-  const langContext = useContext(LangContext);
+  const { saveCallback } = useContext(LangContext);
 
-  useEffect(() => {
-    console.log()
-    if (langContext.prevLang !== lang) {
-      callback();
-      langContext.setLang(lang);
-    }
-  }, [lang])
+  useEffect(() => saveCallback(key, lang, callback), [lang]);
 
   return null;
 }

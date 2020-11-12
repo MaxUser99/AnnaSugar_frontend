@@ -12,7 +12,7 @@ export default (Component) => {
       if (page === null) dispatch(loadArticles(0));
     }, [])
 
-    onLangChange(() => dispatch(reloadArticles()));
+    onLangChange(() => dispatch(reloadArticles()), 'reloadArticles');
 
     return <Component {...props} />
   };

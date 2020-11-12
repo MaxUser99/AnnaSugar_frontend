@@ -16,7 +16,7 @@ const Kindles = ({
   clearHandler,
   reloadKindles
 }) => {
-  onLangChange(() => reloadKindles(0));
+  onLangChange(() => reloadKindles(0), 'reloadKindles');
 
   useEffect(() => {
     if (page === null) loadKindles(0);
