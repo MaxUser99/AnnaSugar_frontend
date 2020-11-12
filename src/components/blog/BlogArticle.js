@@ -1,12 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { useLoading } from '../../hooks/useLoading';
-import { loadReviewArticle, setReviewArticle } from '../../store/content/articleActions'; 
+
 import Breadscrumb from '../breadscrumb/breadscrumb';
 import ArticleLayout from './ArticleLayout';
 import Loader from '../loader/loader';
 import Button from '../button/button';
+
+import { useLoading } from '../../hooks/useLoading';
+import { loadReviewArticle, setReviewArticle } from '../../store/content/articleActions'; 
+import { onLangChange } from '../../hooks/onLangChange';
 
 const baseBreadscrumbs = [
   {
@@ -25,9 +28,7 @@ const BlogArticle = ({
   loadReviewArticle,
   clearReviewArticle,
   navigate,
-  lang
 }) => {
-  const [ prevLang, setLang ] = useState(lang)
   const { shouldRedirect, isLoading } = useLoading(!article, loadReviewArticle);
 
   const breadscrumbs = useMemo(() => {
@@ -38,12 +39,7 @@ const BlogArticle = ({
     return [...baseBreadscrumbs, { title, href: '#', disabled: true }];
   }, [ article ]);
 
-  useEffect(() => {
-    if (lang !== prevLang) {
-      loadReviewArticle();
-      setLang(lang);
-    }
-  }, [ lang ]);
+  onLangChange(() => loadReviewArticle());
 
   useEffect(() => clearReviewArticle, []);
 
@@ -76,9 +72,8 @@ const RedirectButton = styled(Button)`
   margin-bottom: auto;
 `;
 
-const mapStateToProps = ({ ui: { language }, content: { articles: { reviewItem}}}) => ({
-  article: reviewItem,
-  lang: language
+const mapStateToProps = ({ content: { articles: { reviewItem }}}) => ({
+  article: reviewItem
 });
 
 const mapDispatchToProps = (dispatch, { articleId, navigate }) => ({

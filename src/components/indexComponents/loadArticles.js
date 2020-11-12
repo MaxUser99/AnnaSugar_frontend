@@ -1,35 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { loadArticles, reloadArticles } from '../../store/content/articleActions';
-
-const mapStateToProps = ({ content: { articles: { data, page }}, ui: { language }}) => ({
-  lang: language,
-  page
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadArticles: (page) => dispatch(loadArticles(page)),
-  reloadArticles: () => dispatch(reloadArticles())
-});
+import { onLangChange } from '../../hooks/onLangChange';
 
 export default (Component) => {
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(({ page, reloadArticles, loadArticles, lang, ...props}) => {
-    const [ prevLang, setLang ] = useState(lang)
+  return (props) => {
+    const dispatch = useDispatch();
+    const page = useSelector(({ content: { articles: { page }}}) => page);
 
     useEffect(() => {
-      if (page === null) loadArticles(0);
+      if (page === null) dispatch(loadArticles(0));
     }, [])
 
-    useEffect(() => {
-      if (prevLang !== lang) {
-        reloadArticles();
-        setLang(lang);
-      }
-    }, [ lang ]);
+    onLangChange(() => dispatch(reloadArticles()));
 
     return <Component {...props} />
-  });
+  };
 }
