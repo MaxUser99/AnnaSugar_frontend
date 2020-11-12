@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -19,6 +19,20 @@ export const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArg
 
 store.dispatch(onStoreCreate());
 
-export default ({ children }) => (
-  <Provider store={store}>{children}</Provider>
-);
+export const LangContext = React.createContext();
+
+export default ({ children }) => {
+  const { ui: { language }} = store.getState();
+  const [ prevLang, setLang ] = useState(language);
+
+  return (
+    <Provider store={store}>
+      <LangContext.Provider value={{
+        prevLang,
+        setLang
+      }}>
+        {children}
+      </LangContext.Provider>
+    </Provider>
+  );
+}
