@@ -23,6 +23,7 @@ export const reviewUrl = (id) => `/reviews/${id}`;
 export const articlesUrl = () => '/posts';
 export const articleUrl = (id) => `/posts/${id}`;
 export const emailUrl = () => '/email';
+export const staticTextUrl = () => '/static';
 
 export const getLangHeader = lang => ({ "x-lang": langHeaders[lang]});
 export default instance;

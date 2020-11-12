@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+
 import Container from '../container/container';
 import Button from '../button/button';
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import MainImage from '../../assets/images/image.png';
+import Fab from '../layout/components/fab';
+import ExpandableText from './expandableText';
+
+import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
+import { useLocalization } from '../../hooks/useLocalization';
+import { onLangChange } from '../../hooks/onLangChange';
+import { loadStatic } from '../../store/ui/uiActions';
+
 // import FabIcon from '../../assets/images/whatsup-fab.svg';
 // import Img from 'gatsby-image';
 // import { useStaticQuery, graphql } from 'gatsby';
-import { BREAKPOINTS, $minWidth, $maxWidth } from '../../theme';
-import ExpandableText from './expandableText';
-import { useLocalization } from '../../hooks/useLocalization';
-import Fab from '../layout/components/fab';
 
 const MainBlock = () => {
+  const dispatch = useDispatch();
   const { t } = useLocalization();
   const [ textHidden, hideText ] = useState(true)
 
@@ -22,6 +29,10 @@ const MainBlock = () => {
   }
 
   const showMoreClickHandler = () => hideText(prev => !prev);
+
+  useEffect(() => {
+    dispatch(loadStatic());
+  }, []);
 
   // const data = useStaticQuery(graphql`
   //   query MyQuery {

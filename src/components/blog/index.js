@@ -25,7 +25,7 @@ const BlogIndex = ({ articles }) => {
   return (
     <>
       <Breadscrumb breadscrumbs={breadscrumbs} />
-      <Title>{t('articles')}</Title>
+      <Title>{t('Статьи')}</Title>
       {
         articles.map(article => (
           <Preview
