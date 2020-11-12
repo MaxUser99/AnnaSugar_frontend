@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Container from '../container/container';
 import Button from '../button/button';
@@ -20,6 +20,7 @@ import { loadStatic } from '../../store/ui/uiActions';
 
 const MainBlock = () => {
   const dispatch = useDispatch();
+  const { text1, text2 } = useSelector(({ ui: { texts }}) => texts);
   const { t } = useLocalization();
   const [ textHidden, hideText ] = useState(true)
 
@@ -30,6 +31,7 @@ const MainBlock = () => {
 
   const showMoreClickHandler = () => hideText(prev => !prev);
 
+  onLangChange(() => dispatch(loadStatic()), 'reloadStatic');
   useEffect(() => {
     dispatch(loadStatic());
   }, []);
@@ -54,7 +56,7 @@ const MainBlock = () => {
       <StyledWrapper alignItems='flex-start'>
         <TextContainer $show='desctop' direction='column'>
           <Title>Anna Sugar</Title>
-          <Paragraph>{ t('paragraph1')}</Paragraph>
+          {/* <Paragraph>{ t('paragraph1')}</Paragraph>
           <Paragraph>
             {t('paragraph2.1')}
             <b> {t('paragraph2.2')} </b>
@@ -64,7 +66,11 @@ const MainBlock = () => {
             <b> {t('paragraph3.1')} </b><br />
             {t('paragraph3.2')}
           </Paragraph>
-          <Paragraph>{t('paragraph4')}</Paragraph>
+          <Paragraph>{t('paragraph4')}</Paragraph> */}
+          <Paragraph>
+            {text1}
+            {text2}
+          </Paragraph>
         </TextContainer>
         <Container direction='column' alignItems='center' fullWidth>
           <Image src={MainImage} alt='' />
@@ -77,6 +83,15 @@ const MainBlock = () => {
           <Container alignItems='stretch' fullWidth>
             <Container direction='column'>
               <Paragraph>
+                { text1 }
+                <ReadMore onClick={showMoreClickHandler}> {t('paragraph5.readMore')}</ReadMore>
+              </Paragraph>
+              <ExpandableText hidden={textHidden}>
+                <Paragraph>
+                  { text2 }
+                </Paragraph>
+              </ExpandableText>
+              {/* <Paragraph>
                 {t('paragraph5')}
                 <ReadMore onClick={showMoreClickHandler}>{t('paragraph5.readMore')}</ReadMore>
               </Paragraph>
@@ -92,7 +107,7 @@ const MainBlock = () => {
                 <Paragraph>
                   {t('paragraph4')}
                 </Paragraph>
-              </ExpandableText>
+              </ExpandableText> */}
               <Subscribe>{t('subscribe')}</Subscribe>
             </Container>
 
@@ -162,6 +177,7 @@ const TextContainer = styled(Container)`
 `;
 
 const Title = styled.h1`
+  white-space: nowrap;
   text-align: center;
   font-family: "Cormorant Infant";
   font-style: normal;

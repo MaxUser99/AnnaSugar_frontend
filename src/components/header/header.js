@@ -21,11 +21,9 @@ const HIDDEN_LINKS = {
 const Header = () => {
   const { pathname } = useLocation();
   const { t, lang } = useLocalization();
-  console.log('pathname: ', pathname)
 
   useEffect(() => {
     const condition = HIDDEN_LINKS[lang].some(x => pathname.includes(x));
-    console.log('pathname: ', condition, pathname)
 
     if (condition) {
       console.log('navigate')
@@ -33,10 +31,12 @@ const Header = () => {
     }
   }, [pathname, lang]);
 
+  const goToIndex = () => navigate('/');
+
   return (
     <RootContainer id='header' alignItems='center' fullWidth>
       <StyledContentWrapper justifyContent='space-between' alignItems='center' maxWidth='wide'>
-        <FixedWidthContainer>
+        <FixedWidthContainer onClick={goToIndex}>
           <SiteTitle>Anna Sugar</SiteTitle>
         </FixedWidthContainer>
         <LinksContainer justifyContent='center'>
