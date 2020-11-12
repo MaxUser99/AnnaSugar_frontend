@@ -10,16 +10,19 @@ import { setReviewArticle } from '../../store/content/articleActions';
 import { $maxWidth, BREAKPOINTS } from '../../theme';
 import { useLocalization } from '../../hooks/useLocalization';
 import loadArticles from '../indexComponents/loadArticles';
+import LANGS from '../../constants/langs';
 
 const PREVIEW_ITEMS_COUNT = 4;
 
 const Articles = ({ articles }) => {
-  const { t } = useLocalization();
+  const { t, lang } = useLocalization();
   const navigate = useNavigate();
 
   const buttonClickHandler = () => {
     navigate('/blog');
   }
+
+  if (lang === LANGS.EN) return null;
 
   return (
     <Container fullWidth>

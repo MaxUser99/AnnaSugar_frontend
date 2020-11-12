@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useLocation } from '@reach/router';
+import { useLocation, navigate } from '@reach/router';
+
 import ContentWrapper from '../contentWrapper/contentWrapper';
 import Container from '../container/container';
 import Link from './components/link';
 import LangButton from '../langButton/langButton';
+import MenuButton from './components/menuButton';
+
 import LANGS from '../../constants/langs';
 import { BREAKPOINTS, $maxWidth } from '../../theme';
-import MenuButton from './components/menuButton';
 import { userLinks } from '../../constants/links';
 import { useLocalization } from '../../hooks/useLocalization';
 
+const HIDDEN_LINKS = {
+  [LANGS.RU]: [],
+  [LANGS.EN]: ['consult', 'blog']
+}
+
 const Header = () => {
   const { pathname } = useLocation();
-  const { t } = useLocalization();
+  const { t, lang } = useLocalization();
+  console.log('pathname: ', pathname)
+
+  useEffect(() => {
+    const condition = HIDDEN_LINKS[lang].some(x => pathname.includes(x));
+    console.log('pathname: ', condition, pathname)
+
+    if (condition) {
+      console.log('navigate')
+      navigate('/');
+    }
+  }, [pathname, lang]);
 
   return (
     <RootContainer id='header' alignItems='center' fullWidth>
@@ -24,6 +42,7 @@ const Header = () => {
         <LinksContainer justifyContent='center'>
           {
             userLinks.map(({ href, title, isActive }) => (
+              !HIDDEN_LINKS[lang].some(x => href.includes(x)) &&
               <StyledLink
                 key={href}
                 active={isActive(pathname)}
