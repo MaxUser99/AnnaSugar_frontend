@@ -7,21 +7,18 @@ import arrowRight from '../../assets/icons/arrow-right.svg';
 const Gallery = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonsOffset, setButtonsOffset] = useState(images.map(() => 0));
-  const [imagesHeight, setImagesHeight] = useState(images.map(() => 0));
 
   useEffect(() => {
     setButtonsOffset(images.map(() => 0));
-    setImagesHeight(images.map(() => 0));
   }, [images])
 
-  const loadHandler = i => ({ target: { offsetWidth, offsetHeight, parentNode } }) => {
+  const loadHandler = i => ({ target: { offsetWidth, parentNode } }) => {
     setButtonsOffset(prev => prev.map((offset, j) => {
       if (i !== j) return offset;
       const parentWidth = parentNode.offsetWidth;
       const newOffset = (parentWidth - offsetWidth) / 2;
       return newOffset;
     }));
-    setImagesHeight(prev => prev.map((height, j) => j === i ? offsetHeight : height));
   }
 
   const nextClickHandler = () => setCurrentIndex(currentIndex + 1);
@@ -33,9 +30,9 @@ const Gallery = ({ images }) => {
       <Button
         className='gallery-prev'
         onClick={prevClickHandler}
-        disabled={!imagesHeight[currentIndex - 1]}
-        $offset={buttonsOffset[currentIndex]}
-        $height={imagesHeight[currentIndex]}>
+        $hidden={!images.length}
+        disabled={!images[currentIndex - 1]}
+        $offset={buttonsOffset[currentIndex]}>
         <img src={arrowLeft} alt='' />
       </Button>
       {
@@ -48,9 +45,9 @@ const Gallery = ({ images }) => {
       <Button
         className='gallery-next'
         onClick={nextClickHandler}
-        disabled={!imagesHeight[currentIndex + 1]}
-        $offset={buttonsOffset[currentIndex]}
-        $height={imagesHeight[currentIndex]}>
+        $hidden={!images.length}
+        disabled={!images[currentIndex + 1]}
+        $offset={buttonsOffset[currentIndex]}>
         <img src={arrowRight} alt='' />
       </Button>
     </Root>
@@ -115,21 +112,20 @@ const Button = styled.button`
   justify-content: center;
   width: 50px;
   transition: left 0.3s, right 0.3s, opacity 0.3s;
-  height: ${ ({ $height }) => (
-    $height
-    ? `${$height}px;`
-    : '100%;'
-  )};
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  ${ ({ $hidden }) => $hidden && 'visibility: hidden;' };
   img {
     transition: 0.3s;
   }
   :first-of-type {
     left: ${ ({ $offset }) => `${$offset}px;`};
-    border-radius: 4px 0 0 4px;
+    border-radius: 0 4px 4px 0;
   }
   :last-of-type {
     right: ${ ({ $offset }) => `${$offset}px;`};
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px 0 0 4px;
   }
   :hover {
     img {
