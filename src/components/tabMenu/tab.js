@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 
 const Tab = ({ children, href }) => (
-  <TabItem as={Link} activeClassName='active' to={`../${href}`}>
+  <TabItem
+    partiallyActive
+    activeClassName='active'
+    to={`../${href}`}>
     { children }
   </TabItem>
 );
