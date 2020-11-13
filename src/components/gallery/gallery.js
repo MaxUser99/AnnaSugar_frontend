@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Container from '../container/container';
 import arrowLeft from '../../assets/icons/arrow-left.svg';
 import arrowRight from '../../assets/icons/arrow-right.svg';
+import { $maxWidth, BREAKPOINTS } from '../../theme';
 
 const Gallery = ({ images }) => {
+  const [hidden, setHidden] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonsOffset, setButtonsOffset] = useState(images.map(() => 0));
 
@@ -21,16 +23,23 @@ const Gallery = ({ images }) => {
     }));
   }
 
-  const nextClickHandler = () => setCurrentIndex(currentIndex + 1);
-
-  const prevClickHandler = () => setCurrentIndex(currentIndex - 1);
+  const nextClickHandler = () => {
+    setCurrentIndex(currentIndex + 1);
+    setHidden(true);
+    setTimeout(() => setHidden(false), 300);
+  }
+  const prevClickHandler = () => {
+    setCurrentIndex(currentIndex - 1);
+    setHidden(true);
+    setTimeout(() => setHidden(false), 300);
+  }
 
   return (
     <Root className='gallery-root'>
       <Button
         className='gallery-prev'
         onClick={prevClickHandler}
-        $hidden={!images.length}
+        $hidden={!images.length || hidden}
         disabled={!images[currentIndex - 1]}
         $offset={buttonsOffset[currentIndex]}>
         <img src={arrowLeft} alt='' />
@@ -45,7 +54,7 @@ const Gallery = ({ images }) => {
       <Button
         className='gallery-next'
         onClick={nextClickHandler}
-        $hidden={!images.length}
+        $hidden={!images.length  || hidden}
         disabled={!images[currentIndex + 1]}
         $offset={buttonsOffset[currentIndex]}>
         <img src={arrowRight} alt='' />
@@ -101,6 +110,15 @@ const Image = styled.img`
   border-radius: 4px;
 `;
 
+const hideAnimation = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
 const Button = styled.button`
   position: absolute;
   cursor: pointer;
@@ -115,7 +133,14 @@ const Button = styled.button`
   height: 50px;
   top: 50%;
   transform: translateY(-50%);
-  ${ ({ $hidden }) => $hidden && 'visibility: hidden;' };
+  ${ ({ $hidden }) => $hidden && css`
+    visibility: hidden;
+    animation: ${hideAnimation} 0.3s;
+  `};
+  ${ $maxWidth(BREAKPOINTS.TABLET, `
+    background: transparent;
+    border: 1px solid white;
+  `)}
   img {
     transition: 0.3s;
   }
