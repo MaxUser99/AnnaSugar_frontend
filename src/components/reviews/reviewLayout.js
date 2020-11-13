@@ -14,7 +14,6 @@ const ReviewLayout = ({
     <Title>{title}</Title>
     <ImageContainer justifyContent='center' alignItems='center' fullWidth>
       <img src={image} alt='' />
-      {/* <img src={'/' + image} alt='' /> */}
       <ZoomButton onClick={zoomClickHandler}>
         <img src={zoomIcon} alt='' />
       </ZoomButton>
@@ -46,6 +45,9 @@ const ImageContainer = styled(Container)`
 
 const Text = styled.p`
   width: 100%;
+  font-size: 16px;
+  line-height: 36px;
+  white-space: pre-line;
 `;
 
 const ZoomButton = styled.button`
