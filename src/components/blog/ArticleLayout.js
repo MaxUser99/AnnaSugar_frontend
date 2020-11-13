@@ -14,10 +14,8 @@ const ArticleLayout = ({ article: { title, image, text, date } }) => {
         `} 
       </Date>
       <ImageContainer justifyContent='center' fullWidth>
-        {/* <img src={"/" + image} alt='' /> */}
         <img src={image} alt='' />
       </ImageContainer>
-      {/* <Text dangerouslySetInnerHTML={{ __html: text }} /> */}
       <Text>{text}</Text>
     </>
   )
@@ -44,8 +42,10 @@ const ImageContainer = styled(Container)`
   overflow: hidden;
 `;
 
-const Text = styled.pre`
-  white-space: break-spaces;
+const Text = styled.p`
+  white-space: pre-line;
+  font-size: 16px;
+  line-height: 36px;
   font-family: 'Montserrat Alternates';
   width: 100%;
 `;
