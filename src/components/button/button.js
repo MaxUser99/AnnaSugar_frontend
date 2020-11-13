@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 
 const Button = ({ onClick, ...props }) => {
   const ClickHandler = (e) => {
-    const ripple = document.createElement("span"); 
+    const { clientX, clientY, currentTarget  } = e;
+    const ripple = document.createElement('span'); 
 
-    e.target.appendChild(ripple); 
+    currentTarget.appendChild(ripple); 
 
-    const x = e.clientX - e.currentTarget.offsetLeft;
-    const y = e.clientY - e.currentTarget.offsetTop; 
+    const { left, top } = currentTarget.getBoundingClientRect();
+
+    const y = clientY - top;
+    const x = clientX - left;
 
     ripple.style.left = `${x}px`; 
     ripple.style.top = `${y}px`; 
 
     setTimeout(() => { 
-        ripple.remove(); 
+      ripple.remove(); 
     }, 300);
 
     if (onClick) onClick(e);
@@ -67,13 +70,11 @@ const StyledButton = styled.button`
   & span {
     position: absolute; 
         border-radius: 50%; 
-        /* To make it round */
         background-color: rgba(0, 0, 0, 0.3); 
   
         width: 100px; 
         height: 100px; 
         margin-top: -50px; 
-        /* for positioning */
         margin-left: -50px; 
   
         animation: ripple 1s; 

@@ -110,7 +110,6 @@ const MainBlock = () => {
               </ExpandableText> */}
               <Subscribe>{t('subscribe')}</Subscribe>
             </Container>
-
             <FabWrapper alignItems='center' direction='column'>
               <p>{t('write to me')}</p>
               <Fab />
