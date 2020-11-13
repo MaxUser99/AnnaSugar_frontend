@@ -1,3 +1,5 @@
+import LANGS from './langs';
+
 export const faqLinks = [
   { title: 'Астро', href: 'astro' },
   { title: 'Браслеты', href: 'bracelets' },
@@ -26,6 +28,11 @@ export const userLinks = [
   { href: '/faq', title: 'Вопросы', isActive: (path) => path.includes('/faq')},
   { href: '/contact', title: 'Контакты', isActive: (path) => path.includes('/contact')},
 ]
+
+export const HIDDEN_LINKS = {
+  [LANGS.RU]: [],
+  [LANGS.EN]: ['consult', 'blog']
+}
 
 export const adminLinks = [
   { title: 'Статьи', href: 'articles' },

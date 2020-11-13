@@ -13,20 +13,18 @@ import WhatsupIcon from '../../../assets/icons/whatsup-btn.svg';
 import MessangerIcon from '../../../assets/icons/messanger-btn.svg';
 
 import { useLocalization } from '../../../hooks/useLocalization';
-import { userLinks } from '../../../constants/links';
+import { userLinks, HIDDEN_LINKS } from '../../../constants/links';
 import LANGS from '../../../constants/langs';
 import SOCIAL_LINKS from '../../../constants/socialLinks';
 
 const Nav = ({ open, setOpen }) => {
   const menuRef = useRef();
-  const { t } = useLocalization();
+  const { t, lang } = useLocalization();
 
   useEffect(() => {
     if (open) {
       document.addEventListener('click', closeModal);
-      disableBodyScroll(menuRef.current, {
-        reserveScrollBarGap: true,
-      });
+      disableBodyScroll(menuRef.current, { reserveScrollBarGap: true });
     } else {
       document.removeEventListener('click', closeModal);
       enableBodyScroll(menuRef.current);
@@ -58,6 +56,7 @@ const Nav = ({ open, setOpen }) => {
           </Button>
           {
             userLinks.map(({ href, title }) => (
+              !HIDDEN_LINKS[lang].some(x => href.includes(x)) &&
               <StyledLink
                 key={href}
                 onClick={closeModal}

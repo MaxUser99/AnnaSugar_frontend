@@ -10,13 +10,8 @@ import MenuButton from './components/menuButton';
 
 import LANGS from '../../constants/langs';
 import { BREAKPOINTS, $maxWidth } from '../../theme';
-import { userLinks } from '../../constants/links';
+import { userLinks, HIDDEN_LINKS } from '../../constants/links';
 import { useLocalization } from '../../hooks/useLocalization';
-
-const HIDDEN_LINKS = {
-  [LANGS.RU]: [],
-  [LANGS.EN]: ['consult', 'blog']
-}
 
 const Header = () => {
   const { pathname } = useLocation();
