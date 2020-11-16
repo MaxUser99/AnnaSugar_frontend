@@ -122,7 +122,7 @@ const hideAnimation = keyframes`
 const Button = styled.button`
   position: absolute;
   cursor: pointer;
-  background: #dad8d1bd;
+  background: transparent;
   border: none;
   z-index: 1;
   display: flex;
@@ -137,7 +137,6 @@ const Button = styled.button`
     visibility: hidden;
     animation: ${hideAnimation} 0.3s;
   `};
-  ${ $maxWidth(BREAKPOINTS.TABLET, `background: transparent;`) }
   img {
     transition: 0.3s;
   }
