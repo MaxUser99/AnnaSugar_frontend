@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
+import { useLocalization } from '../../hooks/useLocalization';
+import { loadMoreReviews } from '../../store/content/reviewActions';
+
 import Breadscrumb from '../breadscrumb/breadscrumb';
 import Button from '../button/button';
 import ReviewPreview from '../reviewPreview/reviewPreview';
 import Container from '../container/container';
-import { useLocalization } from '../../hooks/useLocalization';
+
 
 const breadscrumbs = [
   {
@@ -19,7 +23,7 @@ const breadscrumbs = [
   }
 ];
 
-const ReviewIndex = ({ reviews }) => {
+const ReviewIndex = ({ reviews, page, maxPage, loadMoreReviews }) => {
   const { t } = useLocalization();
 
   return (
@@ -33,17 +37,16 @@ const ReviewIndex = ({ reviews }) => {
           ))
         }
       </Container>
-      <StyledButton>{t('more')}</StyledButton>
+      {
+        page < maxPage &&
+        <Button onClick={loadMoreReviews}>{t('more')}</Button>
+      }
     </>
   );
 }
 
 const StyledPreview = styled(ReviewPreview)`
   margin-bottom: 64px;
-`;
-
-const StyledButton = styled(Button)`
-  // margin-top: 99px;
 `;
 
 const Title = styled.h1`
@@ -57,8 +60,12 @@ const Title = styled.h1`
 `;
 
 export default connect(
-  ({ content: { reviews: { data }}}) => ({
-    reviews: data
+  ({ content: { reviews: { data, page, maxPage }}}) => ({
+    reviews: data,
+    page,
+    maxPage: (maxPage || 0) - 1
   }),
-  null
+  dispatch => ({
+    loadMoreReviews: () => dispatch(loadMoreReviews())
+  })
 )(ReviewIndex);

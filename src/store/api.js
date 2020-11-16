@@ -18,7 +18,7 @@ export const faqUrl = (category) => `/faqs/c/${category}`;
 export const consultsUrl = (category) => `/services/c/${category}`;
 export const productsUrl = (category) => `/products/c/${category}`;
 export const productUrl = (id) => `/products/${id}`;
-export const reviewsUrl = () => '/reviews';
+export const reviewsUrl = (page) => `/reviews?page=${page}`;
 export const reviewUrl = (id) => `/reviews/${id}`;
 export const articlesUrl = (page) => `/posts?page=${page}`;
 export const articleUrl = (id) => `/posts/${id}`;

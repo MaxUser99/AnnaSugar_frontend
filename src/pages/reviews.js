@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Router } from '@reach/router';
+
 import { loadReviews } from '../store/content/reviewActions';
+import { useEmptySpace } from '../hooks/useEmptySpace';
+
 import Container from '../components/container/container';
 import ContentWrapper from '../components/contentWrapper/contentWrapper';
 import ReviewsIndex from '../components/reviews/index';
 import ReviewPage from '../components/reviews/reviewPage';
 import Layout from '../components/layout/layout';
-import { useEmptySpace } from '../hooks/useEmptySpace';
 
 const Reviews = ({ loadReviews, page }) => {
   const minHeight = useEmptySpace(74);
@@ -30,7 +32,6 @@ const Reviews = ({ loadReviews, page }) => {
     </Layout>
   );
 }
-
 
 const StyledRouter = styled(Router)`
   display: flex;
