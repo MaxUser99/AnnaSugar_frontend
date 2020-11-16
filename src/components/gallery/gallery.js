@@ -137,10 +137,7 @@ const Button = styled.button`
     visibility: hidden;
     animation: ${hideAnimation} 0.3s;
   `};
-  ${ $maxWidth(BREAKPOINTS.TABLET, `
-    background: transparent;
-    border: 1px solid white;
-  `)}
+  ${ $maxWidth(BREAKPOINTS.TABLET, `background: transparent;`) }
   img {
     transition: 0.3s;
   }
