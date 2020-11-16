@@ -123,8 +123,8 @@ const Button = styled.button`
   position: absolute;
   cursor: pointer;
   background: #dad8d1bd;
-  z-index: 1;
   border: none;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;

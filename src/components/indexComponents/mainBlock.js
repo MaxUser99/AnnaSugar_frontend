@@ -14,15 +14,16 @@ import { useLocalization } from '../../hooks/useLocalization';
 import { onLangChange } from '../../hooks/onLangChange';
 import { loadStatic } from '../../store/ui/uiActions';
 
-// import FabIcon from '../../assets/images/whatsup-fab.svg';
-// import Img from 'gatsby-image';
-// import { useStaticQuery, graphql } from 'gatsby';
-
 const MainBlock = () => {
-  const dispatch = useDispatch();
-  const { text1, text2 } = useSelector(({ ui: { texts }}) => texts);
-  const { t } = useLocalization();
   const [ textHidden, hideText ] = useState(true)
+  const { text1, text2 } = useSelector(({ ui: { texts }}) => texts);
+  const dispatch = useDispatch();
+  const { t } = useLocalization();
+
+  onLangChange(() => dispatch(loadStatic()), 'reloadStatic');
+  useEffect(() => {
+    dispatch(loadStatic());
+  }, []);
 
   const scrollToReviews = () => {
     const target = document.getElementById('reviews');
@@ -31,83 +32,33 @@ const MainBlock = () => {
 
   const showMoreClickHandler = () => hideText(prev => !prev);
 
-  onLangChange(() => dispatch(loadStatic()), 'reloadStatic');
-  useEffect(() => {
-    dispatch(loadStatic());
-  }, []);
-
-  // const data = useStaticQuery(graphql`
-  //   query MyQuery {
-  //     file(relativePath: {eq: "image.png"}) {
-  //       childImageSharp {
-  //         fixed(width: 366) {
-  //           aspectRatio
-  //           src
-  //           srcSet
-  //           width
-  //           height
-  //         }
-  //       } 
-  //     }
-  //   }  
-  // `);
   return (
     <Container fullWidth>
       <StyledWrapper alignItems='flex-start'>
-        <TextContainer $show='desctop' direction='column'>
+        <TextContainer $show='desctop' direction='column' fullWidth>
           <Title>Anna Sugar</Title>
-          {/* <Paragraph>{ t('paragraph1')}</Paragraph>
-          <Paragraph>
-            {t('paragraph2.1')}
-            <b> {t('paragraph2.2')} </b>
-            {t('paragraph2.3')}
-          </Paragraph>
-          <Paragraph>
-            <b> {t('paragraph3.1')} </b><br />
-            {t('paragraph3.2')}
-          </Paragraph>
-          <Paragraph>{t('paragraph4')}</Paragraph> */}
           <Paragraph>
             {text1}
             {text2}
           </Paragraph>
         </TextContainer>
-        <Container direction='column' alignItems='center' fullWidth>
+        <Container direction='column' alignItems='center'>
           <Image src={MainImage} alt='' />
           <ReviewsButton onClick={scrollToReviews} outlined>{t('reviews')}</ReviewsButton>
-          {/* <Img fixed={data.file.childImageSharp.fixed} /> */}
         </Container >
-
-        <TextContainer $show='mobile' direction='column'>
+        <TextContainer $show='mobile' direction='column' fullWidth>
           <Title>Anna Sugar</Title>
           <Container alignItems='stretch' fullWidth>
-            <Container direction='column'>
+            <Container direction='column' fullWidth>
               <Paragraph>
                 { text1 }
-                <ReadMore onClick={showMoreClickHandler}> {t('paragraph5.readMore')}</ReadMore>
+                { text2 && <ReadMore onClick={showMoreClickHandler}> {t('paragraph5.readMore')}</ReadMore> }
               </Paragraph>
               <ExpandableText hidden={textHidden}>
                 <Paragraph>
                   { text2 }
                 </Paragraph>
               </ExpandableText>
-              {/* <Paragraph>
-                {t('paragraph5')}
-                <ReadMore onClick={showMoreClickHandler}>{t('paragraph5.readMore')}</ReadMore>
-              </Paragraph>
-              <ExpandableText hidden={textHidden}>
-                <Paragraph>
-                  {t('paragraph2.1')}<b> {t('paragraph2.2')}</b><br />
-                  {t('paragraph6')}
-                </Paragraph>
-                <Paragraph>
-                  <b>{t('paragraph3.1')}</b><br />
-                  {t('paragraph3.2')}
-                </Paragraph>
-                <Paragraph>
-                  {t('paragraph4')}
-                </Paragraph>
-              </ExpandableText> */}
               <Subscribe>{t('subscribe')}</Subscribe>
             </Container>
             <FabWrapper alignItems='center' direction='column'>
