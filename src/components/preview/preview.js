@@ -66,7 +66,7 @@ const StyledPrice = styled(Price)`
 
 const StyledContainer = styled(Container)`
   ${ $between(BREAKPOINTS.DESCTOP, BREAKPOINTS.XL, `max-width: 800px;`)}
-  &:not(:last-of-type) {
+  :not(:last-of-type) {
     margin-bottom: 32px;
   }
   ${

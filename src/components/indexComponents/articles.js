@@ -48,8 +48,7 @@ const Articles = ({ articles }) => {
   );
 };
 
-const StyledContentWrapper = styled(ContentWrapper)`
-`;
+const StyledContentWrapper = styled(ContentWrapper)``;
 
 const Title = styled.h2`
   font-weight: bold;
