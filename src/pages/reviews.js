@@ -43,9 +43,6 @@ const StyledRouter = styled(Router)`
 const StyledWrapper = styled(ContentWrapper)`
   padding-top: 10px;
   padding-bottom: 64px;
-  /* @media screen and (min-width: ${BREAKPOINTS.TABLET}px) and (max-width: ${BREAKPOINTS.XL}px) {
-    max-width: 1030px;
-  } */
 `;
 
 

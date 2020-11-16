@@ -2,15 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useNavigate } from "@reach/router";
-import Container from '../container/container';
-import ContentWrapper from '../contentWrapper/contentWrapper';
-import Preview from '../preview/preview';
-import Button from '../button/button';
+
 import { setReviewArticle } from '../../store/content/articleActions';
 import { $maxWidth, BREAKPOINTS } from '../../theme';
 import { useLocalization } from '../../hooks/useLocalization';
 import loadArticles from '../indexComponents/loadArticles';
 import LANGS from '../../constants/langs';
+
+import Container from '../container/container';
+import ContentWrapper from '../contentWrapper/contentWrapper';
+import Preview from '../preview/preview';
+import Button from '../button/button';
 
 const PREVIEW_ITEMS_COUNT = 4;
 

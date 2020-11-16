@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Router } from '@reach/router';
-import loadArticles from '../components/indexComponents/loadArticles';
+
 import { useEmptySpace } from '../hooks/useEmptySpace';
+import loadArticles from '../components/indexComponents/loadArticles';
+
 import Container from '../components/container/container';
 import ContentWrapper from '../components/contentWrapper/contentWrapper';
 import Layout from '../components/layout/layout';

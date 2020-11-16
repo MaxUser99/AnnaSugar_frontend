@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
+import { setReviewArticle, loadMoreArticles } from '../../store/content/articleActions';
+import { useLocalization } from '../../hooks/useLocalization';
+
 import Breadscrumb from '../breadscrumb/breadscrumb';
 import Preview from '../preview/preview';
 import Button from '../button/button';
-import { setReviewArticle } from '../../store/content/articleActions';
-import { useLocalization } from '../../hooks/useLocalization';
 
 const breadscrumbs = [
   {
@@ -19,7 +21,7 @@ const breadscrumbs = [
   }
 ];
 
-const BlogIndex = ({ articles }) => {
+const BlogIndex = ({ articles, page, maxPage, loadMoreClickHandler }) => {
   const { t } = useLocalization();
 
   return (
@@ -38,7 +40,10 @@ const BlogIndex = ({ articles }) => {
           />
         ))
       }
-      <StyledButton>{t('more')}</StyledButton>
+      {
+        page < maxPage - 1 && 
+        <StyledButton onClick={loadMoreClickHandler}>{t('more')}</StyledButton>
+      }
     </>
   );
 }
@@ -58,10 +63,13 @@ const Title = styled.h1`
 `;
 
 export default connect(
-  ({ content: { articles: { data }}}) => ({
-    articles: data
+  ({ content: { articles: { data, page, maxPage }}}) => ({
+    articles: data,
+    maxPage: maxPage || 0,
+    page,
   }),
   dispatch => ({
-    setReviewArticle: article => dispatch(setReviewArticle(article))
+    setReviewArticle: article => dispatch(setReviewArticle(article)),
+    loadMoreClickHandler: () => dispatch(loadMoreArticles())
   })
 )(BlogIndex);

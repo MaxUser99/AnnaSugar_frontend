@@ -20,7 +20,7 @@ export const productsUrl = (category) => `/products/c/${category}`;
 export const productUrl = (id) => `/products/${id}`;
 export const reviewsUrl = () => '/reviews';
 export const reviewUrl = (id) => `/reviews/${id}`;
-export const articlesUrl = () => '/posts';
+export const articlesUrl = (page) => `/posts?page=${page}`;
 export const articleUrl = (id) => `/posts/${id}`;
 export const emailUrl = () => '/email';
 export const staticTextUrl = () => '/static';

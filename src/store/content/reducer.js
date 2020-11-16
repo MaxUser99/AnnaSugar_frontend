@@ -41,7 +41,8 @@ const LOADABLE_CONTENT = {
   ...SIMPLE_LOADABLE_CONTENT,
   reviewItem: null,
   error: null,
-  page: null
+  page: null,
+  maxPage: null
 };
 
 const initialState = {
@@ -87,14 +88,17 @@ export default (state = initialState, action) => {
         ...state.articles,
         status: RESOURCE_STATUS.LOADED,
         data: [...state.articles.data, ...action.payload.articles],
-        page: action.payload.page
+        page: action.payload.page,
+        maxPage: action.payload.maxPage
       }
     };
     case RESET_ARTICLES: return {
       ...state,
       articles: {
         ...state.articles,
-        data: [ ...action.payload ]
+        page: 0,
+        data: [ ...action.payload.articles ],
+        maxPage: action.payload.maxPage
       }
     };
     case SET_REVIEW_ARTICLE: return {
@@ -120,7 +124,8 @@ export default (state = initialState, action) => {
         ...state.reviews,
         status: RESOURCE_STATUS.LOADED,
         data: [...state.reviews.data, ...action.payload.reviews],
-        page: action.payload.page
+        page: action.payload.page,
+        maxPage: action.payload.maxPage
       }
     };
     case SET_REVIEW_ITEM: return {

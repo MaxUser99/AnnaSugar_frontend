@@ -7,17 +7,27 @@ export const SET_REVIEW_ARTICLE = 'SET_REVIEW_ARTICLE';
 export const RESET_ARTICLES = 'RESET_ARTICLES';
 
 export const setArticlesLoading = () => ({ type: SET_ARTICLES_LOADING });
-export const pushArticles = (articles, page) => ({ type: PUSH_ARTICLES, payload: { articles, page } }); 
+export const pushArticles = (articles, page, maxPage) => ({ type: PUSH_ARTICLES, payload: { articles, page, maxPage } }); 
 export const setReviewArticle = article => ({ type: SET_REVIEW_ARTICLE, payload: article });
-export const resetArticles = articles => ({ type: RESET_ARTICLES, payload: articles });
+export const resetArticles = (articles, maxPage) => ({ type: RESET_ARTICLES, payload: {articles, maxPage} });
+
+export const loadMoreArticles = () => {
+  return (dispatch, getState) => {
+    const { content: { articles: { page, maxPage }} } = getState();
+
+    if (page < maxPage) {
+      return dispatch(loadArticles(page + 1));
+    }
+  }
+}
 
 export const reloadArticles = page => {
   return async (dispatch, getState, api) => {
     const { ui: { language }} = getState();
 
-    const articles = await getArticles(api, language);
+    const { articles, maxPage } = await getArticles(api, language, page  + 1);
 
-    dispatch(resetArticles(articles));
+    dispatch(resetArticles(articles, maxPage));
   }
 }
 
@@ -29,9 +39,9 @@ export const loadArticles = page => {
 
     dispatch(setArticlesLoading());
 
-    const articles = await getArticles(api, language);
+    const {articles, maxPage} = await getArticles(api, language, page + 1);
 
-    return dispatch(pushArticles(articles, page));
+    return dispatch(pushArticles(articles, page, maxPage));
   };
 };
 
@@ -54,12 +64,18 @@ async function getArticle(api, id, lang) {
     .catch(() => null);
 }
 
-async function getArticles(api, lang) {
-  const url = articlesUrl();
+async function getArticles(api, lang, page) {
+  const url = articlesUrl(page);
   const headers = getLangHeader(lang);
   return await api.get(url, { headers })
-    .then(({ data: { data }}) => data.map(articleNormalizer))
-    .catch(() => []);
+    .then(({ data: { data, meta: { last_page } }}) => ({
+      articles: data.map(articleNormalizer),
+      maxPage: last_page
+    }))
+    .catch(() => ({
+      articles: [],
+      maxPage: 0
+    }));
 }
 
 export const editArticle = (data) => {
