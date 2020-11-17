@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Container from '../container/container';
 
@@ -88,7 +88,8 @@ const StyledContainer = styled(Container)`
 
 const inputStyles = css`
   width: 100%;
-  border-width: 0 0 1px;
+  border: none;
+  border-bottom: 1px solid;
   border-color: ${({ error }) => (error ? '#e85d5d' : '#969696')};
   transition: 0.3s;
   font-size: 20px;
