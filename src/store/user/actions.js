@@ -6,9 +6,11 @@ export const postMessage = data => {
   return (dispatch, getState, api) => {
     const url = emailUrl();
     return api.post(url, data)
+      .then(() => true)
       .catch((e) => {
-        console.error('post error: ', e);
-      })
+        console.error('post message error: ', e);
+        return false;
+      });
   }
 }
 

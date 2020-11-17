@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -14,24 +14,46 @@ import TelegramIcon from '../assets/icons/telegram-btn.svg';
 import WhatsupIcon from '../assets/icons/whatsup-btn.svg';
 import MessangerIcon from '../assets/icons/messanger-btn.svg';
 
-import { BREAKPOINTS, $maxWidth } from '../theme';
+import { BREAKPOINTS, $maxWidth, $minWidth } from '../theme';
 import { useLocalization } from '../hooks/useLocalization';
 import SOCIAL_LINKS from '../constants/socialLinks';
 import LANGS from '../constants/langs';
 import { postMessage } from '../store/user/actions';
 
+const SUCCESS_MESSAGE = 'success_message';
+const ERROR_MESSAGE = 'error_message';
+
 const Contact = () => {
   const dispatch = useDispatch();
+  const [ message, setMessage ] = useState();
+  const [ isLoading, setLoading ] = useState(false);
   const { t, lang } = useLocalization();
   const {
     register,
     handleSubmit,
-    watch,
-    errors
+    errors,
+    reset,
+    formState: { isDirty }
   } = useForm();
 
-  const submitHandler = data => dispatch(postMessage(data)); 
+  const submitHandler = async (data) => {
+    setLoading(true);
+    const success = await dispatch(postMessage(data));
+    setLoading(false);
+
+    reset();
+
+    const newMessage = success
+      ? SUCCESS_MESSAGE
+      : ERROR_MESSAGE;
+    setMessage(newMessage);
+  }
+
   const socialClickHandler = link => () => window.open(link);
+
+  useEffect(() => {
+    if (isDirty) setMessage();
+  }, [ isDirty ]);
 
   return (
     <StyledLayout>
@@ -83,13 +105,54 @@ const Contact = () => {
               inputRef={register({ required: true })}
               error={'message' in errors}
             />
-            <SubmitButton type='submit'>{t('отправить')}</SubmitButton>
+            <AnimationContainer>
+              <Message $show={!!message} $error={message === ERROR_MESSAGE}>{t(message)}</Message>
+              <SubmitButton $show={!message} type='submit' disabled={isLoading}>
+                { t('отправить') }
+              </SubmitButton>
+            </AnimationContainer>
           </Form>
         </StyledWrapper>
       </Container>
     </StyledLayout>
   );
 };
+
+const Message = styled.p`
+  line-height: 64px;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  position: absolute;
+  transition: 0.3s 0.3s;
+  opacity: 1;
+  ${ ({ $show }) => !$show && `
+    transition: 0.3s;
+    opacity: 0;
+  `}
+  ${ $minWidth(BREAKPOINTS.TABLET, 'white-space: nowrap;')}
+`;
+
+const SubmitButton = styled(Button)`
+  transition: 0.3s 0.3s;
+  position: absolute;
+  opacity: 1;
+  ${ ({ $show }) => !$show && `
+    transition: 0.3s;
+    opacity: 0;
+  `}
+  :disabled {
+    background-color: #aaa;
+  }
+`
+
+const AnimationContainer = styled(Container)`
+  width: 100%;
+  height: 64px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
 
 const StyledLayout = styled(Layout)`
   #default-fab {
@@ -102,11 +165,10 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   ${ $maxWidth(BREAKPOINTS.TABLE, `padding: 0 10px;`)}
+  > *:last-of-type {
+    margin-top: 64px;
+  }
 `;
-
-const SubmitButton = styled(Button)`
-  margin-top: 64px;
-`
 
 const Buttons = styled(Container)`
   margin-bottom: 64px;

@@ -41,6 +41,8 @@
   "Почта": "Email",
   "Напиши свое сообщение": "Enter your message",
   "Сообщение": "Message",
+  "success_message": "Message sent successfully",
+  "error_message": "Unable to send message",
 
   "// CATALOG": "",
   "Описание": "Description",
