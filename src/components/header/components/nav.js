@@ -1,5 +1,5 @@
 import React, { useRef, useEffect} from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'gatsby';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
@@ -77,6 +77,7 @@ const Nav = ({ open, setOpen }) => {
             <SocialButton
               onClick={socialClickHandler(SOCIAL_LINKS.WHATS_UP)}
               img={WhatsupIcon}
+              $animate
             />
             <SocialButton
               onClick={socialClickHandler(SOCIAL_LINKS.MESSENGER)}
@@ -88,10 +89,36 @@ const Nav = ({ open, setOpen }) => {
   );
 }
 
+const pulseAnimation = keyframes`
+  0% {
+    opacity: 0.8;
+		transform: scale(0.97);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+	}
+	22% {
+		box-shadow: 0 0 0 13px rgba(0, 0, 0, 0);
+	}
+	33% {
+    opacity: 1;
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+  40% {
+		transform: scale(1);
+  }
+`;
+
+const animationMixin = css`
+  animation-delay: 1s;
+  animation-name: ${pulseAnimation};
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+`;
+
 const SocialButton = styled(BaseSocialButton)`
   margin: 0 10px;
   width: 50px;
   height: 50px;
+  ${ ({ $animate }) => $animate && animationMixin};
   img {
     width: 50px;
     height: 50px;

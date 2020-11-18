@@ -84,21 +84,15 @@ const pulseAnimation = keyframes`
 		transform: scale(0.97);
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
 	}
-
 	22% {
-		/* transform: scale(1); */
 		box-shadow: 0 0 0 13px rgba(0, 0, 0, 0);
 	}
-
 	33% {
     opacity: 1;
-
-		/* transform: scale(0.95); */
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
   40% {
 		transform: scale(1);
-    /* transform: scale(1); */
   }
 `;
 
@@ -114,8 +108,6 @@ const StyledFab = styled(Fab)`
   animation-name: ${pulseAnimation};
   animation-iteration-count: infinite;
   animation-duration: 5s;
-  /* animation: 1s 10s infinite ${pulseAnimation}; */
-  /* animation: 4s ${pulseAnimation} infinite; */
   ${ $maxWidth(BREAKPOINTS.DESCTOP, `
     width: 88px;
     height: 88px;
