@@ -13,10 +13,6 @@ const Fab = React.forwardRef((props, ref) => {
   );
 });
 
-// position: fixed;
-// bottom: 11%;
-// right: 7.5%;
-// z-index: 1;
 const FabButton = styled.button`
   border: none;
   border-radius: 50%;
@@ -27,13 +23,6 @@ const FabButton = styled.button`
   width: 98px;
   height: 98px;
   cursor: pointer;
-  /* ${({ $absolute }) => $absolute && `
-    ${ $maxWidth(BREAKPOINTS.DESCTOP, 'display: none;') }
-    position: absolute;
-    // right: 3.25%;
-    right: 8%;
-    top: 0;
-  `} */
   transition: 0.3s;
   :hover {
     opacity: 0.7;
