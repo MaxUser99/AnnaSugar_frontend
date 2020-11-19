@@ -21,13 +21,18 @@ export const loadMoreArticles = () => {
   }
 }
 
-export const reloadArticles = page => {
+export const reloadArticles = () => {
+  const pages = [0, 1];
+
   return async (dispatch, getState, api) => {
     const { ui: { language }} = getState();
 
-    const { articles, maxPage } = await getArticles(api, language, page  + 1);
+    for (const page of pages) {
+      const { articles, maxPage } = await getArticles(api, language, page  + 1);
 
-    dispatch(resetArticles(articles, maxPage));
+      if (page === pages[0]) dispatch(resetArticles(articles, maxPage));
+      else dispatch(pushArticles(articles, page, maxPage));
+    }
   }
 }
 
