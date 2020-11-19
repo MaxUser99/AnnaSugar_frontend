@@ -77,7 +77,8 @@ const ImageModal = ({ isOpen, closeHandler, image }) => {
               <img src={ZoomIn} alt='' />
             </Button>
             <Button onClick={closeHandler}>
-              <img src={CloseImage} alt='' />
+              <CloseImage />
+              {/* <img src={CloseImage} alt='' /> */}
             </Button>
           </Buttons>
         </StyledContainer>
@@ -92,6 +93,7 @@ const StyledContainer = styled(Container)`
 
 const PreviewImage = styled.img`
   max-width: 100%;
+  width: 100%;
   transform: scale(${({ $scale }) => $scale});
 `;
 
