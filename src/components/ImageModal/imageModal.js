@@ -91,6 +91,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const PreviewImage = styled.img`
+  max-width: 100%;
   transform: scale(${({ $scale }) => $scale});
 `;
 
