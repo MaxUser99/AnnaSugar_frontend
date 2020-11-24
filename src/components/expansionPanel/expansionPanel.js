@@ -126,6 +126,7 @@ const Content = styled(Container)`
   box-sizing: border-box;
   .text {
     margin: 0;
+    white-space: pre-line;
   }
 `;
 

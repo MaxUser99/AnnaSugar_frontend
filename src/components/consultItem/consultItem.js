@@ -104,7 +104,6 @@ const ConsultItem = ({ item }) => {
           alignItems='center'
           fullWidth>
             <img src={image} alt='' />
-            {/* <img src={`/${image}`} alt='' /> */}
             { imageInfo && <Info $showFrom={900}>{imageInfo}</Info>}
         </ImageContainer>
         <ContentBlock direction='column' fullWidth>
@@ -286,6 +285,7 @@ const StyledPrice = styled(Price)`
 `;
 
 const Short = styled.p`
+  white-space: pre-line;
   font-size: 14px;
   line-height: 28px;
   color: ${({ theme }) => theme.text.default};
