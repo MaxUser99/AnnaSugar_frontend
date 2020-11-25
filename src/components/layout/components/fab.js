@@ -1,14 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import SOCIAL_LINKS from '../../../constants/socialLinks';
-import FabIcon from '../../../assets/images/whatsup-fab.svg';
+import WhatsupIcon from '../../../assets/images/whatsup-fab.svg';
+import MessangerIcon from '../../../assets/icons/messanger-btn.svg';
+import { useLocalization } from '../../../hooks/useLocalization';
+import LANGS from '../../../constants/langs';
+
+const settings = {
+  [LANGS.RU]: { icon: WhatsupIcon, link: SOCIAL_LINKS.WHATS_UP },
+  [LANGS.EN]: { icon: MessangerIcon, link: SOCIAL_LINKS.WHATS_UP }
+}
 
 const Fab = React.forwardRef((props, ref) => {
-  const fabClickHandler = () => window.open(SOCIAL_LINKS.WHATS_UP);
+  const { lang } = useLocalization();
+
+  const { icon, link } = settings[lang];
+  
+  const fabClickHandler = () => window.open(link);
 
   return (
     <FabButton ref={ref} {...props} onClick={fabClickHandler}>
-      <FabImg src={FabIcon} alt='' />
+      <FabImg src={icon} alt='' />
     </FabButton>
   );
 });
