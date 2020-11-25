@@ -9,7 +9,7 @@ import { useLocalization } from '../../hooks/useLocalization';
 
 const FaqLayout = ({ title, tabs, children }) => {
   const { t } = useLocalization();
-
+  console.log({ tabs })
   return (
     <StyledLayout>
       <HeaderBlock direction='column' fullWidth>

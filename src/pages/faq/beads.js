@@ -4,16 +4,19 @@ import Layout from '../../components/layout/faqLayout';
 import ExpansionPanel from '../../components/expansionPanel/expansionPanel';
 import { faqLinks } from '../../constants/links';
 import loadFAQs from '../../HOCs/loadFAQs';
+import { useFaqLinks } from '../../hooks/useFaqLilnks';
 
-const Beads = ({ data }) => (
-  <Layout title='Вопросы' tabs={faqLinks}>
-    {
-      data.map(({ title, text }, i) => (
-        <ExpansionPanel key={i} title={title} text={text} />
-      ))
-    }
-  </Layout>
-);
+const Beads = ({ data, links }) => {
+  return (
+    <Layout title='Вопросы' tabs={links}>
+      {
+        data.map(({ title, text }, i) => (
+          <ExpansionPanel key={i} title={title} text={text} />
+        ))
+      }
+    </Layout>
+  );
+}
 
 export default loadFAQs(
   connect(

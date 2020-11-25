@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Layout from '../../components/layout/faqLayout';
 import ExpansionPanel from '../../components/expansionPanel/expansionPanel';
-import { faqLinks } from '../../constants/links';
 import loadFAQs from '../../HOCs/loadFAQs';
+import { useFaqLinks } from '../../hooks/useFaqLilnks';
 
-const Bars = ({ data }) => {
+const Bars = ({ data, links }) => {
   return (
-    <Layout title='Вопросы' tabs={faqLinks}>
+    <Layout title='Вопросы' tabs={links}>
       {
         data.map(({ title, text }, i) => (
           <ExpansionPanel key={i} title={title} text={text} />
