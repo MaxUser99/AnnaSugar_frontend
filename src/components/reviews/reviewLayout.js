@@ -39,7 +39,9 @@ const ImageContainer = styled(Container)`
   position: relative;
   > img {
     max-width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
+    /* max-width: 100%; */
+    max-height: 500px;
   }
 `;
 
