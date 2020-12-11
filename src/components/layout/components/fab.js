@@ -8,7 +8,7 @@ import LANGS from '../../../constants/langs';
 
 const settings = {
   [LANGS.RU]: { icon: WhatsupIcon, link: SOCIAL_LINKS.WHATS_UP },
-  [LANGS.EN]: { icon: MessangerIcon, link: SOCIAL_LINKS.WHATS_UP }
+  [LANGS.EN]: { icon: MessangerIcon, link: SOCIAL_LINKS.MESSENGER }
 }
 
 const Fab = React.forwardRef((props, ref) => {
